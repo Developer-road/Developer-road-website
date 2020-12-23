@@ -5,4 +5,5 @@ class Project(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     technology = models.CharField(max_length=30)
-    image = models.FilePathField(path='/img', match=None, max_length=100)
+    image = models.ImageField(blank=True, null=True)
+    project_url = models.URLField(null=True)
