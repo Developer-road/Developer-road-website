@@ -10,4 +10,4 @@ class Post(models.Model):
         """
         Show the title and the author in the admin Page
         """
-        return self.title + " by " + self.author
+        return self.title + " by " + str(self.author)

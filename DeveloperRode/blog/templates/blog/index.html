@@ -1,9 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-My blog
+Blog - Posts
 {% endblock title %}
 
 {% block body_content %}
-This is the body content of the blog
+
+<h1>Posts</h1>
+
+{% for post in object_list %}
+
+<h2><a href="{% url 'blog:article_page' post.pk %}">{{ post.title }}</a> by {{ post.author.first_name }}
+    {{ post.author.last_name }}</h2>
+
+{% endfor %}
+
 {% endblock body_content %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}
+Post : {{ post.title }}
+{% endblock title %}
+
+{% block body_content %}
+<h1>Post: {{ post.title }}</h1>
+<small>By {{ post.author.first_name }} {{ post.author.last_name }} </small>
+
+<br>
+<hr>
+<p>
+{{ post.body }}
+
+</p>
+
+
+{% endblock body_content %}
