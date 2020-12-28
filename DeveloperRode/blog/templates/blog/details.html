@@ -2,6 +2,10 @@
 {% block title %}
 Post : {{ post.title }}
 {% endblock title %}
+{% block description %}
+{{ post.meta_description }}
+{% endblock description %}
+
 
 {% block body_content %}
 <h1>Post: {{ post.title }}</h1>

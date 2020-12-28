@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% block title %}
-Index page
+Home: 
+{{ block.super }}
 {% endblock title %}
 {% block body_content %}
 <h1>This is the home page of the Developer road website</h1>
 <p><a href="projects/">Some of my projects</a></p>
-<p><a href="about/">About</a></p>
+<p><a href="about/" class="btn btn-secondary" >About</a></p>
 {% endblock body_content %}

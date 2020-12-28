@@ -13,7 +13,7 @@
 }
 
 .site-header a {
-    color: #8e8e8e;
+    color: rgba(216, 209, 209, 0.966);
     transition: color .15s ease-in-out;
 }
 
