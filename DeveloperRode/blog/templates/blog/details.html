@@ -9,14 +9,21 @@ Post : {{ post.title }}
 
 {% block body_content %}
 <h1>Post: {{ post.title }}</h1>
-<small>By {{ post.author.first_name }} {{ post.author.last_name }} </small>
+<small>By {{ post.author.first_name }} {{ post.author.last_name }} - Published on {{ post.date }}</small>
+<br>
+<small><a href="{% url 'blog:delete_page' post.pk %}" class="link-danger">Delete post</a></small>
 
 <br>
 <hr>
 <p>
-{{ post.body }}
+    {{ post.body }}
 
 </p>
 
+<br>
+
+<a href="{% url 'blog:edit_page' post.pk %}" target="_blank" rel="#" <button type="button"
+    class="btn btn-secondary btn-sm">Edit
+    post</a>
 
 {% endblock body_content %}

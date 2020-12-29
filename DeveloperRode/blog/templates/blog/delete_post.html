@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Delete Post : {{ post.title }}{% endblock title %}
+{% block description %}
+{{ post.meta_description }}
+{% endblock description %}
+
+
+{% block body_content %}
+
+<h1>Delete Post</h1>
+<br>
+
+<h2>You are going to delete: <i>{{ post.title }}</i></h2>
+
+<br>
+
+<p>Are you sure, you want to delete the post?</p>
+
+<br>
+
+
+<div class="form-group">
+    <form action="" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete Post</button>
+
+    </form>
+</div>
+
+<br>
+<br>
+
+<a href="{% url 'blog:article_page' post.pk %}"  class="btn btn-primary btn-sm">Back</a>
+
+{% endblock body_content %}

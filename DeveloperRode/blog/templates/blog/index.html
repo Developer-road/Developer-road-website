@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}
-Blog - Posts
-{% endblock title %}
+{% block title %}Blog - Posts{% endblock title %}
+
+{% block description %}
+These are all the blog posts about Programming:
+Python, Javascript, Frontend, Backend and Django.
+{% endblock description %}
+
 
 {% block body_content %}
 
@@ -10,11 +14,18 @@ Blog - Posts
 
 {% for post in object_list %}
 
-<h2><a href="{% url 'blog:article_page' post.pk %}">{{ post.title }}</a> by {{ post.author.first_name }}
-    {{ post.author.last_name }}</h2>
+<ul>
+    <h3><a href="{% url 'blog:article_page' post.pk %}">{{ post.title }}</a> by {{ post.author.first_name }}
+        {{ post.author.last_name }} - <small>{{ post.date }}</small></h3>
 
+
+    <small><a href="{% url 'blog:delete_page' post.pk %}" class="link-danger">Delete post</a></small>
+</ul>
 {% endfor %}
 
+
+<br>
+<br>
 <a href="{% url 'blog:add_post' %}" target="_blank" rel="#" <button type="button" class="btn btn-primary btn-lg">Add
     post</a>
 

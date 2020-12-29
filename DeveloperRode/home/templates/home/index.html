@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
-{% block title %}
-Home: 
-{{ block.super }}
-{% endblock title %}
+{% block title %}Home{% endblock title %}
+
+{% block description %}
+This is a page of a guy who is passionate about technology and programming
+{% endblock description %}
+
 {% block body_content %}
+
 <h1>This is the home page of the Developer road website</h1>
+
 <p><a href="projects/">Some of my projects</a></p>
-<p><a href="about/" class="btn btn-secondary" >About</a></p>
+<p><a href="about/" class="btn btn-secondary">About</a></p>
+
 {% endblock body_content %}
