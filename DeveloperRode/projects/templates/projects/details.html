@@ -1,9 +1,21 @@
 {% extends 'base.html' %}
-{% block title %}
-Projects detail page
-{% endblock title %}
+{% block title %}{{ project.title }}{% endblock title %}
 
 {% block body_content %}
-This is the projects page of a project
+<h1>{{ project.title }}</h1>
+<div class="row">
+    <div class="col-md-8">
+        <img src="{{ project.image.url }}" alt="" width="100%">
+    </div>
+    <div class="col-md-4">
+        <h5>About the project:</h5>
+        <p>{{ project.description }}</p>
+        <br>
+        <h5>Technology used:</h5>
+        <p>{{ project.technology }}</p>
+        <a href="{{ project.project_url }}" class="btn btn-secondary" target="_blank">
+            Follow the project
+        </a>
+    </div>
+</div>
 {% endblock body_content %}
-

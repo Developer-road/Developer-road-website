@@ -1,26 +1,20 @@
 from django.shortcuts import render, get_object_or_404
-from django.views import View
+from django.views.generic import ListView, DetailView
 
 from .models import Project
 
 # Create your views here.
-class ProjectsHome(View):
-    def get(self, request):
-        """
-        Returns the projects page
-        """
-        my_projects = Project.objects.all()
-        
-        context = {"projects": my_projects}
-        
-        return render(request, 'projects/index.html', context)
+class ProjectsHome(ListView):
+    """
+    Returns the projects page
+    """
+    model = Project
+    template_name = 'projects/index.html'
+    ordering = ["-id"]
 
-
-class ProjectsDetail(View):
-    def get(self, request, project_id):
-        """
-        Returns the projects page
-        """
-        detail_project = get_object_or_404(Project, pk=project_id)
-        context = {"project": detail_project}
-        return render(request, 'projects/details.html',context)
+class ProjectsDetail(DetailView):
+    """
+    Returns the projects page
+    """
+    model = Project
+    template_name = 'projects/details.html'

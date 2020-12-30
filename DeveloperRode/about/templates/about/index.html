@@ -4,6 +4,21 @@
 
 {% block body_content %}
 {{ block.super }}
-<h2></h2>
+
+{% for person in object_list %}
+
+<h2>Hi, I'm {{ person.name }}</h2>
+
+<img src="{{ person.person_picture.url }}" alt="" srcset=""> 
+
+<div>
+{{ person.description }}
+</div>
+
+{% empty %}
+<h2>There is no People in about us</h2>
+
+{% endfor %}
+
 
 {% endblock body_content %}

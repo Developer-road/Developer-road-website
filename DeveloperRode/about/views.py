@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.views import View
+from django.views.generic import ListView
 
-# Create your views here.
-class AboutView(View):
-    
-    def get(self, request):
-        """
-        Returns the about page
-        """
-        return render(request,'about/index.html')
+# Import People class
+from .models import People
+
+
+class AboutView(ListView):
+    """
+    View that shows the list of all the existent blogs
+    """
+    model = People
+    template_name = 'about/index.html'

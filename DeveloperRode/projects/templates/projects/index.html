@@ -4,5 +4,57 @@
 {% block title %}My Projects{% endblock title %}
 
 {% block body_content %}
-<h1>Projects</h1>
+<h1>My Personal Projects</h1>
+
+
+<div class="row">
+    {% for project in object_list %}
+    <div class="col-md-4">
+        <div class="card mb-2">
+            {% if project.image %}
+            <img class="card-img-top" src="{{ project.image.url }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ project.title }}</h5>
+                <p class="card-text">{{ project.description }}</p>
+                <a href="{% url 'projects:detail-project' project.pk %}" class="btn btn-primary">
+                    Read More
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% comment %} <br>
+
+{% for project in object_list %}
+<h2> {{ project.title }} </h2>
+
+<br>
+{% if project.image %}
+
+<img src="{{ project.image.url }}" alt="">
+
+{% endif %}
+
+<p><span><small>Technology used : {{ project.technology }}</small></span></p>
+
+<p> {{ project.description }} </p>
+
+<br>
+
+{% if project.project_url %}
+
+<a href="{{ project.project_url }}}">Follow the Project</a> {% endcomment %}
+
+{% comment %} {% endif %}
+
+
+{% empty %}
+<h2>No projects avaiable</h2>
+
+{% endfor %} {% endcomment %}
+
 {% endblock %}
