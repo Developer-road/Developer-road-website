@@ -1,0 +1,118 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 960px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+    background-color: #212738;
+}
+
+nav a{
+    transition: color .15s ease-in-out;
+}
+nav a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* logo font and image styles  */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo h4 {
+    color: #E8E9F3;
+    letter-spacing: 2px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.logo a {
+
+    text-decoration: none;
+
+}
+
+
+.logo img {
+    float: left;
+    width: auto;
+    height: auto;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-around;
+    width: 45%;
+}
+
+.nav-links a {
+    color: #E8E9F3;
+    letter-spacing: 1px;
+    text-decoration: none;
+    text-align: center;
+}
+
+
+/* Doesn't display the burger in Desktop */
+.burger{
+    display: none;
+    cursor: pointer;
+}
+
+
+/* All the lines in the burger are like this  */
+.burger div{
+    width: 20px;
+    height: 3px;
+    background-color: #E8E9F3;
+    margin: 3px;
+}
+
+/* mobile stuff */
+/* tablet view */
+@media screen and (max-width:1024px){
+    .nav-links {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width:768px){
+    body{
+        overflow-x: hidden;
+    }
+    
+    .nav-links{
+        position: absolute;
+        right: 0px;
+        height: 92vh;
+        top: 8vh;
+        background-color: #212738;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50px;
+        transform: translateX(100%);
+        transition: 0.5s ease-in;
+    }
+    .nav-links li{
+        opacity: 0;
+    }
+    .burger{
+        display: block;
+    }
+}
+
+.nav-active{
+    transform: translateX(0%);
+}
