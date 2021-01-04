@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Sign up{% endblock title %}
+
+{% block description %}
+Sign up page of Developer Rode blog
+{% endblock description %}
+
+{% block body_content %}
+<h1>Sign up</h1>
+<div class="form-group">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Create account</button>
+
+    </form>
+</div>
+{% endblock body_content %}

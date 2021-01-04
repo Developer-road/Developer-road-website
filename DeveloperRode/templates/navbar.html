@@ -17,7 +17,8 @@
             <li><a class="nav-links" href="{% url 'contact:contact_page' %}">Contact me</a></li>
             <li><a class="nav-links" href="{% url 'projects:my_projects' %}">Projects</a></li>
             <li><a class="nav-links" href="{% url 'blog:blog_page' %}">Blog</a></li>
-            <li><a class="nav-links sign-button" href="{% url 'home:home_page' %}">Sign in</a></li>
+            <li><a class="nav-links sign-button" href="{% url 'login' %}">Sign in</a></li>
+            <li><a class="nav-links sign-button" href="{% url 'members:signup' %}">Sign up</a></li>
         </ul>
 
         {% comment %} hamburger menu {% endcomment %}

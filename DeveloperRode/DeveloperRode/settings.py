@@ -136,3 +136,9 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media/'
+
+
+# Redirect login button to login default template
+
+LOGIN_REDIRECT_URL = 'home:home_page'
+LOGOUT_REDIRECT_URL = 'home:home_page'
