@@ -8,9 +8,14 @@
 <div class="form-group">
     <form action="" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-success">Login</button>
+        {{ form.as_table }}
+        <button type="submit" class="btn form-btn">Login</button>
     </form>
+</div>
+
+<hr>
+<div class="btn create-btn">
+    <a href="{% url 'members:signup' %}">Register</a>
 </div>
 
 {% endblock body_content %}}

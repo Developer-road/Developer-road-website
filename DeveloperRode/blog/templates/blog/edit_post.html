@@ -6,6 +6,7 @@ Edit an existent post of Dan programmer.
 {% endblock description %}
 
 {% block body_content %}
+{% if user.is_authenticated %}
 <h1>Edit a post</h1>
 <div class="form-group">
     <form action="" method="post">
@@ -17,5 +18,9 @@ Edit an existent post of Dan programmer.
     </form>
 </div>
 
+{% else %}
+<h1>Sorry, You are not allowed to edit this Post</h1>
+
+{% endif %}
 
 {% endblock body_content %}

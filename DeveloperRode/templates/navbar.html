@@ -10,17 +10,18 @@
             </a>
         </div>
         {% comment %} Navbar links for the page {% endcomment %}
-
         <ul class="my-nav-menu">
             <li><a class="nav-links" href="{% url 'home:home_page' %}">Home</a></li>
             <li><a class="nav-links" href="{% url 'about:about_page' %}">About</a></li>
             <li><a class="nav-links" href="{% url 'contact:contact_page' %}">Contact me</a></li>
             <li><a class="nav-links" href="{% url 'projects:my_projects' %}">Projects</a></li>
             <li><a class="nav-links" href="{% url 'blog:blog_page' %}">Blog</a></li>
+            {% if user.is_authenticated %}
+            <li><a class="nav-links sign-button" href="{% url 'logout' %}">Sign out</a></li>
+            {% else %}
             <li><a class="nav-links sign-button" href="{% url 'login' %}">Sign in</a></li>
-            <li><a class="nav-links sign-button" href="{% url 'members:signup' %}">Sign up</a></li>
+            {% endif %}
         </ul>
-
         {% comment %} hamburger menu {% endcomment %}
         <div class="menu-toggle" id="mobile-menu">
             <div class="line"></div>

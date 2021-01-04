@@ -4,6 +4,7 @@
 {% block title %}Add a post{% endblock title %}
 
 {% block body_content %}
+{% if user.is_authenticated %}
 <h1>Add post</h1>
 <div class="form-group">
     <form action="" method="post">
@@ -14,6 +15,8 @@
 
     </form>
 </div>
-
+{% else %}
+<h1>Sorry. You are not Allowed to add a Post</h1>
+{% endif %}
 
 {% endblock body_content %}

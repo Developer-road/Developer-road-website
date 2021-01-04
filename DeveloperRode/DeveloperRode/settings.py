@@ -140,5 +140,5 @@ MEDIA_ROOT = 'media/'
 
 # Redirect login button to login default template
 
-LOGIN_REDIRECT_URL = 'home:home_page'
+LOGIN_REDIRECT_URL = 'blog:blog_page'
 LOGOUT_REDIRECT_URL = 'home:home_page'
