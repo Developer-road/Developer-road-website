@@ -1,0 +1,31 @@
+{% load static %}
+
+<div class="nav-container">
+    <nav class="my-navbar overlay">
+
+        {% comment %} Logo navbar {% endcomment %}
+        <div class="logo">
+            <a href="{% url 'home:home_page' %}">
+                <h1>DeveloperRoad</h1>
+            </a>
+        </div>
+        {% comment %} Navbar links for the page {% endcomment %}
+
+        <ul class="my-nav-menu">
+            <li><a class="nav-links" href="{% url 'home:home_page' %}">Home</a></li>
+            <li><a class="nav-links" href="{% url 'about:about_page' %}">About</a></li>
+            <li><a class="nav-links" href="{% url 'contact:contact_page' %}">Contact me</a></li>
+            <li><a class="nav-links" href="{% url 'projects:my_projects' %}">Projects</a></li>
+            <li><a class="nav-links" href="{% url 'blog:blog_page' %}">Blog</a></li>
+            <li><a class="nav-links sign-button" href="{% url 'home:home_page' %}">Sign in</a></li>
+        </ul>
+
+        {% comment %} hamburger menu {% endcomment %}
+        <div class="menu-toggle" id="mobile-menu">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+
+    </nav>
+</div>

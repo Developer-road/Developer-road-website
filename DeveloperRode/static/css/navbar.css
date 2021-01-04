@@ -1,0 +1,176 @@
+:root {
+    --myblack: #212738;
+    --myred: #EF233C;
+    --mywhite: #E8E9F3;
+    --nav-height: 10vh;
+    --menu-color: #212940;
+}
+
+.nav-container {
+    width: 100%;
+    background-color: var(--myblack);
+}
+
+.my-navbar {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    min-height: var(--nav-height);
+}
+
+.logo h1 {
+    color: var(--mywhite);
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-left: 15px;
+    justify-self: start;
+}
+
+.logo a {
+    text-decoration: none;
+}
+
+.my-nav-menu {
+    display: flex;
+    justify-content: space-around;
+    width: 45%;
+}
+
+.my-nav-menu li {
+    list-style: none;
+}
+
+.nav-links {
+    text-decoration: none;
+    color: var(--mywhite);
+    font-size: 0.9em;
+}
+
+.nav-links:hover {
+    color: var(--myred);
+    transition: all 0.2s ease-out;
+}
+
+.sign-button {
+    background-color: var(--myred);
+    padding: 4px 14px;
+    border-radius: 3px;
+}
+
+.sign-button:hover {
+    color: var(--mywhite);
+    background-color: transparent;
+    padding: 3px 13px;
+    border-radius: 3px;
+    border: solid 1px var(--myred);
+    transition: all 0.3s ease-out;
+}
+
+
+.menu-toggle div {
+    display: none;
+}
+
+@media screen and (max-width: 1024px) {
+    .my-nav-menu {
+        width: 60%;
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .nav-container {
+        position: relative;
+    }
+
+    .my-nav-menu {
+        display: grid;
+        /* display the links in colums instead of in line */
+        grid-template-columns: auto;
+        background-color: var(--myred);
+        margin: 0;
+        width: 100%;
+        position: absolute;
+        /* Doesn't override the main navbar */
+        top: var(--nav-height);
+
+        /* hide the menu  */
+        left: -100%;
+        opacity: 0;
+        transition: all 0.5s ease;
+    }
+
+    .logo {
+        margin: 0px auto 0px auto;
+    }
+
+    .nav-links {
+        text-align: center;
+        line-height: 45px;
+        width: 100%;
+        display: table;
+    }
+
+    .nav-links:hover {
+        color: var(--myred);
+        transition: all 0.4s ease-out;
+    }
+
+    .my-navbar {
+        width: 100%;
+    }
+
+    .sign-button {
+        border: none;
+        padding: 0;
+        border-radius: 0;
+        background-color: var(--menu-color);
+    }
+
+    .sign-button:hover {
+        padding: 0;
+        border-radius: 0;
+        border: 0;
+        color: var(--myred);
+    }
+
+    #mobile-menu {
+        position: absolute;
+        top: 20%;
+        right: 5%;
+    }
+
+    .menu-toggle div {
+        display: block;
+        width: 25px;
+        height: 4px;
+        background-color: var(--mywhite);
+        margin: 5px;
+        cursor: pointer;
+        transition: ease;
+    }
+
+    .is-active .line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .is-active .line:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .is-active .line:nth-child(3) {
+        transform: translateY(-10px) rotate(-45deg);
+    }
+
+    .my-nav-menu.active {
+        background-color: var(--menu-color);
+        left: 0;
+        opacity: 1;
+        transition: all 0.5s ease;
+        /* Center correctly the items */
+        width: 105%;
+        left: -5%;
+        z-index: 10;
+    }
+}
