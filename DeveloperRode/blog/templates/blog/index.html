@@ -1,25 +1,51 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load extra_filters %}
 {% block title %}Blog - Posts{% endblock title %}
 
 {% block description %}
 These are all the blog posts about Programming:
-Python, Javascript, Frontend, Backend and Django.
+Python, Javascript, Frontend, Backend and Django Web Framework.
 {% endblock description %}
 
 
 {% block body_content %}
 
-<h1>Posts</h1>
+<div class="posts container-fluid">
+    <h1>Developer Road Blog</h1>
+    <p class="intro-post">Diverse <span>Programming tips</span>  and <span>tutorials</span> of the most
+        recent topics in the <span>Tech World</span></p>
+</div>
 
 {% for post in object_list %}
 
 <ul>
-    <h3><a href="{% url 'blog:article_page' post.pk %}">{{ post.title }}</a> by {{ post.author.first_name }}
-        {{ post.author.last_name }} - <small>{{ post.date }}</small></h3>
+    <div class="blog-abv">
+        <span>By {{ post.author.first_name }} {{ post.author.last_name }}</span>
+        <span class="px-2">·</span>
+        <span>{{ post.date }}</span>
+        <span class="px-2">·</span>
+        <div class="category">
+            <span><a href="{% url 'blog:category_page'  post.category|string|myslug %}">{{ post.category }}</a></span>
+        </div>
+    </div>
+
+    <div class="blog-title semibold">
+        <h3>{{ post.title|title }}</h3>
+    </div>
+
+
+    {% if post.description %}
+    <p class="blog-description">{{ post.description | slice:":200" }}</p>
+    {% else %}
+    <p class="blog-description">{{ post.body | escape | slice:":200" }}</p>
+    {% endif %}
+
+
+    <a href="{% url 'blog:article_page' post.pk %}" class="Read-full">Read full Post</a>
 
     {% if user.is_authenticated %}
-    <small><a href="{% url 'blog:delete_page' post.pk %}" class="link-danger">Delete post</a></small>
+    <br><br><small><a href="{% url 'blog:delete_page' post.pk %}" class="link-danger">Delete post</a></small>
     {% endif %}
 </ul>
 {% endfor %}

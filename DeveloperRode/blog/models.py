@@ -5,11 +5,25 @@ from django.urls import reverse
 # For pub date
 from datetime import date, datetime
 
+
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        """
+        Show the category name in the admin Page
+        """
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("blog:blog_page")
+
 class Post(models.Model):
     title = models.CharField(max_length=200)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True) 
-    meta_description = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     body = models.TextField()
     
     def __str__(self):

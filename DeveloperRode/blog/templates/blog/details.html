@@ -1,31 +1,41 @@
 {% extends 'base.html' %}
-{% block title %}
-Post : {{ post.title }}
-{% endblock title %}
+{% block title %}Post : {{ post.title }}{% endblock title %}
+
 {% block description %}
-{{ post.meta_description }}
+{{ post.description }}
 {% endblock description %}
 
 
 {% block body_content %}
-<h1>Post: {{ post.title }}</h1>
-<small>By {{ post.author.first_name }} {{ post.author.last_name }} - Published on {{ post.date }}</small>
-<br>
+
+<div class="blog-abv">
+    <span>By {{ post.author.first_name }} {{ post.author.last_name }}</span>
+    <span class="px-2">·</span>
+    <span>{{ post.date }}</span>
+    <span class="px-2">·</span>
+    <div class="category">
+        <span><a href="{% url 'blog:category_page'  post.category %}">{{ post.category }}</a></span>
+    </div>
+</div>
+
+<div class="blog-title-page">
+    <h1>{{ post.title }}</h1>
+</div>
+
 {% if user.is_authenticated %}
-<small><a href="{% url 'blog:delete_page' post.pk %}" class="link-danger">Delete post</a></small>
-<br>
+<br><small><a href="{% url 'blog:delete_page' post.pk %}" class="link-danger">Delete post</a></small>
 {% endif %}
 <hr>
-<p>
-    {{ post.body }}
 
-</p>
+<div class="col-md-8">
+    <p>
+        {{ post.body|safe }}
 
-<br>
+    </p>
+</div>
 
 {% if user.is_authenticated %}
-<a href="{% url 'blog:edit_page' post.pk %}" target="_blank" rel="#" <button type="button"
-    class="btn btn-secondary btn-sm">Edit
+<a href="{% url 'blog:edit_page' post.pk %}" rel="#" <button type="button" class="btn btn-secondary btn-sm detail-button">Edit
     post</a>
 {% endif %}
 

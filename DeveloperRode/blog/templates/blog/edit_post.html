@@ -12,11 +12,15 @@ Edit an existent post of Dan programmer.
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-success">Edit</button>
+        <button type="submit" class="btn form-btn">Edit</button>
 
 
     </form>
 </div>
+<hr>
+<p>There is not the category you are looking for?<br>
+<a href="{% url 'blog:add_category' %}" target="_blank">Create one</a>
+</p>
 
 {% else %}
 <h1>Sorry, You are not allowed to edit this Post</h1>

@@ -24,11 +24,11 @@
     transition: all 0.3s ease-out;
 }
 
-.create-btn:hover a{
+.create-btn:hover a {
     color: var(--myblue);
 }
 
-.form-btn{
+.form-btn {
     color: var(--mywhite);
     background-color: var(--bs-success);
     padding: 6px 14px;
@@ -36,7 +36,7 @@
 }
 
 
-.form-btn:hover{
+.form-btn:hover {
     color: rgb(4, 92, 4);
     background-color: transparent;
     padding: 5.5px 13.5px;
@@ -44,3 +44,7 @@
     border: solid 1px var(--bs-success);
     transition: all 0.3s ease-out;
 }
+
+/* .semibold h3 p{
+    font-weight: 600;
+} */

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Category: {{ category_post.name|title }}{% endblock title %}
+
+{% block description %}
+Page of Category: {{ category_name.title|title }}
+{% endblock description %}
+
+
+{% block body_content %}
+
+<h1>{{ category_name.name|title }}</h1>
+
+<br>
+{% for post in category_post %}
+
+<ul>
+    <h3><a href="{% url 'blog:article_page' post.pk %}">{{ post.title }}</a> by {{ post.author.first_name }}
+        {{ post.author.last_name }} - <small>{{ post.date }}</small></h3>
+
+    {% if post.description %}
+    <p>{{ post.description | slice:":200" }}</p>
+    {% endif %}
+
+
+    {% if user.is_authenticated %}
+    <br><small><a href="{% url 'blog:delete_page' post.pk %}" class="link-danger">Delete post</a></small>
+    {% endif %}
+
+</ul>
+
+{% empty %}
+<p>There are not post with {{ category_name.name }} category yet</p>
+
+{% if user.is_authenticated %}
+
+<a href="{% url 'blog:add_post' %}" <button type="button" class="btn btn-primary btn-lg">Add
+    post</a>
+
+{% endif %}
+
+{% endfor %}
+
+
+<br>
+<br>
+{% if user.is_authenticated %}
+<a href="{% url 'blog:add_post' %}" target="_blank" rel="#" <button type="button" class="btn btn-primary btn-lg">Add
+    post</a>
+{% endif %}
+
+
+
+
+{% endblock body_content %}

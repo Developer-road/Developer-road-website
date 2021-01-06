@@ -10,11 +10,15 @@
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-success">Post</button>
-
+        <button type="submit" class="btn form-btn">Post</button>
 
     </form>
 </div>
+<hr>
+<p>There is not the category you are looking for?<br>
+<a href="{% url 'blog:add_category' %}">Create one</a>
+</p>
+
 {% else %}
 <h1>Sorry. You are not Allowed to add a Post</h1>
 {% endif %}
