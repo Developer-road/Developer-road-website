@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load extra_filters %}
+{% block title %}Categories{% endblock title %}
+
+{% block description %}
+Categories of the Developer Road Blog:
+{% for category in object_list %}
+{{category.name}} ,
+{% endfor %}
+{% endblock description %}
+
+{% block body_content %}
+
+<h1 class="fw-bold h1"> Categories: </h1>
+
+<div class="align-content-sm-around">
+    {% for category in object_list %}
+    <ul class="text-decoration-none list-unstyled px-4">
+        <li><a class="text-decoration-none text-dark" href="{% url 'blog:category_page' category.name|myslug %}">
+                <h5 class="h5 ">{{category.name|title}} <span
+                        class="text-danger fs-6 fw-light text-decoration-underline">Show Posts</span></h5>
+            </a></li>
+    </ul>
+
+    {% endfor %}
+
+</div>
+
+{% endblock body_content %}

@@ -10,7 +10,7 @@ Sign up page of Developer Rode blog
 <div class="form-group">
     <form action="" method="post">
         {% csrf_token %}
-        {{ form.as_div }}
+        {{ form.as_p }}
         <button type="submit" class="btn form-btn">Create account</button>
 
     </form>

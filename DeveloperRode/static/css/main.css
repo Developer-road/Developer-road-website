@@ -4,6 +4,9 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
+:root{
+    --secondary-red: #db162f;
+}
 
 .create-btn a {
     text-decoration: none;

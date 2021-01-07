@@ -102,3 +102,19 @@
 .posts span {
     color: #db162f;
 }
+
+.my-column{
+    margin-left: 15px;
+    margin-right: 12px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media screen and (max-width: 768px) {
+    .my-column {
+        display: flex;
+        margin-bottom: 30px;
+        margin-right: 20px;
+        align-items: center;
+    }
+}

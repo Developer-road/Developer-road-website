@@ -175,3 +175,102 @@
         z-index: 10;
     }
 }
+
+@media screen and (max-width: 330px) {
+    .nav-container {
+        position: relative;
+    }
+
+    .my-nav-menu {
+        display: grid;
+        /* display the links in colums instead of in line */
+        grid-template-columns: auto;
+        background-color: var(--myred);
+        margin: 0;
+        width: 100%;
+        position: absolute;
+        /* Doesn't override the main navbar */
+        top: var(--nav-height);
+
+        /* hide the menu  */
+        left: -100%;
+        opacity: 0;
+        transition: all 0.5s ease;
+    }
+
+    .logo {
+        margin-right: 15vh;
+    }
+    .logo h1{
+        font-size: 1.3em;
+    }
+
+    .nav-links {
+        text-align: center;
+        line-height: 45px;
+        width: 100%;
+        display: table;
+    }
+
+    .nav-links:hover {
+        color: var(--myred);
+        transition: all 0.4s ease-out;
+    }
+
+    .my-navbar {
+        width: 100%;
+    }
+
+    .sign-button {
+        border: none;
+        padding: 0;
+        border-radius: 0;
+        background-color: var(--menu-color);
+    }
+
+    .sign-button:hover {
+        padding: 0;
+        border-radius: 0;
+        border: 0;
+        color: var(--myred);
+    }
+
+    #mobile-menu {
+        position: absolute;
+        top: 20%;
+        right: 5%;
+    }
+
+    .menu-toggle div {
+        display: block;
+        width: 25px;
+        height: 4px;
+        background-color: var(--mywhite);
+        margin: 5px;
+        cursor: pointer;
+        transition: ease;
+    }
+
+    .is-active .line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .is-active .line:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .is-active .line:nth-child(3) {
+        transform: translateY(-10px) rotate(-45deg);
+    }
+
+    .my-nav-menu.active {
+        background-color: var(--menu-color);
+        left: 0;
+        opacity: 1;
+        transition: all 0.5s ease;
+        /* Center correctly the items */
+        width: 105%;
+        left: -5%;
+        z-index: 10;
+    }
+}

@@ -2,11 +2,14 @@
 {% block title %}Edit a post{% endblock title %}
 
 {% block description %}
-Edit an existent post of Dan programmer.
+Edit an existent post of Developer Road.
 {% endblock description %}
 
 {% block body_content %}
 {% if user.is_authenticated %}
+
+{% if user.id == post.author.id %}
+
 <h1>Edit a post</h1>
 <div class="form-group">
     <form action="" method="post">
@@ -19,9 +22,12 @@ Edit an existent post of Dan programmer.
 </div>
 <hr>
 <p>There is not the category you are looking for?<br>
-<a href="{% url 'blog:add_category' %}" target="_blank">Create one</a>
+    <a href="{% url 'blog:add_category' %}" target="_blank">Create one</a>
 </p>
+{% else %}
+<h1>Sorry, You are not allowed to edit this Post</h1>
 
+{% endif %}
 {% else %}
 <h1>Sorry, You are not allowed to edit this Post</h1>
 

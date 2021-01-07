@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load extra_filters %}
+
 {% block title %}Post : {{ post.title }}{% endblock title %}
 
 {% block description %}
@@ -9,12 +12,13 @@
 {% block body_content %}
 
 <div class="blog-abv">
-    <span>By {{ post.author.first_name }} {{ post.author.last_name }}</span>
+    <span>By {% if post.author.first_name and post.author.last_name %} {{ post.author.first_name }}
+        {{ post.author.last_name }} {% else %} {{ post.author }}{% endif %}</span>
     <span class="px-2">·</span>
     <span>{{ post.date }}</span>
     <span class="px-2">·</span>
     <div class="category">
-        <span><a href="{% url 'blog:category_page'  post.category %}">{{ post.category }}</a></span>
+        <span><a href="{% url 'blog:category_page'  post.category|myslug %}">{{ post.category }}</a></span>
     </div>
 </div>
 
@@ -35,7 +39,8 @@
 </div>
 
 {% if user.is_authenticated %}
-<a href="{% url 'blog:edit_page' post.pk %}" rel="#" <button type="button" class="btn btn-secondary btn-sm detail-button">Edit
+<a href="{% url 'blog:edit_page' post.pk %}" rel="#" <button type="button"
+    class="btn btn-secondary btn-sm detail-button">Edit
     post</a>
 {% endif %}
 

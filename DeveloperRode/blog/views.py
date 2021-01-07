@@ -19,6 +19,12 @@ class BlogView(ListView):
     template_name = 'blog/index.html'
     ordering = ["-date"]
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["cat_items"] = Category.objects.all()
+        return context
+    
+
 
 class ArticleDetail(DetailView):
     """
@@ -52,6 +58,10 @@ class CategoryView(View):
         context = {"category_name": category_name,
                    "category_post": category_post}
         return render(request, "blog/categories.html", context)
+
+class CategoryListView(ListView):
+    model = Category
+    template_name = "blog/categories_list.html"
 
 
 class CategoryCreateView(CreateView):

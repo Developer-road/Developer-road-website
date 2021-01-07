@@ -10,7 +10,7 @@ class Home(View):
         """
         return render(request, 'home/index.html')
 
-def handler404(request):
+def handler404(request, exception):
     """
     Handles the 404 Page to all the Website
     """

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load extra_filters %}
 {% block title %}Category: {{ category_post.name|title }}{% endblock title %}
 
 {% block description %}
@@ -15,18 +16,29 @@ Page of Category: {{ category_name.title|title }}
 {% for post in category_post %}
 
 <ul>
-    <h3><a href="{% url 'blog:article_page' post.pk %}">{{ post.title }}</a> by {{ post.author.first_name }}
-        {{ post.author.last_name }} - <small>{{ post.date }}</small></h3>
+    <div class="blog-abv">
+        <span>By {{ post.author.first_name }} {{ post.author.last_name }}</span>
+        <span class="px-2">·</span>
+        <span>{{ post.date }}</span>
+    </div>
+
+    <div class="blog-title semibold">
+        <h3>{{ post.title|title }}</h3>
+    </div>
+
 
     {% if post.description %}
-    <p>{{ post.description | slice:":200" }}</p>
+    <p class="blog-description">{{ post.description | slice:":200" }}</p>
+    {% else %}
+    <p class="blog-description">{{ post.body | escape | slice:":200" }}</p>
     {% endif %}
 
+
+    <a href="{% url 'blog:article_page' post.pk %}" class="Read-full">Read full Post</a>
 
     {% if user.is_authenticated %}
-    <br><small><a href="{% url 'blog:delete_page' post.pk %}" class="link-danger">Delete post</a></small>
+    <br><br><small><a href="{% url 'blog:delete_page' post.pk %}" class="link-danger">Delete post</a></small>
     {% endif %}
-
 </ul>
 
 {% empty %}

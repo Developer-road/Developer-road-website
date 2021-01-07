@@ -13,42 +13,68 @@ Python, Javascript, Frontend, Backend and Django Web Framework.
 
 <div class="posts container-fluid">
     <h1>Developer Road Blog</h1>
-    <p class="intro-post">Diverse <span>Programming tips</span>  and <span>tutorials</span> of the most
+    <p class="intro-post">Diverse <span>Programming tips</span> and <span>tutorials</span> of the most
         recent topics in the <span>Tech World</span></p>
 </div>
 
-{% for post in object_list %}
 
-<ul>
-    <div class="blog-abv">
-        <span>By {{ post.author.first_name }} {{ post.author.last_name }}</span>
-        <span class="px-2">·</span>
-        <span>{{ post.date }}</span>
-        <span class="px-2">·</span>
-        <div class="category">
-            <span><a href="{% url 'blog:category_page'  post.category|string|myslug %}">{{ post.category }}</a></span>
+
+<div class="blog-posts">
+    <div class="my-column">
+        <!-- Dropdown button -->
+        <div class="btn-group dropdown-blog">
+            <button type="button" class="btn btn-danger"><a class="text-decoration-none text-white"
+                    href="{% url 'blog:categories_page' %}">Categories</a></button>
+            <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+
+                {% for item in cat_items %}
+                <li><a class="dropdown-item"
+                        href="{% url 'blog:category_page' item.name|string|myslug %}">{{ item.name }}</a></li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 
-    <div class="blog-title semibold">
-        <h3>{{ post.title|title }}</h3>
-    </div>
+    {% for post in object_list %}
+
+    <ul>
+        <div class="blog-abv">
+            <span>By {% if post.author.first_name and post.author.last_name %} {{ post.author.first_name }}
+                {{ post.author.last_name }} {% else %} {{ post.author }}{% endif %}</span>
+            <span class="px-2">·</span>
+            <span>{{ post.date }}</span>
+            <span class="px-2">·</span>
+            <div class="category">
+                <span><a href="{% url 'blog:category_page'  post.category|myslug %}">{{ post.category }}</a></span>
+            </div>
+        </div>
+
+        <div class="blog-title semibold">
+            <h3>{{ post.title|title }}</h3>
+        </div>
 
 
-    {% if post.description %}
-    <p class="blog-description">{{ post.description | slice:":200" }}</p>
-    {% else %}
-    <p class="blog-description">{{ post.body | escape | slice:":200" }}</p>
-    {% endif %}
+        {% if post.description %}
+        <p class="blog-description">{{ post.description | slice:":200" }}</p>
+        {% else %}
+        <p class="blog-description">{{ post.body | escape | slice:":200" }}</p>
+        {% endif %}
 
 
-    <a href="{% url 'blog:article_page' post.pk %}" class="Read-full">Read full Post</a>
+        <a href="{% url 'blog:article_page' post.pk %}" class="Read-full">Read full Post</a>
 
-    {% if user.is_authenticated %}
-    <br><br><small><a href="{% url 'blog:delete_page' post.pk %}" class="link-danger">Delete post</a></small>
-    {% endif %}
-</ul>
-{% endfor %}
+        {% if user.is_authenticated %}
+        {% if user.id == post.author.id %}
+        <br><br><small><a href="{% url 'blog:delete_page' post.pk %}" class="link-danger">Delete post</a></small>
+        {% endif %}
+        {% endif %}
+    </ul>
+    {% endfor %}
+</div>
 
 
 <br>
