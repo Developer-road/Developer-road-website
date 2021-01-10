@@ -20,13 +20,32 @@
     <div class="category">
         <span><a href="{% url 'blog:category_page'  post.category|myslug %}">{{ post.category }}</a></span>
     </div>
+    <span class="px-2">·</span>
+    <span>{% if upvotes == 1 %}{{ upvotes }} Upvote{% else %}{{ upvotes }} Upvotes {% endif %}</span>
+    {% if user.is_authenticated %}
+    <div class="vote">
+        <form action="{% url 'blog:upvotes' post.pk %}" method="post">
+            {% csrf_token %}
+            {% if upvoted %}
+            <button type="submit" name="post_upvote" value="{{ post.id }}" class="btn btn-danger btn-sm mt-4">Downvote
+            </button>
+            {% else %}
+            <button type="submit" name="post_upvote" value="{{ post.id }}" class="btn btn-success btn-sm mt-4">Upvote
+            </button>
+            {% endif %}
+        </form>
+    </div>
+    {% else %}
+    <p class="mt-5">Login to like this post <a href="{% url 'login' %}"
+            class="btn text-decoration-none btn-danger btn-sm">Sing In</a></p>
+    {% endif %}
 </div>
 
 <div class="blog-title-page">
     <h1>{{ post.title }}</h1>
 </div>
 
-{% if user.is_authenticated %}
+{% if user.is_authenticated and  user.id == post.author.id %}
 <br><small><a href="{% url 'blog:delete_page' post.pk %}" class="link-danger">Delete post</a></small>
 {% endif %}
 <hr>
@@ -34,11 +53,9 @@
 <div class="col-md-8">
     <p>
         {{ post.body|safe }}
-
-    </p>
 </div>
 
-{% if user.is_authenticated %}
+{% if user.is_authenticated and  user.id == post.author.id %}
 <a href="{% url 'blog:edit_page' post.pk %}" rel="#" <button type="button"
     class="btn btn-secondary btn-sm detail-button">Edit
     post</a>

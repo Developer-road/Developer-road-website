@@ -17,7 +17,8 @@ Page of Category: {{ category_name.title|title }}
 
 <ul>
     <div class="blog-abv">
-        <span>By {{ post.author.first_name }} {{ post.author.last_name }}</span>
+        <span>By {% if post.author.first_name and post.author.last_name %} {{ post.author.first_name }}
+            {{ post.author.last_name }} {% else %} {{ post.author }}{% endif %}</span>
         <span class="px-2">·</span>
         <span>{{ post.date }}</span>
     </div>

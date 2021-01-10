@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block title %}Delete Post : {{ post.title }}{% endblock title %}
 {% block description %}
-{{ post.meta_description }}
+{{ post.description }}
 {% endblock description %}
 
 
 {% block body_content %}
 
-{% if user.is_authenticated %}
+{% if user.is_authenticated and  user.id == post.author.id %}
 <h1>Delete Post</h1>
 <br>
 
@@ -31,7 +31,7 @@
 <br>
 <br>
 
-<a href="{% url 'blog:article_page' post.pk %}"  class="btn btn-primary btn-sm">Back</a>
+<a href="{% url 'blog:article_page' post.pk %}" class="btn btn-primary btn-sm">Back</a>
 {% else %}
 <h1>Sorry, You are not allowed to Delete this Post</h1>
 {% endif %}

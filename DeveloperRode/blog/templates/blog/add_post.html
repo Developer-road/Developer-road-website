@@ -16,7 +16,7 @@
 </div>
 <hr>
 <p>There is not the category you are looking for?<br>
-<a href="{% url 'blog:add_category' %}">Create one</a>
+    <a href="{% url 'blog:add_category' %}">Create one</a>
 </p>
 
 {% else %}
@@ -24,3 +24,8 @@
 {% endif %}
 
 {% endblock body_content %}
+
+{% block scripts %}
+    {{ block.super }}
+    {% include "blog/author.html" %}
+{% endblock scripts %}

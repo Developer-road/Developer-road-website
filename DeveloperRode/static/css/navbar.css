@@ -107,6 +107,7 @@
     }
 
     .nav-links {
+        font-weight: 600;
         text-align: center;
         line-height: 45px;
         width: 100%;
@@ -201,11 +202,13 @@
     .logo {
         margin-right: 15vh;
     }
-    .logo h1{
+
+    .logo h1 {
         font-size: 1.3em;
     }
 
     .nav-links {
+        font-weight: 600;
         text-align: center;
         line-height: 45px;
         width: 100%;

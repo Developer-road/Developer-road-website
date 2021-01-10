@@ -51,3 +51,7 @@
 /* .semibold h3 p{
     font-weight: 600;
 } */
+
+.vote_button:hover{
+    color: var(--myred);
+}

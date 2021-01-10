@@ -25,7 +25,14 @@ class Post(models.Model):
     description = models.TextField(blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     body = models.TextField()
+    upvotes = models.ManyToManyField(User, related_name="post_votes")
     
+    def total_likes(self):
+        """
+        Returns total likes in the page
+        """
+        return self.upvotes.count()
+
     def __str__(self):
         """
         Show the title and the author in the admin Page
