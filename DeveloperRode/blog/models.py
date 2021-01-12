@@ -5,6 +5,8 @@ from django.urls import reverse
 # For pub date
 from datetime import date, datetime
 
+# Import Custom user
+from django.conf import settings
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -20,12 +22,12 @@ class Category(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True) 
     description = models.TextField(blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     body = models.TextField()
-    upvotes = models.ManyToManyField(User, related_name="post_votes")
+    upvotes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="post_votes")
     
     def total_likes(self):
         """

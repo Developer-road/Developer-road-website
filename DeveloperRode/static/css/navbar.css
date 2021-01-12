@@ -18,6 +18,7 @@
     justify-content: space-around;
     align-items: center;
     min-height: var(--nav-height);
+    margin-bottom: 30px;
 }
 
 .logo h1 {

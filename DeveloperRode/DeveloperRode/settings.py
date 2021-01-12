@@ -27,6 +27,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["localhost"]
 
+# Custom User Model
+AUTH_USER_MODEL = "members.BlogUser"
+
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.AllowAllUsersModelBackend",
+    "members.backends.CaseModelBackend",
+)
 
 # Application definition
 
