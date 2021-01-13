@@ -4,9 +4,15 @@
 {% block title %}My Projects{% endblock title %}
 
 {% block body_content %}
-<h1>My Personal Projects</h1>
 
+<div class="posts container-fluid mt-5">
+    <h1>My Personal Projects</h1>
+</div>
 
+<div class="container-sm">
+
+    <p><i>Featured Projects</i></p>
+</div>
 <div class="row">
     {% for project in object_list %}
     <div class="col-md-4">
@@ -27,34 +33,12 @@
 </div>
 
 
-{% comment %} <br>
-
-{% for project in object_list %}
-<h2> {{ project.title }} </h2>
-
-<br>
-{% if project.image %}
-
-<img src="{{ project.image.url }}" alt="">
-
-{% endif %}
-
-<p><span><small>Technology used : {{ project.technology }}</small></span></p>
-
-<p> {{ project.description }} </p>
-
-<br>
-
-{% if project.project_url %}
-
-<a href="{{ project.project_url }}}">Follow the Project</a> {% endcomment %}
-
-{% comment %} {% endif %}
+{% comment %} Github Projects {% endcomment %}
 
 
-{% empty %}
-<h2>No projects avaiable</h2>
+<div class="posts container-fluid mt-5">
+    <h1 class="fs-lg-3">My projects on Github</h1>
+</div>
 
-{% endfor %} {% endcomment %}
 
 {% endblock %}

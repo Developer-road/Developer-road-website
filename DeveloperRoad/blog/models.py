@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from ckeditor.fields import RichTextField
 
 # For pub date
 from datetime import date, datetime
@@ -26,7 +27,8 @@ class Post(models.Model):
     date = models.DateField(auto_now_add=True) 
     description = models.TextField(blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    body = models.TextField()
+    # body = models.TextField()
+    body = RichTextField()
     upvotes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="post_votes")
     
     def total_likes(self):
