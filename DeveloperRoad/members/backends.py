@@ -14,7 +14,7 @@ class CaseModelBackend(ModelBackend):
             user = UserModel._default_manager.get(**{case_insensitive_user_name_field: username})
 
         except UserModel.DoesNotExist:
-            UserModel.set_password(password)
+            UserModel().set_password(password)
 
         else:
             if user.check_password(password) and self.user_can_authenticate(user):

@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect
 
 from .models import Post, Category
 
-from .forms import PostForm, EditForm
+from .forms import PostForm, EditPostForm, CreateCategoryForm
 
 
 class BlogView(ListView):
@@ -87,8 +87,8 @@ class CategoryCreateView(CreateView):
     """
 
     model = Category
-    fields = "__all__"
-    # form_class = PostForm
+    # fields = "__all__"
+    form_class = CreateCategoryForm
     template_name = "blog/add_category.html"
 
 
@@ -99,7 +99,7 @@ class EditPost(UpdateView):
 
     model = Post
     template_name = 'blog/edit_post.html'
-    form_class = EditForm
+    form_class = EditPostForm
     # fields = ('title','meta_description', 'body')
 
 

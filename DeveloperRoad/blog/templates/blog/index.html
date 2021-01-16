@@ -61,7 +61,7 @@ Python, Javascript, Frontend, Backend and Django Web Framework.
         {% if post.description %}
         <p class="blog-description">{{ post.description | slice:":200" }}</p>
         {% else %}
-        <p class="blog-description">{{ post.body | escape | slice:":200" }}</p>
+        <p class="blog-description">{{ post.body | striptags | slice:":200" }}</p>
         {% endif %}
 
 

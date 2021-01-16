@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Add Category{% endblock title %}
+
+{% block body_content %}
+{% if user.is_authenticated %}
+
+<div class="mb-5">
+    <h1 class="">Edit profile</h1>
+</div>
+
+<div class="form-group">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="mt-5">
+            <button type="submit" class="btn form-btn">Update profile</button>
+        </div>
+    </form>
+</div>
+{% else %}
+
+<div class="mb-5">
+    <h1 class="">You are not registered yet</h1>
+</div>
+
+<hr>
+
+<p class="mt-4">Login to edit your Profile
+    <span class="px-3"><a href="{% url 'login' %}" class=" btn text-decoration-none btn-danger btn-sm">Sing
+            In</a></span>
+</p>
+
+
+{% endif %}
+{% endblock body_content %}

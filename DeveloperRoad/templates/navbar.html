@@ -17,6 +17,7 @@
             <li><a class="nav-links" href="{% url 'projects:my_projects' %}">Projects</a></li>
             <li><a class="nav-links" href="{% url 'blog:blog_page' %}">Blog</a></li>
             {% if user.is_authenticated %}
+            <li><a class="nav-links" href="{% url 'members:edit' %}">Edit profile</a></li>
             <li><a class="nav-links sign-button" href="{% url 'logout' %}">Sign out</a></li>
             {% else %}
             <li><a class="nav-links sign-button" href="{% url 'login' %}">Sign in</a></li>

@@ -12,7 +12,9 @@ Categories of the Developer Road Blog:
 
 {% block body_content %}
 
-<h1 class="fw-bold h1"> Categories: </h1>
+<div class="mb-5">
+    <h1 class="fw-bold h1">Categories</h1>
+</div>
 
 <div class="align-content-sm-around">
     {% for category in object_list %}
@@ -25,6 +27,11 @@ Categories of the Developer Road Blog:
 
     {% endfor %}
 
+</div>
+
+<div class="mt-5">
+    <span class="text-muted">There isn't the category you are looking for ? <a href="{% url 'blog:add_category' %}"
+            class="link-danger">Create one</a></span>
 </div>
 
 {% endblock body_content %}

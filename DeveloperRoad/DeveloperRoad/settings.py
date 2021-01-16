@@ -54,6 +54,9 @@ INSTALLED_APPS = [
     'members',
     # Rich Text editor
     "ckeditor",
+    # Healthy Html
+    'django_bleach',
+
 ]
 
 MIDDLEWARE = [
@@ -100,6 +103,13 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'DeveloperRoad',
+#     }
+# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -139,10 +149,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [ 
+STATICFILES_DIRS = [
     join(BASE_DIR, 'static'),
 ]
-
 
 
 MEDIA_URL = '/media/'
@@ -153,3 +162,30 @@ MEDIA_ROOT = 'media/'
 
 LOGIN_REDIRECT_URL = 'blog:blog_page'
 LOGOUT_REDIRECT_URL = 'home:home_page'
+
+# BLEACH STUFF
+# Which HTML tags are allowed
+BLEACH_ALLOWED_TAGS = ['p', 'b', 'i', 'u', 'em', 'strong', 'a', 'h1', 'h2',
+                       'h3', 'h4', 'h5', 'h6', 'pre', "img", "caption", "table", 'tbody', 'tr', "td"]
+
+# Which HTML attributes are allowed
+BLEACH_ALLOWED_ATTRIBUTES = ['href', 'title', 'style', 'border',
+                             "alt", 'cellpadding', 'cellspacing', 'summary', 'src']
+
+# Which CSS properties are allowed in 'style' attributes (assuming style is
+# an allowed attribute)
+BLEACH_ALLOWED_STYLES = [
+    'font-family', 'font-weight', 'text-decoration', 'font-variant', 'width'
+]
+
+# Which protocols (and pseudo-protocols) are allowed in 'src' attributes
+# (assuming src is an allowed attribute)
+BLEACH_ALLOWED_PROTOCOLS = [
+    'http', 'https', 'data'
+]
+
+# Strip unknown tags if True, replace with HTML escaped characters if False
+BLEACH_STRIP_TAGS = True
+
+# Strip HTML comments, or leave them in.
+BLEACH_STRIP_COMMENTS = False

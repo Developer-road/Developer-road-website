@@ -65,9 +65,12 @@
                                 <i class="fa fa-envelope text-muted"></i>
                             </span>
                         </div>
-                        <input type="text" name="username" autofocus=""  placeholder="Email" autocapitalize="none" autocomplete="off"
-                            maxlength="70" required="" id="id_username"
+                        <input type="text" name="username" autofocus="" placeholder="Email" autocapitalize="none"
+                            autocomplete="off" maxlength="70" required="" id="id_username"
                             class="form-control bg-white border-left-0 border-md">
+                    </div>
+                    <div class="font-italic text-muted mb-2 ml-3 mr-3 ">
+                        {{ form.invalid_login.errors }}
                     </div>
 
 
@@ -78,8 +81,11 @@
                                 <i class="fa fa-lock text-muted"></i>
                             </span>
                         </div>
-                        <input type="password" name="password" autocomplete="off" required=""  placeholder="Password" id="id_password"
-                            class="form-control bg-white border-left-0 border-md">
+                        <input type="password" name="password" autocomplete="off" required="" placeholder="Password"
+                            id="id_password" class="form-control bg-white border-left-0 border-md">
+                    </div>
+                    <div class="font-italic text-muted mb-2 ml-3 mr-3 ">
+                        {{ form.password.errors }}
                     </div>
 
 

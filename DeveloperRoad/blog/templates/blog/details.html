@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load extra_filters %}
+{% load bleach_tags %}
 
-{% block title %}Post : {{ post.title }}{% endblock title %}
+{% block title %}{{ post.title }}{% endblock title %}
 
 {% block description %}
 {{ post.description }}
@@ -36,8 +37,9 @@
         </form>
     </div>
     {% else %}
-    <p class="mt-5">Login to like this post <a href="{% url 'login' %}"
-            class="btn text-decoration-none btn-danger btn-sm">Sing In</a></p>
+    <p class="mt-4">Login to like this post
+        <span class="px-3"><a href="{% url 'login' %}" class=" btn text-decoration-none btn-danger btn-sm">Sing In</a></span>
+    </p>
     {% endif %}
 </div>
 
@@ -52,7 +54,7 @@
 
 <div class="col-md-8">
     <p>
-        {{ post.body|safe }}
+        {{ post.body|bleach }}
 </div>
 
 {% if user.is_authenticated and  user.id == post.author.id %}

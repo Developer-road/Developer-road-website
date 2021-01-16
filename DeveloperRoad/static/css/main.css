@@ -55,3 +55,7 @@
 .vote_button:hover{
     color: var(--myred);
 }
+
+.errorlist{
+    list-style: none;
+}
