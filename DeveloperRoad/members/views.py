@@ -57,4 +57,8 @@ class ShowProfileView(DetailView):
         context = super().get_context_data(**kwargs)
         requested_user = get_object_or_404(self.model, id=self.kwargs['pk'])
         context["requested_user"] = requested_user
+        try:
+            context["user_posts"] = Post.objects.get(author_id=self.model.id)
+        except Post.DoesNotExist:
+            context["user_posts"] = None
         return context
