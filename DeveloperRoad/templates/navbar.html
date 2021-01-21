@@ -17,8 +17,15 @@
             <li><a class="nav-links" href="{% url 'projects:my_projects' %}">Projects</a></li>
             <li><a class="nav-links" href="{% url 'blog:blog_page' %}">Blog</a></li>
             {% if user.is_authenticated %}
-            <li><a class="nav-links" href="{% url 'members:edit' %}">Edit profile</a></li>
-            <li><a class="nav-links sign-button" href="{% url 'logout' %}">Sign out</a></li>
+            <div class="navbar-image-phone dropdown">
+                <img src="{{ user.profile_image.url }}" alt="{{ user.first_name }} {{user.last_name}}"
+                    class="rounded-circle user-navbar-image dropdown-toggle" id="navbarDarkDropdownMenuLink" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li class="ps-2"><a class="nav-links" href="{% url 'members:profile' user.id %}">Your Profile</a></li>
+                    <li class="ps-2"><a class="nav-links" href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+            </div>
             {% else %}
             <li><a class="nav-links sign-button" href="{% url 'login' %}">Sign in</a></li>
             {% endif %}

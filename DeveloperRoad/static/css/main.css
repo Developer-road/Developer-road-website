@@ -4,7 +4,8 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
-:root{
+
+:root {
     --secondary-red: #db162f;
 }
 
@@ -52,10 +53,19 @@
     font-weight: 600;
 } */
 
-.vote_button:hover{
+.vote_button:hover {
     color: var(--myred);
 }
 
-.errorlist{
+.errorlist {
     list-style: none;
+}
+
+.django-ckeditor-widget {
+    width: 100%;
+}
+
+.image-opacity:hover{
+    opacity: 0.7;
+    cursor: pointer;
 }

@@ -19,7 +19,7 @@ Python, Javascript, Frontend, Backend and Django Web Framework.
 
 
 
-<div class="blog-posts">
+<div class="container blog-posts">
     <div class="my-column">
         <!-- Dropdown button -->
         <div class="btn-group dropdown-blog">
@@ -43,8 +43,9 @@ Python, Javascript, Frontend, Backend and Django Web Framework.
 
     <ul>
         <div class="blog-abv">
-            <span>By {% if post.author.first_name and post.author.last_name %} {{ post.author.first_name }}
-                {{ post.author.last_name }} {% else %} {{ post.author }}{% endif %}</span>
+            <a href="{% url 'members:profile' post.author.id %}"><span class="px-2"><img src="{{ post.author.profile_image.url }}" alt="" class="rounded-circle image-opacity" width=30
+                    height=30> </span>
+            <span> {{ post.author.first_name }} {{ post.author.last_name }} </span></a>
             <span class="px-2">·</span>
             <span>{{ post.date }}</span>
             <span class="px-2">·</span>

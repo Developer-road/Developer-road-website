@@ -9,10 +9,9 @@
 
 <h2>Hi, I'm {{ person.name }}</h2>
 
-<img src="{{ person.person_picture.url }}" alt="" srcset=""> 
-
-<div>
-{{ person.description }}
+<div class="container-sm">
+    <img src="{{ person.person_picture.url }}" alt="{{ person.name }} Image" srcset="" class="img-fluid">
+    {{ person.description }}
 </div>
 
 {% empty %}

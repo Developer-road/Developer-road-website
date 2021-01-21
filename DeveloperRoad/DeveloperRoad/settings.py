@@ -155,7 +155,7 @@ STATICFILES_DIRS = [
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = 'media/'
+MEDIA_ROOT = join(BASE_DIR, 'media')
 
 
 # Redirect login button to login default template
@@ -166,7 +166,7 @@ LOGOUT_REDIRECT_URL = 'home:home_page'
 # BLEACH STUFF
 # Which HTML tags are allowed
 BLEACH_ALLOWED_TAGS = ['p', 'b', 'i', 'u', 'em', 'strong', 'a', 'h1', 'h2',
-                       'h3', 'h4', 'h5', 'h6', 'pre', "img", "caption", "table", 'tbody', 'tr', "td"]
+                       'h3', 'h4', 'h5', 'h6', 'pre', "img", "caption", "table", 'tbody', 'tr', "td", "div"]
 
 # Which HTML attributes are allowed
 BLEACH_ALLOWED_ATTRIBUTES = ['href', 'title', 'style', 'border',
@@ -175,7 +175,7 @@ BLEACH_ALLOWED_ATTRIBUTES = ['href', 'title', 'style', 'border',
 # Which CSS properties are allowed in 'style' attributes (assuming style is
 # an allowed attribute)
 BLEACH_ALLOWED_STYLES = [
-    'font-family', 'font-weight', 'text-decoration', 'font-variant', 'width'
+    'font-family', 'font-weight', 'text-decoration', 'font-variant', 'width', 'color', "background", "padding"
 ]
 
 # Which protocols (and pseudo-protocols) are allowed in 'src' attributes
@@ -189,3 +189,57 @@ BLEACH_STRIP_TAGS = True
 
 # Strip HTML comments, or leave them in.
 BLEACH_STRIP_COMMENTS = False
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        # 'skin': 'moono',
+        # 'skin': 'office2013',
+        'toolbar_Basic': [
+            ['Source', '-', 'Bold', 'Italic']
+        ],
+        'toolbar_YourCustomToolbarConfig': [
+            {'name': 'clipboard', 'items': ['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText']},
+            {'name': 'editing', 'items': ['Find', 'Replace', '-', 'SelectAll']},
+            {'name': 'paragraph',
+             'items': ['NumberedList', 'BulletedList', '-''Blockquote']},
+            {'name': 'links', 'items': ['Link', 'Unlink']},
+            {'name': 'insert',
+             'items': ['Image', 'HorizontalRule', 'Smiley', 'SpecialChar', 'CreateDiv']},
+            {'name': 'document', 'items': [ 'Save', 'Preview' '-', 'Templates', '-', 'Source']},
+            '/',
+            {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
+            {'name': 'colors', 'items': ['TextColor', 'BGColor']},
+            {'name': 'basicstyles',
+             'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']},
+            {'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
+        ],
+        'toolbar': 'YourCustomToolbarConfig',  # put selected toolbar config here
+        # 'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
+        # 'height': 291,
+        'width': '100%',
+        # 'filebrowserWindowHeight': 725,
+        # 'filebrowserWindowWidth': 940,
+        'toolbarCanCollapse': True,
+        # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
+        'tabSpaces': 4,
+        # 'extraPlugins': ','.join([
+        #     # 'uploadimage', # the upload image feature
+        #     # your extra plugins here
+        #     'div',
+        #     'autolink',
+        #     'autoembed',
+        #     'embedsemantic',
+        #     'autogrow',
+        #     # 'devtools',
+        #     'widget',
+        #     'lineutils',
+        #     'clipboard',
+        #     'dialog',
+        #     'dialogui',
+        #     'elementspath'
+        # ]),
+    }
+}
+
+
+

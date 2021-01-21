@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Profile Changed{% endblock title %}
+
+{% block description %}
+Profile has been succesfully updated.
+{% endblock description %}
+
+{% block body_content %}
+{% if user.is_authenticated %}
+<div class="mt-5 posts">
+    <h1>Your account was succesfully updated</h1>
+    <div class="font-italic text-muted mb-2 ml-3 mr-3 ">
+        <p>Hey there {{ user.first_name }} {{ user.last_name }} your account has been updated</p>
+    </div>
+</div>
+
+<div class="mt-5">
+    <p class="mt-4">
+        Take me to the <span class="px-3"><a href="{% url 'blog:blog_page' %}"
+                class=" btn text-decoration-none btn-danger btn-sm">Blog</a></span>
+    </p>
+</div>
+
+{% endif %}
+{% endblock body_content %}

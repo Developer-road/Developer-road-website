@@ -8,7 +8,7 @@ class PostForm(forms.ModelForm):
         Returns the form of  the add post page
         """
         model = Post
-        fields = ('title', 'author', 'description', 'body', 'category',)
+        fields = ('title', 'author', 'description', "header_image", 'body', 'category',)
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', "placeholder": "An awesome title 🤓"}),
             'author': forms.TextInput(attrs={'class': 'form-control', "value":"", "id": "jhsdfjkhasdfjljadklasfdkjdfjkasdfkn", "type": "hidden"}),
@@ -25,7 +25,7 @@ class EditPostForm(forms.ModelForm):
         Returns the form of  the add post page
         """
         model = Post
-        fields = ('title', 'description', 'body', 'category',)
+        fields = ('title', 'description', 'header_image', 'body', 'category',)
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.TextInput(attrs={'class': 'form-control'}),

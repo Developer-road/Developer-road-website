@@ -2,7 +2,7 @@
     --myblack: #212738;
     --myred: #EF233C;
     --mywhite: #E8E9F3;
-    --nav-height: 10vh;
+    --nav-height: 75px;
     --menu-color: #212940;
     --myblue: #0075C4;
 }
@@ -34,9 +34,10 @@
 }
 
 .my-nav-menu {
+    margin-top: 15px;
     display: flex;
     justify-content: space-around;
-    width: 45%;
+    width: 50%;
 }
 
 .my-nav-menu li {
@@ -74,9 +75,22 @@
     display: none;
 }
 
+.navbar-image-phone{
+    cursor: pointer;
+}
+
+.user-navbar-image{
+    width: 32px;
+    height: 32px;
+}
+
+.user-navbar-image:hover{
+    opacity: 0.7;
+}
+
 @media screen and (max-width: 1024px) {
     .my-nav-menu {
-        width: 60%;
+        width: 65%;
     }
 }
 
@@ -175,6 +189,13 @@
         width: 105%;
         left: -5%;
         z-index: 10;
+    }
+    .navbar-image-phone{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+        padding-bottom: 10px;
     }
 }
 

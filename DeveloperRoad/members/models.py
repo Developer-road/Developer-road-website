@@ -48,13 +48,23 @@ class BlogUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+def get_image_extension(filename):
+    if "." in filename:
+        return filename.split(".")[-1]
+    else:
+        return None
 
-def get_profile_image_filepath(self):
+def get_profile_image_filepath(self, filename):
     """
     Returns the profile name path to store
     """
+    extension = get_image_extension(filename)
+    
+    if extension is not None:
+        return f"images/profile_images/{self.pk}/profile_image.{extension}"
+    else:
+        return f"images/profile_images/{self.pk}/profile_image.png"
 
-    return f"images/profile_images/{self.pk}/profile_image.png"
 
 
 def get_default_profile_image():
@@ -62,7 +72,7 @@ def get_default_profile_image():
     Returns the default profile image
     """
 
-    return "images/default_profile_image/default.svg"
+    return "images/default_profile_image/default.png"
 
 
 # Custom User Model
@@ -89,8 +99,18 @@ class BlogUser(AbstractBaseUser):
     profile_image = models.ImageField(max_length=255, upload_to=get_profile_image_filepath,
                                       default=get_default_profile_image, blank=True, null=True)
 
+    description = models.TextField(
+        max_length=400, default="This User doesn't have a description yet", blank=True, null=True)
+
     hide_email = models.BooleanField(default=True)
 
+    # Optional url show in the profile page, if there is one
+    website_url = models.CharField(max_length=250, blank=True, null=True)
+    github_url = models.CharField(max_length=250, blank=True, null=True)
+    instagram_url = models.CharField(max_length=250, blank=True, null=True)
+    twitter_url = models.CharField(max_length=250, blank=True, null=True)
+    linkedin_url = models.CharField(max_length=250, blank=True, null=True)
+    
     objects = BlogUserManager()
 
     USERNAME_FIELD = "email"
