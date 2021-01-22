@@ -70,7 +70,10 @@ class CategoryView(View):
 
         category_name = get_object_or_404(Category, name=cat.replace("-", " "))
 
-        category_post = get_list_or_404(Post, category_id=category_name.id)
+        try:
+            category_post = list(Post.objects.filter(category_id=category_name.id))
+        except Post.DoesNotExist:
+            category_post = None
         context = {"category_name": category_name,
                    "category_post": category_post}
         return render(request, "blog/categories.html", context)
@@ -111,16 +114,6 @@ class PostDeleteView(DeleteView):
     template_name = "blog/delete_post.html"
     success_url = reverse_lazy("blog:blog_page")
 
-
-# class VoteView(View):
-#     """
-#     Redirect the like view
-#     """
-
-#     def get(self, request,pk):
-#         post = get_object_or_404(Post, id=pk)
-#         post.upvotes.add(request.user)
-#         return HttpResponseRedirect(reverse("blog:upvotes", args=[str(pk)]))
 
 def VoteView(request, pk):
     post = Post.objects.get(id=pk)

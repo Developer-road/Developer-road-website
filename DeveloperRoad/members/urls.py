@@ -8,7 +8,7 @@ from .views import (SignUpView, EditProfileSuccessView, UserEditView,
 app_name = "members"
 urlpatterns = [
     path("signup/", SignUpView.as_view(), name="signup"),
-    path("edit_user/", UserEditView.as_view(), name="edit"),
+    path("user/<int:pk>/edit/", UserEditView.as_view(), name="edit"),
     path("password/", ChangePasswordView.as_view(), name="change_password"),
     path("password_success/", ChangePasswordSuccessView.as_view(),
          name="change_password_success"),

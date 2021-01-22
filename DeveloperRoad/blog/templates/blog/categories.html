@@ -10,16 +10,17 @@ Page of Category: {{ category_name.title|title }}
 
 {% block body_content %}
 
-<h1>{{ category_name.name|title }}</h1>
-
-<br>
+<div class="posts mt-4">
+    <h1>{{ category_name.name|title }}</h1>
+</div>
 {% for post in category_post %}
 
 <ul>
     <div class="blog-abv">
-        <span class="px-2"><img src="{{ post.author.profile_image.url }}" alt="" class="rounded-circle " width=30
-                height=30> </span>
-        <span> {{ post.author.first_name }} {{ post.author.last_name }} </span>
+        <a href="{% url 'members:profile' post.author.id %}"><span class="px-2"><img
+                    src="{{ post.author.profile_image.url }}" alt="" class="rounded-circle image-opacity" width=30
+                    height=30> </span>
+            <span> {{ post.author.first_name }} {{ post.author.last_name }} </span></a>
         <span class="px-2">·</span>
         <span>{{ post.date }}</span>
     </div>
@@ -44,20 +45,14 @@ Page of Category: {{ category_name.title|title }}
 </ul>
 
 {% empty %}
-<p>There are not post with {{ category_name.name }} category yet</p>
+<div class="posts mt-4">
+    <p>There are not post with <span>{{ category_name.name }}</span> category yet</p>
+</div>
 
-{% if user.is_authenticated %}
-
-<a href="{% url 'blog:add_post' %}" <button type="button" class="btn btn-primary btn-lg">Add
-    post</a>
-
-{% endif %}
 
 {% endfor %}
 
 
-<br>
-<br>
 {% if user.is_authenticated %}
 <a href="{% url 'blog:add_post' %}" target="_blank" rel="#" <button type="button" class="btn btn-primary btn-lg">Add
     post</a>

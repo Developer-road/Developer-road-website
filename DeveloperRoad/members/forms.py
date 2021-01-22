@@ -41,13 +41,23 @@ class UserEditForm(UserChangeForm):
     last_name = forms.CharField(max_length=70, widget=forms.TextInput(
         attrs={'placeholder': 'Last name', 'class': 'form-control bg-white border-left-0 border-md'}))
     description = forms.CharField(max_length=400, widget=forms.Textarea(
-        attrs={'placeholder': 'Last name', 'class': 'form-control bg-white border-left-0 border-md'}))
+        attrs={'placeholder': 'An awesome description', 'class': 'form-control bg-white border-left-0 border-md'}))
+    website_url = forms.URLField(max_length=400, required=False, widget=forms.URLInput(
+        attrs={'placeholder': 'Your Website Url', 'class': 'form-control bg-white border-left-0 border-md'}))
+    instagram_url = forms.URLField(max_length=400, required=False, widget=forms.URLInput(
+        attrs={'placeholder': 'A cool Instagram Profile', 'class': 'form-control bg-white border-left-0 border-md'}))
+    github_url = forms.URLField(max_length=400, required=False, widget=forms.URLInput(
+        attrs={'placeholder': 'An amazing github account', 'class': 'form-control bg-white border-left-0 border-md'}))
+    twitter_url = forms.URLField(max_length=400, required=False, widget=forms.URLInput(
+        attrs={'placeholder': 'Twitter Url', 'class': 'form-control bg-white border-left-0 border-md'}))
+    linkedin_url = forms.URLField(max_length=400, required=False, widget=forms.URLInput(
+        attrs={'placeholder': 'Linkedin Url', 'class': 'form-control bg-white border-left-0 border-md'}))
 
 
     class Meta:
         model = get_user_model()
-        fields = ("first_name", "last_name", "description","profile_image")
-
+        fields = ("first_name", "last_name", "description", "profile_image",
+                  "website_url", "github_url", "linkedin_url", "twitter_url", "instagram_url")
 
 
 class MyPasswordChangeForm(auth_views.PasswordChangeForm):
@@ -63,4 +73,3 @@ class MyPasswordChangeForm(auth_views.PasswordChangeForm):
         widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'autofocus': True,
                                           "class": "form-control bg-white border-left-0 border-md", "placeholder": "Confirmation"}),
     )
-

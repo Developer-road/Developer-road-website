@@ -27,12 +27,15 @@ class UserEditView(generic.UpdateView):
     """
     Allows the User to Edit their Profile
     """
+    model = get_user_model()
     form_class = UserEditForm
     template_name = "registration/edit_profile.html"
     success_url = reverse_lazy('members:edit_success')
 
-    def get_object(self):
-        return self.request.user
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["profile_user"] = get_object_or_404(self.model, id=self.kwargs['pk'])
+        return context
 
 
 class ChangePasswordView(auth_views.PasswordChangeView):
@@ -57,8 +60,10 @@ class ShowProfileView(DetailView):
         context = super().get_context_data(**kwargs)
         requested_user = get_object_or_404(self.model, id=self.kwargs['pk'])
         context["requested_user"] = requested_user
+        # Blog Stuff Only use in Blog Project
         try:
-            context["user_posts"] = Post.objects.get(author_id=self.model.id)
+            context["user_posts"] = list(Post.objects.filter(author_id=requested_user.id))
         except Post.DoesNotExist:
             context["user_posts"] = None
+        
         return context

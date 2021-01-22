@@ -1,0 +1,14 @@
+label[for=id_password]
+{
+    display: none;
+}
+
+strong{
+    display: none;
+}
+#id_password{
+    display: none;
+}
+.helptext{
+    display: none;
+}

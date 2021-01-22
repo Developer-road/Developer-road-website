@@ -16,15 +16,14 @@
         <div class="col-md-4">
             <a href="{% url 'members:profile' requested_user.id%}"><img
                     title="{{ requested_user.first_name }} {{ post.author.last_name }}"
-                    class="rounded-circle mb-2 mt-3 center-phone-img image-opacity" width=200px height=200
+                    class="rounded-circle mb-2 mt-3 center-phone-img" width=200px height=200
                     src="{{ requested_user.profile_image.url }}"
                     alt="{{ requested_user.first_name }} {{ post.author.last_name }}"></a>
         </div>
         <div class="col-md-8">
             <div class="card-body center-phone">
-                <a href="{% url 'members:profile' requested_user.id%}">
-                    <h4 class="card-title">{{ requested_user.first_name }} {{ post.author.last_name }}</h4>
-                </a>
+                <h4 class="card-title mb-3">{{ requested_user.first_name }} {{ requested_user.last_name }}</h4>
+                <p class="card-text text-muted">Joined on {{ requested_user.date_joined|date:"M d, Y" }}</p>
                 <p class="card-text">{{ requested_user.description }}</p>
                 <div class="card-txt social-links mt-3">
                     {% if requested_user.website_url %}
@@ -55,8 +54,48 @@
 </div>
 
 {% if requested_user.id == user.id %}
-<a href="{% url 'members:edit' %}" class="btn btn-danger">Edit Profile</a>
+<a href="{% url 'members:edit' user.id%}" class="btn btn-danger">Edit Profile</a>
 {% endif %}
 
+{% if user_posts %}
 
+<div class="fluid-container mt-4 m-5">
+    <h2 class="text-center fs-2 fw-bold">
+        Posts by {{ requested_user.first_name }} {{ requested_user.last_name }}
+    </h2>
+</div>
+{% endif %}
+
+{% for post in user_posts %}
+
+<ul class="mt-4">
+    <div class="blog-abv">
+        <span>{{ post.date }}</span>
+        <span class="px-2">·</span>
+        <div class="category">
+            <span><a href="{% url 'blog:category_page'  post.category|myslug %}">{{ post.category }}</a></span>
+        </div>
+    </div>
+
+    <div class="blog-title semibold">
+        <h3>{{ post.title|title }}</h3>
+    </div>
+
+
+    {% if post.description %}
+    <p class="blog-description">{{ post.description | slice:":200" }}</p>
+    {% else %}
+    <p class="blog-description">{{ post.body | striptags | slice:":200" }}</p>
+    {% endif %}
+
+
+    <a href="{% url 'blog:article_page' post.pk %}" class="Read-full">Read full Post</a>
+
+</ul>
+{% if user.is_authenticated and  user.id == post.author.id %}
+<div class="mt-4 mb-4">
+    <small class=""><a href="{% url 'blog:delete_page' post.pk %}" class="link-danger ms-4">Delete post</a></small>
+</div>
+{% endif %}
+{% endfor %}
 {% endblock body_content %}

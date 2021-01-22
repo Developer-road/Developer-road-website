@@ -50,3 +50,12 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse("blog:article_page", kwargs={"pk": self.pk})
     
+class Comment(models.Model):
+    """
+    The comment system in The Blog
+    """
+    post = models.ForeignKey(Post, verbose_name=("comment"), on_delete=models.CASCADE)
+    body = models.TextField(max_length=1200)
+    date_added = models.DateField(auto_now_add=True)
+
+

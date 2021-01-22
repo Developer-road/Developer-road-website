@@ -41,7 +41,7 @@ Python, Javascript, Frontend, Backend and Django Web Framework.
 
     {% for post in object_list %}
 
-    <ul>
+    <ul class="mb-5">
         <div class="blog-abv">
             <a href="{% url 'members:profile' post.author.id %}"><span class="px-2"><img src="{{ post.author.profile_image.url }}" alt="" class="rounded-circle image-opacity" width=30
                     height=30> </span>

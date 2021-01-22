@@ -20,6 +20,11 @@ Profile has been succesfully updated.
         Take me to the <span class="px-3"><a href="{% url 'blog:blog_page' %}"
                 class=" btn text-decoration-none btn-danger btn-sm">Blog</a></span>
     </p>
+    
+    <p class="mt-4">
+        Let's go to my <span class="px-3"><a href="{% url 'members:profile' user.id%}"
+                class=" btn text-decoration-none btn-danger btn-sm">Profile</a></span>
+    </p>
 </div>
 
 {% endif %}

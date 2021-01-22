@@ -8,10 +8,10 @@ class PostForm(forms.ModelForm):
         Returns the form of  the add post page
         """
         model = Post
-        fields = ('title', 'author', 'description', "header_image", 'body', 'category',)
+        fields = ('title', 'description', 'header_image', 'body', 'category',)
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', "placeholder": "An awesome title 🤓"}),
-            'author': forms.TextInput(attrs={'class': 'form-control', "value":"", "id": "jhsdfjkhasdfjljadklasfdkjdfjkasdfkn", "type": "hidden"}),
+            # 'author': forms.TextInput(attrs={'class': 'form-control', "value":"", "id": "jhsdfjkhasdfjljadklasfdkjdfjkasdfkn", "type": "hidden"}),
             'description': forms.Textarea(attrs={'class': 'form-control', "placeholder": "Describe your Post briefly"}),
             # 'body': forms.Textarea(attrs={'class': 'form-control',"placeholder": "Unleash your creativity in the Post"}),
             'body': BleachField(),
