@@ -1,6 +1,8 @@
 from django import forms
-from .models import Post, Category
 from django_bleach.forms import BleachField
+
+from .models import Post, Category, Comment
+
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -46,3 +48,13 @@ class CreateCategoryForm(forms.ModelForm):
         }
 
 
+class CommentForm(forms.ModelForm):
+    class Meta:
+        """
+        Returns the form of the comment  page
+        """
+        model = Comment
+        fields = ('body',)
+        widgets = {
+            'body': BleachField()
+        }

@@ -6,9 +6,9 @@ from django.http import HttpResponseRedirect
 
 # Import the Post object and Category object
 
-from .models import Post, Category
+from .models import Post, Category, Comment
 
-from .forms import PostForm, EditPostForm, CreateCategoryForm
+from .forms import PostForm, EditPostForm, CreateCategoryForm, CommentForm
 
 
 class BlogView(ListView):
@@ -16,7 +16,7 @@ class BlogView(ListView):
     View that shows the list of all the existent blogs
     """
     model = Post
-    queryset = Post.objects.order_by('-date')[:5]
+    queryset = Post.objects.order_by('-date')[:10]
     template_name = 'blog/index.html'
 
     def get_context_data(self, **kwargs):
@@ -37,13 +37,29 @@ class ArticleDetail(DetailView):
         detail_post = get_object_or_404(Post, id=self.kwargs['pk'])
         context["upvotes"] = detail_post.total_likes()
         upvoted = False
-       
+
         if detail_post.upvotes.filter(id=self.request.user.id).exists():
             upvoted = True
-        
+
         context["upvoted"] = upvoted
 
+        try:
+            context["comments"] = list(Comment.objects.filter(
+                post_id=detail_post.id).order_by('-date_added'))
+        except:
+            context["comments"] = None
+
+        if self.request.user.is_authenticated:
+            context["comment_form"] = CommentForm(instance=self.request.user)
+
         return context
+
+    def post(self, request, *args, **kwargs):
+        new_comment = Comment(body=request.POST.get('body'),
+                                commenter=self.request.user,
+                                post=self.get_object())
+        new_comment.save()
+        return  HttpResponseRedirect(reverse('blog:article_page', args=[str(self.kwargs['pk'])]))
 
 
 class PostCreateView(CreateView):
@@ -71,7 +87,8 @@ class CategoryView(View):
         category_name = get_object_or_404(Category, name=cat.replace("-", " "))
 
         try:
-            category_post = list(Post.objects.filter(category_id=category_name.id))
+            category_post = list(Post.objects.filter(
+                category_id=category_name.id))
         except Post.DoesNotExist:
             category_post = None
         context = {"category_name": category_name,

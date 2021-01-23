@@ -165,12 +165,12 @@ LOGOUT_REDIRECT_URL = 'home:home_page'
 
 # BLEACH STUFF
 # Which HTML tags are allowed
-BLEACH_ALLOWED_TAGS = ['p', 'b', 'i', 'u', 'em', 'strong', 'a', 'h1', 'h2',
+BLEACH_ALLOWED_TAGS = ['p', 'b', 'i', 'u', 'em', 'strong', 'a', 'h1', 'h2', 'code',
                        'h3', 'h4', 'h5', 'h6', 'pre', "img", "caption", "table", 'tbody', 'tr', "td", "div"]
 
 # Which HTML attributes are allowed
 BLEACH_ALLOWED_ATTRIBUTES = ['href', 'title', 'style', 'border',
-                             "alt", 'cellpadding', 'cellspacing', 'summary', 'src']
+                             "alt", 'cellpadding', 'cellspacing', 'summary', 'src', 'class']
 
 # Which CSS properties are allowed in 'style' attributes (assuming style is
 # an allowed attribute)
@@ -204,8 +204,8 @@ CKEDITOR_CONFIGS = {
              'items': ['NumberedList', 'BulletedList', '-''Blockquote']},
             {'name': 'links', 'items': ['Link', 'Unlink']},
             {'name': 'insert',
-             'items': ['Image', 'HorizontalRule', 'Smiley', 'SpecialChar', 'CreateDiv']},
-            {'name': 'document', 'items': [ 'Save', 'Preview' '-', 'Templates', '-', 'Source']},
+             'items': ['Image', 'HorizontalRule', 'Smiley', 'SpecialChar', 'CodeSnippet']},
+            {'name': 'document', 'items': [ 'Save', 'Preview' '-', 'Templates']},
             '/',
             {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
             {'name': 'colors', 'items': ['TextColor', 'BGColor']},
@@ -222,22 +222,29 @@ CKEDITOR_CONFIGS = {
         'toolbarCanCollapse': True,
         # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
         'tabSpaces': 4,
-        # 'extraPlugins': ','.join([
-        #     # 'uploadimage', # the upload image feature
-        #     # your extra plugins here
-        #     'div',
-        #     'autolink',
-        #     'autoembed',
-        #     'embedsemantic',
-        #     'autogrow',
-        #     # 'devtools',
-        #     'widget',
-        #     'lineutils',
-        #     'clipboard',
-        #     'dialog',
-        #     'dialogui',
-        #     'elementspath'
-        # ]),
+        'extraPlugins': 'codesnippet',
+    },
+    'comment': {
+        # 'skin': 'moono',
+        # 'skin': 'office2013',
+        'toolbar_Basic': [
+            ['Source', '-', 'Bold', 'Italic']
+        ],
+        'toolbar_Comment': [
+            {'name': 'clipboard', 'items': ['Undo', 'Redo']},
+            {'name': 'basicstyles',
+             'items': ['Bold', 'Italic', 'CodeSnippet', "-", "Link"]},
+        ],
+        'toolbar': 'Comment',  # put selected toolbar config here
+        # 'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
+        'height': "40%",
+        'width': '80%',
+        # 'filebrowserWindowHeight': 725,
+        # 'filebrowserWindowWidth': 940,
+        'toolbarCanCollapse': True,
+        # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
+        'tabSpaces': 4,
+        'extraPlugins': 'codesnippet',
     }
 }
 

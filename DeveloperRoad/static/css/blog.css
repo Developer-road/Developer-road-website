@@ -192,6 +192,7 @@ body {
     color: var(--card-color);
     box-shadow: 2px 2px 2px 3px var(--card-border);
     /* overflow-wrap: anywhere; */
+    font-size: 18px;
 }
 
 

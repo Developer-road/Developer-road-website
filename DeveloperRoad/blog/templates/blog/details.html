@@ -9,6 +9,17 @@
 {{ post.description }}
 {% endblock description %}
 
+{% block head_links %}
+{{ block.super }}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+{% endblock head_links %}
+
+{% block scripts %}
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+{% endblock scripts %}
 
 {% block body_content %}
 
@@ -21,18 +32,21 @@
         {% endif %}
 
         <div class="blog-title-page">
-            <h1>{{ post.title }}</h1>
+            <h1 class="pt-4">{{ post.title }}</h1>
         </div>
         <div class="blog-abv text-center">
-            <a href="{% url 'members:profile' post.author.id%}"><span class="px-2"><img src="{{ post.author.profile_image.url }}" alt=""
-                    class="rounded-circle center-phone-none" width=30 height=30> </span>
-            <span>{{ post.author.first_name }} {{ post.author.last_name }}</span></a>
+            <a href="{% url 'members:profile' post.author.id%}"><span class="px-2"><img
+                        src="{{ post.author.profile_image.url }}" alt="" class="rounded-circle center-phone-none"
+                        width=30 height=30> </span>
+                <span>{{ post.author.first_name }} {{ post.author.last_name }}</span></a>
             <span class="px-2">·</span>
             <span>{{ post.date }}</span>
+            {% if post.category %}
             <span class="px-2">·</span>
             <div class="category">
                 <span><a href="{% url 'blog:category_page'  post.category|myslug %}">{{ post.category }}</a></span>
             </div>
+            {% endif %}
             <span class="px-2">·</span>
             <span>{% if upvotes == 1 %}{{ upvotes }} Upvote{% else %}{{ upvotes }} Upvotes {% endif %}</span>
             {% if user.is_authenticated %}
@@ -51,7 +65,7 @@
                 </form>
             </div>
             {% else %}
-            <p class="mt-4">Login to like this post
+            <p class="mt-4">Sign in to like this post
                 <span class="px-3"><a href="{% url 'login' %}" class=" btn text-decoration-none btn-danger btn-sm">Sing
                         In</a></span>
             </p>
@@ -63,13 +77,12 @@
         {% endif %}
 
         <hr>
-        <div class="ms-2 me-2">
+        <div class="ms-5 me-5">
 
             {{ post.body|bleach }}
         </div>
         {% if user.is_authenticated and  user.id == post.author.id %}
-        <a href="{% url 'blog:edit_page' post.pk %}" rel="#" <button type="button"
-            class="btn btn-secondary ms-2">Edit
+        <a href="{% url 'blog:edit_page' post.pk %}" rel="#" <button type="button" class="btn btn-secondary ms-2">Edit
             post</a>
         {% endif %}
         <div class="mb-4 mt-4">
@@ -79,35 +92,39 @@
         <div class="card mb-3">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <a href="{% url 'members:profile' post.author.id%}"><img title="{{ post.author.first_name }} {{ post.author.last_name }}" class="rounded-circle mb-2 mt-3 center-phone-img image-opacity" width=200px height=200
-                        src="{{ post.author.profile_image.url }}"
-                        alt="{{ post.author.first_name }} {{ post.author.last_name }}"></a>
+                    <a href="{% url 'members:profile' post.author.id%}"><img
+                            title="{{ post.author.first_name }} {{ post.author.last_name }}"
+                            class="rounded-circle mb-2 mt-3 center-phone-img image-opacity" width=200px height=200
+                            src="{{ post.author.profile_image.url }}"
+                            alt="{{ post.author.first_name }} {{ post.author.last_name }}"></a>
                 </div>
                 <div class="col-md-8">
                     <div class="card-body center-phone">
-                       <a href="{% url 'members:profile' post.author.id%}"><h4 class="card-title">{{ post.author.first_name }} {{ post.author.last_name }}</h4></a>
+                        <a href="{% url 'members:profile' post.author.id%}">
+                            <h4 class="card-title">{{ post.author.first_name }} {{ post.author.last_name }}</h4>
+                        </a>
                         <p class="card-text">{{ post.author.description }}</p>
                         <div class="card-txt social-links mt-3">
                             {% if post.author.website_url %}
-                            <a class="px-3" href="{{ post.author.website_url }}" target="_blank"><i class="fas fa-cloud-upload-alt"
-                                    title="Author Website"></i></a>
+                            <a class="px-3" href="{{ post.author.website_url }}" target="_blank"><i
+                                    class="fas fa-cloud-upload-alt" title="Author Website"></i></a>
                             {% endif %}
                             {% if post.author.instagram_url %}
 
-                            <a class="px-3 " href="{{ post.author.instagram_url }}" target="_blank"><i class="fab fa-instagram"
-                                    title="Author Instagram"></i></a>
+                            <a class="px-3 " href="{{ post.author.instagram_url }}" target="_blank"><i
+                                    class="fab fa-instagram" title="Author Instagram"></i></a>
                             {% endif %}
                             {% if post.author.github_url %}
-                            <a class="px-3 " href="{{ post.author.github_url }}" target="_blank"><i class="fab fa-github"
-                                    title="Author Github"></i></a>
+                            <a class="px-3 " href="{{ post.author.github_url }}" target="_blank"><i
+                                    class="fab fa-github" title="Author Github"></i></a>
                             {% endif %}
                             {% if post.author.twitter_url %}
-                            <a class="px-3 " href="{{ post.author.twitter_url }}" target="_blank"><i class="fab fa-twitter"
-                                    title="Author Twitter"></i></a>
+                            <a class="px-3 " href="{{ post.author.twitter_url }}" target="_blank"><i
+                                    class="fab fa-twitter" title="Author Twitter"></i></a>
                             {% endif %}
                             {% if post.author.linkedin_url %}
-                            <a class="px-3 " href="{{ post.author.linkedin_url }}" target="_blank"><i class="fab fa-linkedin"
-                                    title="Author Linkedin"></i></a>
+                            <a class="px-3 " href="{{ post.author.linkedin_url }}" target="_blank"><i
+                                    class="fab fa-linkedin" title="Author Linkedin"></i></a>
                             {% endif %}
                         </div>
                     </div>
@@ -115,7 +132,59 @@
             </div>
         </div>
 
-    </article>
+    </article class="">
+</div class="">
+
+<div class="container mt-5">
+    <hr class="mt-5 mb-4">
+    <div class="mt-2">
+        <h2 class="fw-bold mb-4">Comments</h2>
+        {% if post.number_of_comments %}
+        <span class="text-muted fst-italic">{% if post.number_of_comments > 1 %} {{ post.number_of_comments }} comments
+            {% else %} {{post.number_of_comments}} comment {% endif %}</span>
+        {% else %}
+        <span class="text-muted fst-italic">No comments yet</span>
+        {% endif %}
+    </div>
+    <div class="mb-4 mt-4 fst-italic text-black-50">
+        <h3>Join the discussion!</h3>
+    </div>
+    {% if user.is_authenticated %}
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ comment_form.media }}
+        {{ comment_form.body }}
+        <div class="text-muted">
+            {{ comment_form.body.errors }}
+        </div>
+        <div class="mt-4 mb-5">
+            <button class="btn btn-danger btn-sm" type="submit">Add comment <i class="fas fa-comments text-white px-2">
+                </i></button>
+        </div>
+    </form>
+    {% else %}
+    <a class="btn btn-outline-danger" href="{% url 'login' %}">Log in to add a comment!</a>
+    {% endif %}
+
+    {% for comment in comments %}
+    <div class="card border-light mb-3" style="max-width: 40rem;">
+        <div class="card-header">
+            <a href="{% url 'members:profile' post.author.id%}"><span class="px-2"><img
+                        src="{{ comment.commenter.profile_image.url }}" alt="" class="rounded-circle" width=30
+                        height=30></span></a>
+            <span class="fst-italic font-size-abv-comments"> {{ comment.commenter }} <span class="px-2">·</span>
+                {{ comment.date_added }} </span></div>
+        <div class="card-body">
+            <p class="card-text">{{ comment.body|bleach }}</p>
+        </div>
+    </div>
+    {% empty %}
+
+    <h3>Be the first in make a comment!</h3>
+    {% endfor %}
+
+
+
 </div>
 
 
