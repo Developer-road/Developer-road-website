@@ -15,6 +15,7 @@
 {% endblock head_links %}
 
 {% block scripts %}
+{{ block.super }}
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
 <script>
     hljs.initHighlightingOnLoad();
@@ -66,7 +67,7 @@
             </div>
             {% else %}
             <p class="mt-4">Sign in to like this post
-                <span class="px-3"><a href="{% url 'login' %}" class=" btn text-decoration-none btn-danger btn-sm">Sing
+                <span class="px-3 "><a href="{% url 'login' %}" class="text-white btn btn-danger btn-sm">Sing
                         In</a></span>
             </p>
             {% endif %}
@@ -163,7 +164,9 @@
         </div>
     </form>
     {% else %}
-    <a class="btn btn-outline-danger" href="{% url 'login' %}">Log in to add a comment!</a>
+    <div class="mb-5">
+        <a class="btn btn-outline-danger" href="{% url 'login' %}">Log in to add a comment!</a>
+    </div>
     {% endif %}
 
     {% for comment in comments %}

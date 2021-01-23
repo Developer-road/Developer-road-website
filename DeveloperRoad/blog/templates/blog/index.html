@@ -23,9 +23,13 @@ Python, Javascript, Frontend, Backend and Django Web Framework.
     <div class="row g-0">
         <div class="col-md-8">
             {% for post in object_list %}
-
-            <ul class="mb-5">
-                <div class="blog-abv">
+            <div class="card w-70 rounded m-3">
+                {% if post.header_image %}
+                <div class="mb-3">
+                    <img src="{{ post.header_image.url }}" alt="No image for this Post" class=" card-img-top">
+                </div>
+                {% endif %}
+                <div class="blog-abv p-2 pt-3">
                     <a href="{% url 'members:profile' post.author.id %}"><span class="px-2"><img
                                 src="{{ post.author.profile_image.url }}" alt="" class="rounded-circle image-opacity"
                                 width=30 height=30> </span>
@@ -41,30 +45,40 @@ Python, Javascript, Frontend, Backend and Django Web Framework.
                     {% endif %}
                 </div>
 
-                <div class="blog-title semibold">
-                    <h3>{{ post.title|title }}</h3>
+                <div class="blog-title semibold p-3">
+                    <h3 class="fs-2">{{ post.title|title }}</h3>
                 </div>
 
 
                 {% if post.description %}
-                <p class="blog-description">{{ post.description | slice:":200" }}</p>
+                <p class="blog-description p-3 fs-5">{{ post.description | slice:":200" }}</p>
                 {% else %}
-                <p class="blog-description">{{ post.body | striptags | slice:":200" }}</p>
+                <p class="blog-description p-3 fs-5">{{ post.body | striptags | slice:":200" }}</p>
                 {% endif %}
 
 
-                <a href="{% url 'blog:article_page' post.pk %}" class="Read-full">Read full Post</a>
+                <a href="{% url 'blog:article_page' post.pk %}" class="Read-full p-3">Read full Post</a>
 
                 {% if user.is_authenticated and  user.id == post.author.id %}
-                <br><br><small><a href="{% url 'blog:delete_page' post.pk %}" class="link-danger">Delete
-                        post</a></small>
+                <div class="p-3">
+                    <small><a href="{% url 'blog:delete_page' post.pk %}" class="link-danger">Delete
+                            post</a></small>
+                </div>
                 {% endif %}
-            </ul>
+            </div>
             {% endfor %}
         </div>
         <div class="col-md-4">
+            {% if user.is_authenticated %}
+            <div class="mb-5 p-3">
+
+                <a href="{% url 'blog:add_post' %}" target="_blank" rel="#"
+                    class="btn btn-secondary btn-md rounded-pill">Add
+                    post <i class="px-2 text-white fas fa-plus-circle"></i></a> <br>
+            </div>
+            {% endif %}
             <!-- Dropdown button -->
-            <div class="btn-group dropdown-blog mb-4">
+            <div class="btn-group dropdown-blog mb-4 p-3">
                 <button type="button" class="btn btn-danger"><a class="text-decoration-none text-white"
                         href="{% url 'blog:categories_page' %}">Categories</a></button>
                 <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
@@ -86,9 +100,5 @@ Python, Javascript, Frontend, Backend and Django Web Framework.
 
 <br>
 <br>
-{% if user.is_authenticated %}
-<a href="{% url 'blog:add_post' %}" target="_blank" rel="#" <button type="button" class="btn btn-primary btn-lg">Add
-    post</a>
-{% endif %}
 
 {% endblock body_content %}
