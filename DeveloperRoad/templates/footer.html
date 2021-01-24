@@ -10,37 +10,35 @@
                     <div class="col-xl-2 col-md-4 col-sm-4 col-12">
                         <h6 class="mb-3 mb-lg-4 bold-text "><b>MENU</b></h6>
                         <ul class="list-unstyled">
-                            <li>Home</li>
-                            <li>About</li>
-                            <li>Blog</li>
-                            <li>Portfolio</li>
+                            <li><a class="footer-links" href="{% url 'home:home_page' %}">Home</a></li>
+                            <li><a class="footer-links" href="{% url 'about:about_page' %}">About</a></li>
+                            <li><a class="footer-links" href="{% url 'contact:contact_page' %}">Contact me</a></li>
+                            <li><a class="footer-links" href="{% url 'projects:my_projects' %}">Projects</a></li>
+                            <li><a class="footer-links" href="{% url 'blog:blog_page' %}">Blog</a></li>
                         </ul>
                     </div>
                     <div class="col-xl-2 col-md-4 col-sm-4 col-12">
                         <h6 class="mb-3 mb-lg-4 text-muted bold-text mt-sm-0 mt-5"><b>TECHNOLOGIES USED</b></h6>
-                        <p class="mb-1">605, RATAN ICON BUILDING</p>
-                        <p>SEAWOODS SECTOR</p>
-                    </div>
+                        <p class="mb-1"><a href="https://www.djangoproject.com/" class="footer-links">Django</a></p>
+                        <p class="mb-1"><a href="https://getbootstrap.com/" class="footer-links">Bootstrap 5</a></p>
+                        <p class="mb-1"><a href="https://django-ckeditor.readthedocs.io/en/latest/" class="footer-links">Ckeditor</a></p>
+                        <p class="mb-1"><a href="https://highlightjs.org/" class="footer-links">Highlight.js</a></p>
                 </div>
                 <div class="row ">
                     <div class="col-xl-8 col-md-4 col-sm-4 col-auto my-md-0 mt-5 order-sm-1 order-3 align-self-end">
-                        <p class="social text-muted mb-0 pb-0 bold-text"> <span class="mx-2"><i class="fab fa-github"
+                        <p class="social text-muted mb-2 pb-0 bold-text"> <span class="mx-2"><i class="fab fa-github"
                                     aria-hidden="true"></i></span> <span class="mx-2"><i class="fab fa-linkedin"
                                     aria-hidden="true"></i></span> <span class="mx-2"><i class="fab fa-twitter"
                                     aria-hidden="true"></i></span> <span class="mx-2"><i class="fab fa-instagram"
                                     aria-hidden="true"></i></span> </p>
                         <small class="rights"><span>&#174;</span> Created
-                            from scratch by Daniel Diaz All Rights Reserved.</small>
+                            with <i class="heart fas fa-heart "></i> by Daniel Diaz All Rights Reserved.</small>
                     </div>
                     <div class="col-xl-2 col-md-4 col-sm-4 col-auto order-1 align-self-end ">
                         <h6 class="mt-55 mt-2 text-muted bold-text"><b>DANIEL DIAZ</b></h6><small> <span><i
-                                    class="fas fa-inbox px-2" aria-hidden="true"></i></span>
+                                    class="fas fa-inbox px-2 fs-5" aria-hidden="true"></i></span>
                             danieldiazgonza52@gmail.com</small>
                     </div>
-                    {% comment %} <div class="col-xl-2 col-md-4 col-sm-4 col-auto order-2 align-self-end mt-3 ">
-                        <h6 class="text-muted bold-text"><b>RISHABH SHEKHAR</b></h6><small><span><i
-                                    class="fab fa-envelope" aria-hidden="true"></i></span> rishab@gmail.com</small>
-                    </div> {% endcomment %}
                 </div>
             </div>
         </div>

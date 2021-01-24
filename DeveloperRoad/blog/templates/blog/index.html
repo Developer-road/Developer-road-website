@@ -22,7 +22,7 @@ Python, Javascript, Frontend, Backend and Django Web Framework.
 <div class="blog-posts">
     <div class="row g-0">
         <div class="col-md-8">
-            {% for post in object_list %}
+            {% for post in page_obj %}
             <div class="card w-70 rounded m-3">
                 {% if post.header_image %}
                 <div class="mb-3">
@@ -96,9 +96,12 @@ Python, Javascript, Frontend, Backend and Django Web Framework.
         </div>
     </div>
 </div>
+    
+    {% if page_obj.paginator.num_pages > 1 %}
 
+        {% include 'blog/pagination.html' with page_obj=page_obj %}
 
-<br>
-<br>
+    {% endif %}
+
 
 {% endblock body_content %}

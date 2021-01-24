@@ -1,0 +1,24 @@
+<div class="mypagination m-4 mt-5">
+    {% if page_obj.has_previous %}
+    <a class="mypagination-action" href="?page=1">
+        <i class="fa fa-angle-double-left" aria-hidden="true"></i> </a>
+    <a class="mypagination-action" href="?page={{ page_obj.previous_page_number }}">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+    </a>
+    {% endif %}
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+            <span class="mypagination-number mypagination-current">{{ num }}</span>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a class="mypagination-number" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+        <a class="mypagination-action" href="?page={{ page_obj.next_page_number }}">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </a>
+        <a class="mypagination-action" href="?page={{ page_obj.paginator.num_pages }}">
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+        </a>
+    {% endif %}
+</div>

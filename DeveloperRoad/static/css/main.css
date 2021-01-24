@@ -7,6 +7,7 @@
 
 :root {
     --secondary-red: #db162f;
+    --pag-red: rgb(206, 60, 60);
 }
 
 .create-btn a {
@@ -73,3 +74,42 @@
     font-size: 0.8rem;
 }
 
+/* BLUE THEME */
+
+.mypagination {
+    margin-top: 1em;
+    text-align: center;
+    margin: auto;
+}
+
+.mypagination a {
+    text-decoration: none;
+}
+
+.mypagination-number {
+    padding: 0.5em 0.8em;
+    border-radius: 2px;
+    color: #fff;
+    background-color: var(--pag-red);
+}
+
+.mypagination-number:hover,
+.mypagination-current {
+    background-color: var(--myred);
+    color: white;
+    transition: all 0.3s ease-out;
+}
+
+.mypagination-action {
+    margin: 0 0.1em;
+    display: inline-block;
+    
+    color: #B9B9B9;
+    font-size: 1.3em !important;
+}
+
+.mypagination-action:hover,
+.mypagination-previous,
+.mypagination-next {
+    color: var(--myred);
+}

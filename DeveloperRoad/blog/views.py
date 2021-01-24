@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.views import View
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
-
+from django.core.paginator import Paginator
 # Import the Post object and Category object
 
 from .models import Post, Category, Comment
@@ -16,12 +16,14 @@ class BlogView(ListView):
     View that shows the list of all the existent blogs
     """
     model = Post
-    queryset = Post.objects.order_by('-date')[:10]
+    queryset = Post.objects.order_by('-date')
+    paginate_by = 4
     template_name = 'blog/index.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["cat_items"] = Category.objects.all()
+
         return context
 
 
@@ -56,10 +58,10 @@ class ArticleDetail(DetailView):
 
     def post(self, request, *args, **kwargs):
         new_comment = Comment(body=request.POST.get('body'),
-                                commenter=self.request.user,
-                                post=self.get_object())
+                              commenter=self.request.user,
+                              post=self.get_object())
         new_comment.save()
-        return  HttpResponseRedirect(reverse('blog:article_page', args=[str(self.kwargs['pk'])]))
+        return HttpResponseRedirect(reverse('blog:article_page', args=[str(self.kwargs['pk'])]))
 
 
 class PostCreateView(CreateView):
