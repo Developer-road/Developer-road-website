@@ -66,4 +66,6 @@ class ShowProfileView(DetailView):
         except Post.DoesNotExist:
             context["user_posts"] = None
         
+        context["image_hidden"] = True
+        
         return context

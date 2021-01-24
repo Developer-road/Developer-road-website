@@ -12,4 +12,5 @@ urlpatterns = [
     path('categories/', CategoryListView.as_view(), name="categories_page"),
     path('category/<str:cat>/', CategoryView.as_view(), name="category_page"),
     path('upvotes/<int:pk>/', VoteView, name="upvotes"),
+    # Search stuff
 ]

@@ -57,6 +57,7 @@
 <a href="{% url 'members:edit' user.id%}" class="btn btn-danger">Edit Profile</a>
 {% endif %}
 
+{% comment %} Used only in Blog App {% endcomment %}
 {% if user_posts %}
 
 <div class="fluid-container mt-4 m-5">
@@ -66,44 +67,5 @@
 </div>
 {% endif %}
 
-{% for post in user_posts %}
-
-<div class="card w-70 rounded m-3">
-    {% if post.header_image %}
-    <div class="card mb-3">
-        <img src="{{ post.header_image.url }}" alt="No image for this Post" class="card-img-top">
-    </div>
-    {% endif %}
-    <div class="blog-abv p-3 pt-3">
-        <span>{{ post.date }}</span>
-        {% if post.category %}
-        <span class="px-2">·</span>
-        <div class="category">
-            <span><a href="{% url 'blog:category_page'  post.category|myslug %}">{{ post.category }}</a></span>
-        </div>
-        {% endif %}
-    </div>
-
-    <div class="blog-title semibold p-3">
-        <h3 class="fs-2">{{ post.title|title }}</h3>
-    </div>
-
-
-    {% if post.description %}
-    <p class="blog-description p-3 fs-5">{{ post.description | slice:":200" }}</p>
-    {% else %}
-    <p class="blog-description p-3 fs-5">{{ post.body | striptags | slice:":200" }}</p>
-    {% endif %}
-
-
-    <a href="{% url 'blog:article_page' post.pk %}" class="Read-full p-3">Read full Post</a>
-
-    {% if user.is_authenticated and  user.id == post.author.id %}
-    <div class="p-3">
-        <small><a href="{% url 'blog:delete_page' post.pk %}" class="link-danger">Delete
-                post</a></small>
-    </div>
-    {% endif %}
-</div>
-{% endfor %}
+{% include "blog/post_list.html" with object=user_posts %}
 {% endblock body_content %}

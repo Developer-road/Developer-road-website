@@ -3,7 +3,8 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.views import View
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
-from django.core.paginator import Paginator
+from django.db.models import Q
+
 # Import the Post object and Category object
 
 from .models import Post, Category, Comment
@@ -19,6 +20,34 @@ class BlogView(ListView):
     queryset = Post.objects.order_by('-date')
     paginate_by = 4
     template_name = 'blog/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["cat_items"] = Category.objects.all()
+
+        return context
+
+
+class BlogSearchView(ListView):
+    """
+    View that shows the list of all the existent blogs
+    """
+    model = Post
+    # queryset = Post.objects.order_by('-date')
+
+    paginate_by = 4
+    template_name = 'blog/search.html'
+
+    def get_queryset(self):  # new
+        if "q" in self.request.GET:
+            query = self.request.GET.get('q')
+            object_list = Post.objects.filter(
+                Q(title__icontains=query) | Q(description__icontains=query)
+            )
+            return object_list
+        else:
+            object_list = None
+            return object_list
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -93,8 +122,11 @@ class CategoryView(View):
                 category_id=category_name.id))
         except Post.DoesNotExist:
             category_post = None
+
+        
         context = {"category_name": category_name,
-                   "category_post": category_post}
+                   "category_post": category_post,
+                   "category_hidden": True}
         return render(request, "blog/categories.html", context)
 
 

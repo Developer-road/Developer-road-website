@@ -22,51 +22,7 @@ Python, Javascript, Frontend, Backend and Django Web Framework.
 <div class="blog-posts">
     <div class="row g-0">
         <div class="col-md-8">
-            {% for post in page_obj %}
-            <div class="card w-70 rounded m-3">
-                {% if post.header_image %}
-                <div class="mb-3">
-                    <img src="{{ post.header_image.url }}" alt="No image for this Post" class=" card-img-top">
-                </div>
-                {% endif %}
-                <div class="blog-abv p-2 pt-3">
-                    <a href="{% url 'members:profile' post.author.id %}"><span class="px-2"><img
-                                src="{{ post.author.profile_image.url }}" alt="" class="rounded-circle image-opacity"
-                                width=30 height=30> </span>
-                        <span> {{ post.author.first_name }} {{ post.author.last_name }} </span></a>
-                    <span class="px-2">·</span>
-                    <span>{{ post.date }}</span>
-                    {% if post.category %}
-                    <span class="px-2">·</span>
-                    <div class="category">
-                        <span><a
-                                href="{% url 'blog:category_page'  post.category|myslug %}">{{ post.category }}</a></span>
-                    </div>
-                    {% endif %}
-                </div>
-
-                <div class="blog-title semibold p-3">
-                    <h3 class="fs-2">{{ post.title|title }}</h3>
-                </div>
-
-
-                {% if post.description %}
-                <p class="blog-description p-3 fs-5">{{ post.description | slice:":200" }}</p>
-                {% else %}
-                <p class="blog-description p-3 fs-5">{{ post.body | striptags | slice:":200" }}</p>
-                {% endif %}
-
-
-                <a href="{% url 'blog:article_page' post.pk %}" class="Read-full p-3">Read full Post</a>
-
-                {% if user.is_authenticated and  user.id == post.author.id %}
-                <div class="p-3">
-                    <small><a href="{% url 'blog:delete_page' post.pk %}" class="link-danger">Delete
-                            post</a></small>
-                </div>
-                {% endif %}
-            </div>
-            {% endfor %}
+        {% include "blog/post_list.html"  with object=page_obj %}
         </div>
         <div class="col-md-4">
             {% if user.is_authenticated %}
