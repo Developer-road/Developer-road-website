@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import BlogView, ArticleDetail, PostCreateView, EditPost, PostDeleteView, CategoryCreateView, CategoryView, CategoryListView, VoteView
+from .views import (BlogView, ArticleDetail, PostCreateView, EditPost,
+                    PostDeleteView, CategoryCreateView, CategoryView, CategoryListView, VoteView, BlogSearchView)
 
 app_name = 'blog'
 urlpatterns = [
@@ -13,4 +14,5 @@ urlpatterns = [
     path('category/<str:cat>/', CategoryView.as_view(), name="category_page"),
     path('upvotes/<int:pk>/', VoteView, name="upvotes"),
     # Search stuff
+    path('search/', BlogSearchView.as_view(), name="search"),
 ]

@@ -95,12 +95,12 @@ body {
     color: #73818d;
 }
 
-.blog-abv a{
+.blog-abv a {
     color: #73818d;
     text-decoration: none;
 }
 
-.blog-abv a:hover{
+.blog-abv a:hover {
     color: #444d55;
     text-decoration: none;
 }
@@ -166,7 +166,8 @@ body {
     margin-block-end: 40px;
 }
 
-.posts h1 {
+.posts h1,
+h2 {
     display: block;
     font-weight: 600;
     margin-block-start: 10px;
@@ -221,11 +222,13 @@ body {
     margin-left: 0.8rem;
     font-weight: 600;
 }
-.center-phone a{
+
+.center-phone a {
     text-decoration: none;
     color: rgb(41, 37, 37);
 }
-.center-phone a:hover{
+
+.center-phone a:hover {
     color: rgb(57, 62, 66);
 }
 
@@ -237,6 +240,8 @@ body {
 .fab {
     font-size: 1.4rem;
 }
+
+
 
 
 @media screen and (max-width: 768px) {

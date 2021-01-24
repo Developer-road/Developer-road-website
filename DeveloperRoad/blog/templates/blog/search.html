@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load extra_filters %}
+{% block title %}Search {{ string_query|title }}{% endblock title %}
+
+{% block description %}
+Search for a specific blog Post
+{% endblock description %}
+
+
+{% block body_content %}
+
+
+<div class="posts mt-4">
+    <h2> Results for : {{ string_query|title }}</h1>
+</div>
+
+{% include "blog/search_bar.html" %}
+
+{% include "blog/post_list.html"  with object=object_list %}
+
+{% endblock body_content %}

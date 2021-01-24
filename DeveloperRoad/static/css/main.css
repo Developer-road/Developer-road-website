@@ -113,3 +113,13 @@
 .mypagination-next {
     color: var(--myred);
 }
+
+.search-bar{
+    max-width: 700px;
+    width: 100%;
+    margin: auto;
+}
+
+.center-block{
+    margin: auto !important;
+}

@@ -35,15 +35,19 @@ class BlogSearchView(ListView):
     model = Post
     # queryset = Post.objects.order_by('-date')
 
-    paginate_by = 4
+    # paginate_by = 4
     template_name = 'blog/search.html'
 
     def get_queryset(self):  # new
         if "q" in self.request.GET:
-            query = self.request.GET.get('q')
-            object_list = Post.objects.filter(
-                Q(title__icontains=query) | Q(description__icontains=query)
-            )
+            if str(self.request.GET.get('q')) not in ["", " "]:
+                query = self.request.GET.get('q')
+                object_list = Post.objects.filter(
+                    Q(title__icontains=query) | Q(
+                        description__icontains=query) | Q(body__icontains=query)
+                ).distinct()
+            else:
+                object_list = None
             return object_list
         else:
             object_list = None
@@ -52,6 +56,11 @@ class BlogSearchView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["cat_items"] = Category.objects.all()
+
+        query = "No search"
+        if "q" in self.request.GET:
+            query = str(self.request.GET.get('q'))
+        context["string_query"] = query
 
         return context
 
@@ -123,7 +132,6 @@ class CategoryView(View):
         except Post.DoesNotExist:
             category_post = None
 
-        
         context = {"category_name": category_name,
                    "category_post": category_post,
                    "category_hidden": True}

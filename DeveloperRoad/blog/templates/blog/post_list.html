@@ -49,4 +49,15 @@
     </div>
     {% endif %}
 </div>
+
+{% empty %}
+<div class="posts mt-5">
+    <h2 class="text-muted">Sorry there are not Post with that words included</h2>
+
+    <p class="pt-3 fs-4">Try to make another search</p>
+    <p class="pt-3 fs-5">Or go to the blog <a href="{% url 'blog:blog_page' %}" class="link-danger">main page</a></p>
+
+
+</div>
+
 {% endfor %}
