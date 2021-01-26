@@ -1,15 +1,108 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Home{% endblock title %}
 
 {% block description %}
 This is a page of a guy who is passionate about technology and programming
 {% endblock description %}
 
-{% block body_content %}
+{% block head_links %}
+{{ block.super }}
+{% comment %} Home page font {% endcomment %}
+<link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+{% endblock head_links %}
 
-<h1>This is the home page of the Developer road website</h1>
 
-<p><a href="projects/">Some of my projects</a></p>
-<p><a href="about/" class="btn btn-secondary">About</a></p>
+{% block super_body_content %}
+{% load static %}
 
-{% endblock body_content %}
+
+<div class="home-cover">
+    <div class="home-cover-caption">
+        <h2>Developer Road <i class="fas fa-code"></i></h2>
+        <p class="mt-4">The platform where Developers share knowledge about technology and programming</p>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="text-center mx-auto mt-55 mb-5">
+        <h2 class="fs-11 fw-bold">Learn and share your <br> <span class="text-red">knowledge</span> </h2>
+        <p class="text-muted mt-4">Stay aware of the latest technologies</p>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 py-16">
+                <h3 class="fs-3 fw-bold">Join a Community of <br> <span class="text-red">Learners</span></h3>
+                <p class="text-muted mt-4 ">Follow the Developer Road community on different platforms, and stay in
+                    touch with awesome people</p>
+                <hr>
+                <div class="social-links mt-3 i-fs-1">
+                    <a class="px-3 " href="" target="_blank"><i class="fab fa-instagram" title="Instagram"></i></a>
+                    <a class="px-3 " href="" target="_blank"><i class="fab fa-github" title="Author Github"></i></a>
+                    <a class="px-3 " href="" target="_blank"><i class="fab fa-twitter" title="Author Twitter"></i></a>
+                    <a class="px-3 " href="" target="_blank"><i class="fab fa-discord" title="Author Linkedin"></i></a>
+                </div>
+            </div>
+            <div class="col-md-5 py-16">
+                <img src="{% static 'images/home/social.svg' %}" alt="Social Images" class="img-fluid">
+            </div>
+            <div class="col-md-5 py-16">
+                <img src="{% static 'images/home/blog.svg' %}" alt="Blog Images" class="img-fluid">
+            </div>
+            <div class="col-md-7 py-16-m">
+                <h3 class="fs-3 fw-bold">The most Recent technologies in <br> <span class="text-red">Developer Road
+                        Blog</span></h3>
+                <p class="text-muted mt-4 ">Read, Learn and share your knowledge in the blog</p>
+                <hr>
+                <p><a href="{% url 'blog:blog_page' %}" class="link-danger text-decoration-none fw-bold">Go to the
+                        Blog<i class="fas fa-arrow-right px-2" style="font-size: 1.3rem;"></i></a></p>
+            </div>
+
+            <div class="col-md-7 py-16">
+                <h3 class="fs-3 fw-bold"> Want to know more about <br> <span class="text-red">Developer Road
+                        Project</span> ?</h3>
+                <p class="text-muted mt-4 ">Let's know about the initial idea and the author</p>
+                <hr>
+                <p><a href="{% url 'about:about_page' %}" class="link-danger text-decoration-none fw-bold">Know more<i
+                            class="fas fa-arrow-right px-2" style="font-size: 1.3rem;"></i></a></p>
+
+            </div>
+            <div class="col-md-5 py-16-m">
+                <img src="{% static 'images/home/about.svg' %}" alt="About Images" class="img-fluid">
+            </div>
+
+            <div class="col-md-5 py-16">
+                <img src="{% static 'images/home/project.svg' %}" alt="Projects Images" class="img-fluid">
+            </div>
+            <div class="col-md-7 py-16-m">
+                <h3 class="fs-3 fw-bold">Review Projects of mine and<br> <span class="text-red">the community</span>
+                </h3>
+                <p class="text-muted mt-4 ">From python scripts, to django development, everything you need to know</p>
+                <hr>
+                <p><a href="{% url 'projects:my_projects' %}" class="link-danger text-decoration-none fw-bold">Let's see
+                        cool Projects<i class="fas fa-arrow-right px-2" style="font-size: 1.3rem;"></i></a></p>
+            </div>
+            <div class="col-md-7 py-16">
+                <h3 class="fs-3 fw-bold">Do you have an <span class="text-red">Idea
+                    </span> in mind ?</h3>
+                <p class="text-muted mt-4 ">Get in touch to discuss a freelance project, and build something amazing
+                    together.</p>
+                <hr>
+                <p><a href="{% url 'contact:contact_page' %}" class="link-danger text-decoration-none fw-bold">Let's
+                        connect <i class="fas fa-arrow-right px-2" style="font-size: 1.3rem;"></i></a></p>
+
+            </div>
+            <div class="col-md-5 py-16-m">
+                <img src="{% static 'images/home/contact.svg' %}" alt="Contact Images" class="img-fluid">
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+
+
+{% endblock super_body_content %}

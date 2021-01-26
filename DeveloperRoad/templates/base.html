@@ -50,11 +50,13 @@
         {% include 'navbar.html' %}
         {% endblock navbar %}
 
+        {% block super_body_content %}
         <div class="container">
             {% block body_content %}
             {% endblock body_content %}
         </div>
 
+        {% endblock super_body_content %}
         {% block footer %}
         {% include 'footer.html' %}
         {% endblock footer %}

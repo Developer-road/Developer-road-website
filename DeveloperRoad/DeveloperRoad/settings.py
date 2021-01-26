@@ -34,9 +34,17 @@ AUTH_USER_MODEL = "members.BlogUser"
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.AllowAllUsersModelBackend",
     "members.backends.CaseModelBackend",
+
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
 )
 
 # Application definition
+
+ACCOUNT_AUTHENTICATION_METHOD = ("email",)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -45,6 +53,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Allauth apps
+    'django.contrib.sites',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    # Google provider
+    'allauth.socialaccount.providers.google',
+
     # Custom apps
     'home',
     'projects',
@@ -54,10 +72,15 @@ INSTALLED_APPS = [
     'members',
     # Rich Text editor
     "ckeditor",
+
     # Healthy Html
     'django_bleach',
 
 ]
+
+# Used by the allauth providers
+SITE_ID = 1
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -82,6 +105,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # `allauth` needs this from django
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -198,16 +223,20 @@ CKEDITOR_CONFIGS = {
             ['Source', '-', 'Bold', 'Italic']
         ],
         'toolbar_YourCustomToolbarConfig': [
-            {'name': 'clipboard', 'items': ['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText']},
-            {'name': 'editing', 'items': ['Find', 'Replace', '-', 'SelectAll']},
+            {'name': 'clipboard', 'items': [
+                'Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText']},
+            {'name': 'editing', 'items': [
+                'Find', 'Replace', '-', 'SelectAll']},
             {'name': 'paragraph',
              'items': ['NumberedList', 'BulletedList', '-''Blockquote']},
             {'name': 'links', 'items': ['Link', 'Unlink']},
             {'name': 'insert',
              'items': ['Image', 'HorizontalRule', 'Smiley', 'SpecialChar', 'CodeSnippet']},
-            {'name': 'document', 'items': [ 'Save', 'Preview' '-', 'Templates']},
+            {'name': 'document', 'items': [
+                'Save', 'Preview' '-', 'Templates']},
             '/',
-            {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
+            {'name': 'styles', 'items': [
+                'Styles', 'Format', 'Font', 'FontSize']},
             {'name': 'colors', 'items': ['TextColor', 'BGColor']},
             {'name': 'basicstyles',
              'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']},
@@ -247,6 +276,3 @@ CKEDITOR_CONFIGS = {
         'extraPlugins': 'codesnippet',
     }
 }
-
-
-

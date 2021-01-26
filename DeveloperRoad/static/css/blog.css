@@ -166,8 +166,13 @@ body {
     margin-block-end: 40px;
 }
 
-.posts h1,
-h2 {
+.posts h1 {
+    display: block;
+    font-weight: 600;
+    margin-block-start: 10px;
+    margin-block-end: 20px;
+}
+.posts h2 {
     display: block;
     font-weight: 600;
     margin-block-start: 10px;

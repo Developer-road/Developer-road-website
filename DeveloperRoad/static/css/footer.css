@@ -20,7 +20,8 @@ small {
     background: #262626;
     color: var(--footer-color) !important;
     margin-bottom: 0;
-    padding-bottom: 0
+    padding-bottom: 0;
+    /* z-index: 3; */
 }
 
 .footer-links{

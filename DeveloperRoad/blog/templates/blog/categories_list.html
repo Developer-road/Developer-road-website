@@ -12,21 +12,33 @@ Categories of the Developer Road Blog:
 
 {% block body_content %}
 
-<div class="mb-5">
+<div class="m-5">
     <h1 class="fw-bold h1 text-center">Categories</h1>
 </div>
 
-<div class="align-content-sm-around">
-    {% for category in object_list %}
-    <ul class="text-decoration-none list-unstyled px-4">
-        <li><a class="text-decoration-none text-dark" href="{% url 'blog:category_page' category.name|myslug %}">
-                <h5 class="h5 ">{{category.name|title}} <span
-                        class="text-danger fs-6 fw-light text-decoration-underline">Show Posts</span></h5>
-            </a></li>
-    </ul>
+<div class="row">
+    <div class="col-md-7">
 
-    {% endfor %}
+        <div class="align-content-sm-around">
+            {% for category in object_list %}
+            <ul class="text-decoration-none list-unstyled px-4">
+                <li><a class="text-decoration-none text-dark"
+                        href="{% url 'blog:category_page' category.name|myslug %}">
+                        <h5 class="h5 ">{{category.name|title}} <span
+                                class="text-danger fs-6 fw-light text-decoration-underline">Show Posts</span></h5>
+                    </a></li>
+            </ul>
 
+            {% endfor %}
+
+        </div>
+    </div>
+    <div class="col-md-5 my-auto">
+        <div class="mt-4">
+            <img src="{% static 'images/blog/category.svg' %}" alt="Categories image" class="img-fluid">
+        </div>
+
+    </div>
 </div>
 
 <div class="mt-5">

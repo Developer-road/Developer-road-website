@@ -11,7 +11,7 @@
 
 
 {% block body_content %}
-<div class="card mb-3">
+<div class="card m-4">
     <div class="row g-0">
         <div class="col-md-4">
             <a href="{% url 'members:profile' requested_user.id%}"><img
@@ -54,7 +54,9 @@
 </div>
 
 {% if requested_user.id == user.id %}
-<a href="{% url 'members:edit' user.id%}" class="btn btn-danger">Edit Profile</a>
+<div class="m-4">
+    <a href="{% url 'members:edit' user.id%}" class="btn btn-danger">Edit Profile</a>
+</div>
 {% endif %}
 
 {% comment %} Used only in Blog App {% endcomment %}
