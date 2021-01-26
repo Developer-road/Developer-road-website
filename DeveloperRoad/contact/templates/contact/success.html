@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Email Send{% endblock title %}
+
+{% block body_content %}
+
+<div class="mx-auto text-center my-4">
+    <h1 class="fw-bold">Your message has been sended succesfully </h1>
+</div>
+
+<div class="container">
+    <div class="row py-5 align-items-center">
+
+        <div class="col-md-5">
+            <div class="m-phone-4">
+                <img src="{% static 'images/contact/sent.svg' %}" alt="Sent succesfully" class="img-fluid">
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <h2>Thanks for sending your message</h2>
+            <p class="text-muted">Your message will be replied soon!</p>
+            <hr>
+            <p><a href="{% url 'blog:blog_page' %}" class="link-danger text-decoration-none fw-bold">Continue in the 
+                    Blog<i class="fas fa-arrow-right px-2" style="font-size: 1.3rem;"></i></a></p>
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock body_content %}

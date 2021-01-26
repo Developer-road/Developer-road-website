@@ -199,18 +199,27 @@
     padding-top: var(--my-padding);
     padding-bottom: var(--my-padding);
 }
+
 .py-16-m {
     padding-top: var(--my-padding);
     padding-bottom: var(--my-padding);
 }
+
+.m-phone-4 {
+    margin-bottom: 1rem;
+}
+
 @media screen and (max-width: 768px) {
 
-    .i-fs-1 i{
+    .i-fs-1 i {
         font-size: 1.5rem;
     }
-    .py-16-m{
+
+    .py-16-m {
         padding-bottom: var(--phone-padding);
         padding-top: var(--phone-padding);
-}
+    }
+    .m-phone-4{
+        margin-bottom: 4rem;
     }
 }
