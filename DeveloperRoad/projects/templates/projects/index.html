@@ -9,23 +9,51 @@
     <h1>My Personal Projects</h1>
 </div>
 
+{% if user.is_admin %}
+<div class="row">
+    <div class="col-6 align-self-end">
+
+        <div class="mb-5 p-3">
+
+            <a href="{% url 'projects:add' %}" target="_blank" rel="#"
+                class="btn btn-secondary btn-md rounded-pill">Add
+                Project <i class="px-2 text-white fas fa-plus-circle"></i></a> <br>
+        </div>
+    </div>
+
+</div>
+
+
+{% endif %}
 <div class="container-sm">
 
     <p><i>Featured Projects</i></p>
 </div>
-<div class="row">
-    {% for project in object_list %}
+
+{% if page_obj.paginator.num_pages > 1 %}
+
+{% include 'blog/pagination.html' with page_obj=page_obj %}
+
+{% endif %}
+
+
+
+<div class="row g-3">
+
+    {% for project in page_obj %}
     <div class="col-md-4">
         <div class="card mb-2">
             {% if project.image %}
+            {% comment %} <img class="card-img-top" src="{{ project.image.url }}"
+                style="height: 289.13px; width: 514px;"> {% endcomment %}
             <img class="card-img-top" src="{{ project.image.url }}">
             {% endif %}
             <div class="card-body">
-                <h5 class="card-title">{{ project.title }}</h5>
-                <p class="card-text">{{ project.description }}</p>
-                <a href="{% url 'projects:detail-project' project.pk %}" class="btn btn-primary">
-                    Read More
-                </a>
+                <h4 class="card-title fw-bold">{{ project.title }}</h5>
+                    <p class="card-text text-muted">{{ project.description }}</p>
+                    <a href="{% url 'projects:detail-project' project.pk %}" class="btn btn-danger">
+                        Read More
+                    </a>
             </div>
         </div>
     </div>
@@ -33,12 +61,13 @@
 </div>
 
 
-{% comment %} Github Projects {% endcomment %}
 
 
 <div class="posts container-fluid mt-5">
     <h1 class="fs-lg-3">My projects on Github</h1>
 </div>
+
+
 
 
 {% endblock %}

@@ -2,23 +2,42 @@
 {% block title %}{{ project.title }}{% endblock title %}
 
 {% block body_content %}
-<h1>{{ project.title }}</h1>
+<div class="mx-auto text-center my-4">
+    <h1 class="fw-bold">{{ project.title }}</h1>
+</div>
+
+{% if user.is_admin %}
+
+<div class="my-5 mx-auto text-center">
+    <a href="{% url 'projects:edit' project.pk%}" class="btn btn-danger btn-rounded-pill">
+        Edit Project
+    </a>
+</div>
+{% endif %}
+
 <div class="row">
     {% if project.image %}
     <div class="col-md-8">
         <img src="{{ project.image.url }}" alt="" width="100%">
     </div>
     {% endif %}
-    <div class="col-md-4">
-        <h5>About the project:</h5>
-        <p>{{ project.description }}</p>
-        <br>
-        <h5>Technology used:</h5>
-        <p>{{ project.technology }}</p>
-        {% if project.project_url == "None" %}
-        <a href="{{ project.project_url }}" class="btn btn-secondary" target="_blank">
-            Follow the project
-        </a>
+    <div class="col-md-4 py-16">
+        <div class="mb-3 ">
+            <h5 class="fw-bold">About the project:</h5>
+        </div>
+        <div class="mb-3">
+            <p>{{ project.description }}</p>
+        </div>
+        <div class="mb-3 mt-md-5">
+            <h5 class="fw-bold">Technologies used:</h5>
+            <p>{{ project.technology }}</p>
+        </div>
+        {% if project.project_url %}
+        <div class="m4">
+            <a href="{{ project.project_url }}" class="btn btn-danger btn-rounded-pill" target="_blank">
+                Follow the project
+            </a>
+        </div>
         {% endif %}
     </div>
 </div>

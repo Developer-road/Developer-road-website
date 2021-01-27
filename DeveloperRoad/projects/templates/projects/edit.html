@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Edit Project{% endblock title %}
+
+{% block body_content %}
+{% if user.is_admin %}
+<div class="m-4">
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button class="btn btn-outline-danger w-100" type="submit">Add Project</button>
+
+    </form>
+</div>
+{% else %}
+<div class="mx-auto text-center">
+    <h1 class="fw-bold">Sorry, You are not allowed here</h1>
+</div>
+{% endif %}
+
+{% endblock body_content %}
