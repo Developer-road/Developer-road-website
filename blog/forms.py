@@ -13,10 +13,9 @@ class PostForm(forms.ModelForm):
         fields = ('title', 'description', 'header_image', 'body', 'category',)
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', "placeholder": "An awesome title 🤓"}),
-            # 'author': forms.TextInput(attrs={'class': 'form-control', "value":"", "id": "jhsdfjkhasdfjljadklasfdkjdfjkasdfkn", "type": "hidden"}),
             'description': forms.Textarea(attrs={'class': 'form-control', "placeholder": "Describe your Post briefly"}),
             'body': BleachField(),
-            'category': forms.URLInput(attrs={'class': 'form-control'}),
+            'category': forms.Select(attrs={'class': 'form-control'}),
             'header_image': forms.FileInput(attrs={'class': 'form-control'}),
         }
 
@@ -43,9 +42,10 @@ class CreateCategoryForm(forms.ModelForm):
         Returns the form of the add category page
         """
         model = Category
-        fields = ('name',)
+        fields = ('name', 'description')
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'The name of your Category'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'A brief description'}),
         }
 
 

@@ -14,6 +14,7 @@ from django_bleach.models import BleachField
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(default="This category hasn't a description yet", blank=True, null=True)
 
     def __str__(self):
         """

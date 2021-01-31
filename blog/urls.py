@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (BlogView, ArticleDetail, PostCreateView, EditPost,
-                    PostDeleteView, CategoryCreateView, CategoryView, CategoryListView, VoteView, BlogSearchView)
+                    PostDeleteView, CategoryCreateView, CategoryUpdateView, CategoryView, CategoryListView, VoteView, BlogSearchView)
 
 app_name = 'blog'
 urlpatterns = [
@@ -12,6 +12,7 @@ urlpatterns = [
     path('create_category/', CategoryCreateView.as_view(), name="add_category"),
     path('categories/', CategoryListView.as_view(), name="categories_page"),
     path('category/<str:cat>/', CategoryView.as_view(), name="category_page"),
+    path('category/<int:pk>/edit', CategoryUpdateView.as_view(), name="category_edit"),
     path('upvotes/<int:pk>/', VoteView, name="upvotes"),
     # Search stuff
     path('search/', BlogSearchView.as_view(), name="search"),

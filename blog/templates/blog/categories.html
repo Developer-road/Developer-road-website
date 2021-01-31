@@ -10,8 +10,16 @@ Page of Category: {{ category_name.title|title }}
 
 {% block body_content %}
 
-<div class="posts m-5">
-    <h1>{{ category_name.name|title }}</h1>
+<div class="posts my-5 mx-auto text-center">
+    <h2 class="fw-bold">{{ category_name.name|title }}</h1>
+        <p class="mx-auto text-center text-muted">{{ category_name.description }}</p>
+        {% if user.is_authenticated %}
+        <div class="m-4">
+            <a href="{% url 'blog:category_edit' category_name.id %}"
+                class="btn-sm btn-danger rounded-pill text-decoration-none">Edit Category</a>
+        </div>
+
+        {% endif %}
 </div>
 
 {% include "blog/post_list.html"  with object=category_post %}

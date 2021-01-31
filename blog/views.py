@@ -153,6 +153,11 @@ class CategoryCreateView(CreateView):
     form_class = CreateCategoryForm
     template_name = "blog/add_category.html"
 
+class CategoryUpdateView(UpdateView):
+    model = Category
+    form_class = CreateCategoryForm
+    template_name = "blog/edit_category.html"
+
 
 class EditPost(UpdateView):
     """
