@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load extra_filters %}
 
 {% block title %}My Projects{% endblock title %}
 
@@ -65,6 +66,44 @@
 
 <div class="posts container-fluid mt-5">
     <h1 class="fs-lg-3">My projects on Github</h1>
+    <p class="text-muted">Latest projects</p>
+</div>
+
+<div class="container">
+    {% for repo in repos_user %}
+    <div class="card text-center m-3">
+        <div class="card-header">
+            {% if repo.fork %}
+            Forked <i class="fas fa-code-branch"></i>
+            {% else %}
+            Original <i class="fab fa-github-alt"></i>
+            {% endif %}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ repo.name }}</h5>
+            {% if repo.description %}
+            <p class="card-text py-2">{{ repo.description }}</p>
+            {% endif %}
+            <div class="py-3">
+                <a href="{{ repo.url }}" class="btn btn-danger" target="_blank">On github! <i
+                        class="fab fa-github text-white px-2"></i></a>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            {% if repo.fork %}
+            <p>Forked on: {{ repo.created|mydate }}</p>
+            {% else %}
+            <p>Created on: {{ repo.created|mydate }}</p>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+    <div class="my-5 text-center">
+        <p class="text-muted">Want to see all my {{ repos_count }} projects ?, go to my <a class="link-danger"
+                href="https://github.com/Daniel1404" target="_blank">Github
+                account</a> </p>
+    </div>
+
 </div>
 
 
