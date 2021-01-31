@@ -8,12 +8,13 @@ class AddProjectForm(forms.ModelForm):
     """
     class Meta:
         model = Project        
-        fields = ("title", "description", "technology", "image", "project_url")
+        fields = ("title", "description", "skill","technology", "image", "project_url")
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', "placeholder": "An awesome project title 🤓"}),
             'description': forms.Textarea(attrs={'class': 'form-control', "placeholder": "Describe your Project briefly"}),
             'technology': forms.TextInput(attrs={'class': 'form-control'}),
             'project_url': forms.TextInput(attrs={'class': 'form-control'}),
+            'skill': forms.TextInput(attrs={'class': 'form-control', 'placeholder': "The skill that you've learned with the Project"}),
             'image': forms.FileInput(attrs={'class': 'form-control'}),
         }

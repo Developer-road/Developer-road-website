@@ -25,6 +25,7 @@ class Project(models.Model):
     description = models.TextField()
     technology = models.CharField(max_length=30)
     image = models.ImageField(null=True, upload_to=get_project_image, blank=True)
+    skill = models.CharField(max_length=200, null=True, blank=True)
     project_url = models.URLField(blank=True, null=True)
 
     def __str__(self):

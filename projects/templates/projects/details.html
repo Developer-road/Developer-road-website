@@ -31,10 +31,14 @@
         <div class="mb-3 mt-md-5">
             <h5 class="fw-bold">Technologies used:</h5>
             <p>{{ project.technology }}</p>
+            <div class="mt-md-5">
+                <h5 class="fw-bold">Skills learned:</h5>
+                <p>{{ project.skill }}</p>
+            </div>
         </div>
         {% if project.project_url %}
         <div class="m4">
-            <a href="{{ project.project_url }}" class="btn btn-danger btn-rounded-pill" target="_blank">
+            <a href="{{ project.project_url }}" class="btn btn-danger rounded-pill" target="_blank">
                 Follow the project
             </a>
         </div>
