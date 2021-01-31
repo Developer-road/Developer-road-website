@@ -1,1 +1,1 @@
-web: gunicorn DeveloperRoad.DeveloperRoad.wsgi
+web: gunicorn DeveloperRoad.wsgi

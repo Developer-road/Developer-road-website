@@ -28,9 +28,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'y6=oec#431ql!gqys5i0mm7190p%7tw%3e$pz7sfnt!nk=55v)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["localhost"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "developerroad.herokuapp.com"]
 
 # Custom User Model
 AUTH_USER_MODEL = "members.BlogUser"
@@ -39,12 +40,6 @@ AUTH_USER_MODEL = "members.BlogUser"
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.AllowAllUsersModelBackend",
     "members.backends.CaseModelBackend",
-
-    # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
-
-    # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
 )
 
 # Application definition
@@ -58,16 +53,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Allauth apps
-    'django.contrib.sites',
-
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-
-    # Google provider
-    'allauth.socialaccount.providers.google',
-
     # Custom apps
     'home',
     'projects',
@@ -89,15 +74,14 @@ SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # White noise stuff
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # White noise stuff
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-
 ]
 
 ROOT_URLCONF = 'DeveloperRoad.urls'
@@ -113,8 +97,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # `allauth` needs this from django
-                'django.template.context_processors.request',
             ],
         },
     },
@@ -135,13 +117,6 @@ DATABASES = {
         'HOST': 'localhost',
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': 'DeveloperRoad',
-#     }
-# }
 
 
 # Password validation
@@ -175,20 +150,41 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+import os
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': False,
+        },
+    },
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+# Custom static files
+STATIC_ROOT = join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-
 STATICFILES_DIRS = [
-    join(BASE_DIR, 'static'),
+    join(BASE_DIR, "static")
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-
+# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = join(BASE_DIR, 'media')
 
@@ -196,7 +192,7 @@ MEDIA_ROOT = join(BASE_DIR, 'media')
 # Redirect login button to login default template
 
 LOGIN_REDIRECT_URL = 'blog:blog_page'
-LOGOUT_REDIRECT_URL = 'home:home_page'
+LOGOUT_REDIRECT_URL = 'blog:blog_page'
 
 # BLEACH STUFF
 # Which HTML tags are allowed
