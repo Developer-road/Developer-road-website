@@ -287,17 +287,16 @@ CKEDITOR_CONFIGS = {
     }
 }
 
-# Email settings
-# Testing
-EMAIL_HOST = "localhost"
-EMAIL_PORT = 1025
+# Deploying
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# Simple mail transfer protocol
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = config('EMAIL_HOST_USER') 
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD') #past the key or password app here
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Default from email'
 
-EMAIL_HOST_USER = ""
-
-EMAIL_HOST_PASSWORD = ""
-
-EMAIL_USE_TLS = False
-# EMAIL_USE_SSL = False
 
 # Debugging in heroku live
 LOGGING = {
