@@ -42,6 +42,8 @@ class UserEditForm(UserChangeForm):
         attrs={'placeholder': 'Last name', 'class': 'form-control bg-white border-left-0 border-md'}))
     description = forms.CharField(max_length=400, widget=forms.Textarea(
         attrs={'placeholder': 'An awesome description', 'class': 'form-control bg-white border-left-0 border-md'}))
+    profile_image = forms.FileField(widget=forms.FileInput(
+        attrs={'class': 'form-control bg-white border-left-0 border-md'}))
     website_url = forms.URLField(max_length=400, required=False, widget=forms.URLInput(
         attrs={'placeholder': 'Your Website Url', 'class': 'form-control bg-white border-left-0 border-md'}))
     instagram_url = forms.URLField(max_length=400, required=False, widget=forms.URLInput(
