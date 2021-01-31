@@ -32,7 +32,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'y6=oec#431ql!gqys5i0mm7190p%7tw%3e$pz7sfnt!nk=55v)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
+# DEBUG = True
 DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "developerroad.herokuapp.com"]
@@ -180,14 +180,15 @@ STATICFILES_DIRS = [
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+# Only applies if ther is not debug mode
+if not DEBUG:
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': config('CLOUD_NAME', default=""),
+        'API_KEY': config('API_KEY', default=""),
+        'API_SECRET': config('API_SECRET', default=""),
+    }
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': config('CLOUD_NAME'),
-    'API_KEY': config('API_KEY'),
-    'API_SECRET': config('API_SECRET'),
-}
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = join(BASE_DIR, 'media')
@@ -292,8 +293,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # Simple mail transfer protocol
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
-EMAIL_HOST_USER = config('EMAIL_HOST_USER') 
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD') #past the key or password app here
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default="localhost") 
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default="") #past the key or password app here
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Default from email'
 
