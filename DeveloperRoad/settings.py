@@ -17,6 +17,8 @@ from os.path import join
 import whitenoise
 import django_heroku
 import dj_database_url
+import cloudinary
+import cloudinary_storage
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,8 +32,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'y6=oec#431ql!gqys5i0mm7190p%7tw%3e$pz7sfnt!nk=55v)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = False
+# DEBUG = False
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "developerroad.herokuapp.com"]
 
@@ -55,6 +57,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Media Cloudinary
+    'cloudinary',
+    'cloudinary_storage',
+
+
     # Custom apps
     'home',
     'projects',
@@ -110,22 +117,23 @@ WSGI_APPLICATION = 'DeveloperRoad.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-# For local development 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'DeveloperRoad',
-#         'USER': 'postgres',
-#         'PASSWORD': 'daniel1404',
-#         'HOST': 'localhost',
-#     }
-# }
-
-DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
-}
+# For local development
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'DeveloperRoad',
+            'USER': 'postgres',
+            'PASSWORD': 'daniel1404',
+            'HOST': 'localhost',
+        }
+    }
+else:
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=config('DATABASE_URL')
+        )
+    }
 
 
 # Password validation
@@ -171,7 +179,16 @@ STATICFILES_DIRS = [
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('CLOUD_NAME'),
+    'API_KEY': config('API_KEY'),
+    'API_SECRET': config('API_SECRET'),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = join(BASE_DIR, 'media')
 
@@ -282,7 +299,7 @@ EMAIL_HOST_PASSWORD = ""
 EMAIL_USE_TLS = False
 # EMAIL_USE_SSL = False
 
- # Debugging in heroku live
+# Debugging in heroku live
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
