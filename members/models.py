@@ -72,7 +72,7 @@ def get_default_profile_image():
     Returns the default profile image
     """
 
-    return "images/default_profile_image/default_gilflc..png"
+    return "images/default_profile_image/default_gilflc.png"
 
 
 # Custom User Model
