@@ -202,16 +202,17 @@ LOGOUT_REDIRECT_URL = 'blog:blog_page'
 # BLEACH STUFF
 # Which HTML tags are allowed
 BLEACH_ALLOWED_TAGS = ['p', 'b', 'i', 'u', 'em', 'strong', 'a', 'h1', 'h2', 'code',
-                       'h3', 'h4', 'h5', 'h6', 'pre', "img", "caption", "table", 'tbody', 'tr', "td", "div"]
+                       'h3', 'h4', 'h5', 'h6', 'pre', "img", "caption", "table", 'tbody', 'tr', "td", "div", "iframe"]
 
 # Which HTML attributes are allowed
-BLEACH_ALLOWED_ATTRIBUTES = ['href', 'title', 'style', 'border',
-                             "alt", 'cellpadding', 'cellspacing', 'summary', 'src', 'class']
+BLEACH_ALLOWED_ATTRIBUTES = ['href', 'title', 'style', 'border', 'data-oembed-url', "allow",
+                             "alt", 'cellpadding', 'cellspacing', 'summary', 'src', 'class', 'align', 'frameborder', 'name']
 
 # Which CSS properties are allowed in 'style' attributes (assuming style is
 # an allowed attribute)
 BLEACH_ALLOWED_STYLES = [
-    'font-family', 'font-weight', 'text-decoration', 'font-variant', 'width', 'color', "background", "padding"
+    'font-family', 'font-weight', 'text-decoration', 'height', 'left', 'font-variant', 'width', 'color', "background", "padding",
+    "padding-bottom", "position"
 ]
 
 # Which protocols (and pseudo-protocols) are allowed in 'src' attributes
@@ -226,6 +227,7 @@ BLEACH_STRIP_TAGS = True
 # Strip HTML comments, or leave them in.
 BLEACH_STRIP_COMMENTS = False
 
+# <p><iframe align="middle" frameborder="0" name="Video" scrolling="no" src="https://www.youtube.com/watch?v=IHLqBnE5WOA"></iframe></p>
 CKEDITOR_CONFIGS = {
     'default': {
         # 'skin': 'moono',
@@ -240,11 +242,13 @@ CKEDITOR_CONFIGS = {
                 'Find', 'Replace', '-', 'SelectAll']},
             {'name': 'paragraph',
              'items': ['NumberedList', 'BulletedList', '-''Blockquote']},
-            {'name': 'links', 'items': ['Link', 'Unlink']},
+            {'name': 'links', 'items': ['Link', 'Unlink', 'Iframe', 'Embed']},
             {'name': 'insert',
              'items': ['Image', 'HorizontalRule', 'Smiley', 'SpecialChar', 'CodeSnippet']},
             {'name': 'document', 'items': [
                 'Save', 'Preview' '-', 'Templates']},
+            # {'name': 'Testing', 'items': [
+            #     'Source']},
             '/',
             {'name': 'styles', 'items': [
                 'Styles', 'Format', 'Font', 'FontSize']},
@@ -262,7 +266,12 @@ CKEDITOR_CONFIGS = {
         'toolbarCanCollapse': True,
         # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
         'tabSpaces': 4,
-        'extraPlugins': 'codesnippet',
+        'extraPlugins': ','.join([
+            'codesnippet',
+            'embed',
+            'autoembed',
+            'iframe',
+        ]),
     },
     'comment': {
         # 'skin': 'moono',
@@ -293,8 +302,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # Simple mail transfer protocol
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
-EMAIL_HOST_USER = config('EMAIL_HOST_USER', default="localhost") 
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default="") #past the key or password app here
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default="localhost")
+# past the key or password app here
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default="")
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Default from email'
 
