@@ -6,7 +6,7 @@
 <div class="card w-70 rounded m-3">
     {% if post.header_image %}
     <div class="mb-3">
-        <img src="{{ post.header_image.url }}" alt="No image for this Post" class=" card-img-top">
+        <a href="{% url 'blog:article_page' post.pk %}"><img src="{{ post.header_image.url }}" alt="No image for this Post" class=" card-img-top"></a>
     </div>
     {% endif %}
     <div class="blog-abv p-2 pt-3">
