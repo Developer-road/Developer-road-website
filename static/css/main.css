@@ -186,6 +186,13 @@
     color: var(--myred);
 }
 
+.text-red-2 {
+    color: rgb(199, 33, 33);
+}
+
+.text-red-2:hover {
+    color: rgb(180, 61, 61);
+}
 .fs-11 {
     font-size: 3rem !important;
 }
@@ -812,8 +819,6 @@ body {
     border-radius: var(--radius);
     background: var(--card-bg);
     color: var(--card-color);
-    box-shadow: 2px 2px 2px 3px var(--card-border);
-    /* overflow-wrap: anywhere; */
     font-size: 18px;
 }
 
