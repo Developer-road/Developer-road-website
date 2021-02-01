@@ -2,7 +2,7 @@
 {% block title %}Edit Category{% endblock title %}
 
 {% block body_content %}
-{% if user.is_authenticated %}
+{% if user.is_admin %}
 <div class="m-5 mx-auto text-center">
     <h1 class="fw-bold">Edit a Category</h1>
 </div>
@@ -16,5 +16,10 @@
         </div>
     </form>
 </div>
+{% else %}
+<div class="m-5 mx-auto text-center">
+    <h1 class="fw-bold">Sorry you can't be here!</h1>
+</div>
+
 {% endif %}
 {% endblock body_content %}

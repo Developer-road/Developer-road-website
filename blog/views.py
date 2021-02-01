@@ -92,6 +92,18 @@ class ArticleDetail(DetailView):
         if self.request.user.is_authenticated:
             context["comment_form"] = CommentForm(instance=self.request.user)
 
+        recent = True        
+        other_posts = list(Post.objects.all().order_by('-date'))[:4]
+
+        if detail_post.category:
+            related_posts = list(Post.objects.filter(category=detail_post.category))
+            if len(related_posts) > 1:
+                other_posts = related_posts
+                recent = False
+
+        context["recent"] = recent
+        context["other_posts"] = other_posts
+
         return context
 
     def post(self, request, *args, **kwargs):
