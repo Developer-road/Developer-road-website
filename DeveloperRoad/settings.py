@@ -28,14 +28,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'y6=oec#431ql!gqys5i0mm7190p%7tw%3e$pz7sfnt!nk=55v)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "developerroad.herokuapp.com"]
+
+# SECURITY WARNING: keep the secret key used in production secret!
+if DEBUG:
+    SECRET_KEY = 'y6=oec#431ql!gqys5i0mm7190p%7tw%3e$pz7sfnt!nk=55v)'
+else:
+    SECRET_KEY = config('SECRET_KEY')
+
+
 
 # Custom User Model
 AUTH_USER_MODEL = "members.BlogUser"
