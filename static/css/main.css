@@ -864,6 +864,9 @@ body {
     font-size: 1.4rem;
 }
 
+.text-decoration-none-a a{
+    text-decoration: none;
+}
 
 
 
