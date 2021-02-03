@@ -1,60 +1,72 @@
+{% block head_links %}
+{% endblock head_links %}
+
 {% load static %}
-<div class="footer-container-fluid pb-0 mb-0 justify-content-center text-light ">
-    <footer>
-        <div class="row my-5 justify-content-center py-5">
-            <div class="col-11">
-                <div class="row ">
-                    <div class="col-xl-8 col-md-4 col-sm-4 col-12 my-auto mx-auto a">
-                        <h3 class="text-muted mb-md-0 mb-5 bold-text">Developer Road</h3>
-                    </div>
-                    <div class="col-xl-2 col-md-4 col-sm-4 col-12">
-                        <h6 class="mb-3 mb-lg-4 bold-text "><b>MENU</b></h6>
-                        <ul class="list-unstyled">
-                            <li><a class="footer-links" href="{% url 'home:home_page' %}">Home</a></li>
-                            <li><a class="footer-links" href="{% url 'about:about_page' %}">About</a></li>
-                            <li><a class="footer-links" href="{% url 'contact:contact_page' %}">Contact me</a></li>
-                            <li><a class="footer-links" href="{% url 'projects:my_projects' %}">Projects</a></li>
-                            <li><a class="footer-links" href="{% url 'blog:blog_page' %}">Blog</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-xl-2 col-md-4 col-sm-4 col-12">
-                        <h6 class="mb-3 mb-lg-4 text-muted bold-text mt-sm-0 mt-5"><b>TECHNOLOGIES USED</b></h6>
-                        <p class="mb-1"><a href="https://www.djangoproject.com/" class="footer-links">Django</a></p>
-                        <p class="mb-1"><a href="https://getbootstrap.com/" class="footer-links">Bootstrap 5</a></p>
-                        <p class="mb-1"><a href="https://django-ckeditor.readthedocs.io/en/latest/"
-                                class="footer-links">Ckeditor</a></p>
-                        <p class="mb-1"><a href="https://highlightjs.org/" class="footer-links">Highlight.js</a></p>
-                    </div>
-                    <div class="row ">
-                        <div class="col-xl-8 col-md-4 col-sm-4 col-auto my-md-0 mt-5 order-sm-1 order-3 align-self-end">
-                            <p class="social text-muted mb-2 pb-0 bold-text text-decoration-none-a">
-                                <a href="https://github.com/Daniel1404" target="_blank"><span class="mx-2"><i
-                                            class="fab fa-github" aria-hidden="true"></i></span>
-                                </a>
-                                <a href="https://www.linkedin.com/in/daniel-diaz-3617831a6/" target="_blank"><span
-                                        class="mx-2"><i class="fab fa-linkedin" aria-hidden="true"></i></span>
-                                </a>
-                                <a href="https://twitter.com/DaniDiazTech" target="_blank"><span class="mx-2">
-                                        <i class="fab fa-twitter" aria-hidden="true"></i></span>
-                                </a>
-                                <a href="https://www.instagram.com/daniel._.diaz1404/" target="_blank"><span
-                                        class="mx-2"><i class="fab fa-instagram" aria-hidden="true"></i></span></a>
-                            </p>
-                            <small class="rights"><span>&#174;</span> Created
-                                with <i class="heart fas fa-heart "></i> by Daniel Diaz All Rights Reserved.</small>
-                        </div>
-                        <div class="col-xl-2 col-md-4 col-sm-4 col-auto order-1 align-self-end ">
-                            <h6 class="mt-55 mt-2 text-muted bold-text"><b>DANIEL DIAZ</b></h6><small> <span><i
-                                        class="fas fa-inbox px-2 fs-5" aria-hidden="true"></i></span>
-                                danieldiazgonza52@gmail.com</small>
-                        </div>
-                    </div>
-                </div>
+
+
+/*
+|￣￣￣￣￣ | 
+| TODO: Mejorar los estilos y espacios 
+| ＿＿＿＿＿| 
+(\__/) || 
+(•ㅅ•) || 
+/ 　 づ
+*/
+<footer>
+    <section class="section-footer">
+        <div class="text-decoration-none-a div-footer">
+            <a class="text-decoration-none-a" href="{% url 'home:home_page' %}">
+                <h3 class="text-muted mb-md-0 mb-5 bold-text"><i class="fas fa-code"></i> Developer Road</h3>
+            </a>
+            <p class="footer-p">The platform where Developers share knowledge about technology and programming</p>
+            <div class="social text-muted mb-2 pb-0 bold-text text-decoration-none-a">
+                <a href="https://github.com/Daniel1404" target="_blank">
+                    <span class="mx-2">
+                        <i class="fab fa-github" aria-hidden="true"></i>
+                    </span>
+                </a>
+                <a href="https://www.linkedin.com/in/daniel-diaz-3617831a6/" target="_blank">
+                    <span class="mx-2">
+                        <i class="fab fa-linkedin" aria-hidden="true"></i>
+                    </span>
+                </a>
+                <a href="https://twitter.com/DaniDiazTech" target="_blank">
+                    <span class="mx-2">
+                        <i class="fab fa-twitter" aria-hidden="true"></i>
+                    </span>
+                </a>
+                <a href="https://www.instagram.com/daniel._.diaz1404/" target="_blank">
+                    <span class="mx-2">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                    </span>
+                </a>
             </div>
-    </footer>
-</div>
-{% comment %} <footer class="footer">
-    <div class="container">
-        <small class="d-block ">© 2021</small>
-    </div>
-</footer> {% endcomment %}
+        </div>
+
+        <div class="div-footer-menu">
+            <div class="div-footer-ul">
+                <h6 class="bold-text text-muted"><b>MENU</b></h6>
+                <ul class="list-unstyled mb-0 mr-3">
+                    <li><a class="footer-links" href="{% url 'home:home_page' %}">Home</a></li>
+                    <li><a class="footer-links" href="{% url 'about:about_page' %}">About</a></li>
+                    <li><a class="footer-links" href="{% url 'contact:contact_page' %}">Contact me</a></li>
+                    <li><a class="footer-links" href="{% url 'projects:my_projects' %}">Projects</a></li>
+                    <li><a class="footer-links" href="{% url 'blog:blog_page' %}">Blog</a></li>
+                </ul>
+            </div>
+            <div class="">
+                <h6 class="text-muted bold-text mt-sm-0 mt-5"><b>TECHNOLOGIES USED</b></h6>
+                <p class="mb-1"><a href="https://www.djangoproject.com/" class="footer-links">Django</a></p>
+                <p class="mb-1"><a href="https://getbootstrap.com/" class="footer-links">Bootstrap 5</a></p>
+                <p class="mb-1"><a href="https://django-ckeditor.readthedocs.io/en/latest/"class="footer-links">Ckeditor</a></p>
+                <p class="mb-1"><a href="https://highlightjs.org/" class="footer-links">Highlight.js</a></p>
+            </div>
+        </div>
+    </section>
+    <hr class="hr-footer" />
+    <small class="rights">
+        <span>&#174;</span> 
+        Created with 
+        <i class="heart fas fa-heart "></i> by Daniel Diaz All Rights Reserved.
+    </small>
+</footer>
