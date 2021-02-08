@@ -11,10 +11,17 @@
     {% endif %}
     <div class="blog-abv p-2 pt-3">
         {% if not image_hidden %}
-        <a href="{% url 'members:profile' post.author.id %}"><span class="px-2"><img
-                    src="{{ post.author.profile_image.url }}" alt="" class="rounded-circle image-opacity" width=30
-                    height=30> </span>
-            <span> {{ post.author.first_name }} {{ post.author.last_name }} </span></a>
+        <a href="{% url 'members:profile' post.author.id %}">
+            <span class="px-2">
+                <img
+                    src="{{ post.author.profile_image.url }}" 
+                    alt="" 
+                    class="rounded-circle image-opacity"
+                    width=30
+                    height=30 /> 
+            </span>
+            <span> {{ post.author.first_name }} {{ post.author.last_name }} </span>
+        </a>
         <span class="px-2">·</span>
         <span class="">{{ post.date }}</span>
         {% else %}
@@ -32,11 +39,10 @@
         <h3 class="fs-2">{{ post.title|title }}</h3>
     </div>
 
-
     {% if post.description %}
-    <p class="blog-description p-3 fs-5">{{ post.description | slice:":200" }}</p>
+        <p class="blog-description p-3 fs-5">{{ post.description | slice:":200" }}</p>
     {% else %}
-    <p class="blog-description p-3 fs-5">{{ post.body | striptags | slice:":200" }}</p>
+        <p class="blog-description p-3 fs-5">{{ post.body | striptags | slice:":200" }}</p>
     {% endif %}
 
 
@@ -44,20 +50,31 @@
 
     {% if user.is_authenticated and  user.id == post.author.id %}
     <div class="p-3">
-        <small><a href="{% url 'blog:delete_page' post.pk %}" class="link-danger">Delete
-                post</a></small>
+        <small>
+            <a href="{% url 'blog:delete_page' post.pk %}" class="link-danger">
+                Delete post
+            </a>
+        </small>
     </div>
     {% endif %}
 </div>
 
 {% empty %}
 <div class="posts mt-5">
-    <h2 class="text-muted">Sorry there are not Post with that words included</h2>
+    <h2 class="text-muted">Sorry there are 
+        <span class="text-danger">
+            not
+        </span>
+         Post with that words included
+        </h2>
 
-    <p class="pt-3 fs-4">Try to make another search</p>
-    <p class="pt-3 fs-5">Or go to the blog <a href="{% url 'blog:blog_page' %}" class="link-danger">main page</a></p>
-
-
+    <p class="fs-4 mb-0">Try to make another search</p>
+    <p class="fs-5 ">
+        Or go to the blog 
+        <a href="{% url 'blog:blog_page' %}" class="link-danger">
+            main page
+        </a>
+    </p>
 </div>
 
 {% endfor %}
