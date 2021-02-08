@@ -22,11 +22,16 @@ Categories of the Developer Road Blog:
         <div class="align-content-sm-around">
             {% for category in object_list %}
             <ul class="text-decoration-none list-unstyled px-4">
-                <li><a class="text-decoration-none text-dark"
+                <li>
+                    <a class="text-decoration-none text-dark"
                         href="{% url 'blog:category_page' category.name|myslug %}">
-                        <h5 class="">{{category.name|title}} <span
-                                class="text-danger fs-6 fw-light text-decoration-underline">Show Posts</span></h5>
-                    </a></li>
+                        <h5 class="">{{category.name|title}} 
+                            <span class="text-danger fs-6 fw-light text-decoration-underline">
+                                Show Posts
+                            </span>
+                        </h5>
+                    </a>
+                </li>
             </ul>
 
             {% endfor %}
@@ -37,13 +42,16 @@ Categories of the Developer Road Blog:
         <div class="mt-4">
             <img src="{% static 'images/blog/category.svg' %}" alt="Categories image" class="img-fluid">
         </div>
-
     </div>
 </div>
 
 <div class="mt-5">
-    <span class="text-muted">There isn't the category you are looking for ? <a href="{% url 'blog:add_category' %}"
-            class="link-danger">Create one</a></span>
+    <span class="text-muted">
+        There isn't the category you are looking for?
+        <a href="{% url 'blog:add_category' %}" class="link-danger">
+            Create one
+        </a>
+    </span>
 </div>
 
 {% endblock body_content %}
