@@ -10,38 +10,95 @@
 {% block super_body_content %}
 
 <div class="about-cover">
+    <!-- 
+    /*
+        |￣￣￣￣￣  
+        | // TODO: Arreglar el heigth del banner, agregar animaciones y ajustar lo que falta
+        |＿＿＿_ 
+    (\__/)|| 
+    (•ㅅ•)|| 
+    / 　 づ
+    */
+
+     -->
 
     <div class="about-cover-caption">
         <h2>Programming and <br>Coffee <i class="fas fa-mug-hot"></i></h2>
     </div>
 </div>
 
-<div class="container">
+<div class="container min-vh-100 overflow-auto">
     <div class="mx-auto text-center my-5">
-        <h2 class="fs-11 fw-bold">Hey there <br> <span class="text-red">Awesome People</span></h2>
+        <h2 class="fs-11 fw-bold">
+            Hey there 
+            <br />
+            <span class="text-red">Awesome People</span>
+        </h2>
     </div>
-    <div class="card mb-3 pt-4">
-        <div class="row g-0">
-            <div class="col-md-4 my-auto mx-auto">
-                <img title="Daniel Diaz" class="rounded-circle mb-2 mt-3 center-phone-img image-opacity" width=200px
-                    height=200 src="{% static 'images/about/face.png' %}" alt="Daniel Diaz">
-            </div>
-            <div class="col-md-8 px-2 py-5">
-                <div class="card-body center-phone">
-                    <div class="mb-4  mx-auto text-center">
-                        <h4 class="card-title fs-2"><span class="">About the author</h4>
-                    </div>
-                    <h4 class="card-title"><span class="text-red">I'm</span> Daniel Diaz</h4>
-                    <p class="card-text">Hi, I'm Daniel Diaz the creator of Developer Road, I taught my self to code by
-                        the time I was 15,
-                        by watching free tutorials, videos and blogs. I think that learn how to code gives you the
-                        ability of make reality anything you can Imagine. <br>
-
-                        And because of that Idea I created this Site, to share knowledge and experience and to let other
-                        people, to do so.
-
-                    </p>
+    
+    <div class="row g-0">
+        <div class="col-md-4 my-auto mx-auto d-flex justify-content-center">
+            <img    class="rounded-circle mb-2 mt-3 center-phone-img image-opacity" 
+                    width=200px
+                    height=200 
+                    src="{% static 'images/about/face.png' %}" 
+                    alt="Daniel Diaz" />
+        </div>
+        <div class="col-md-8 px-2 py-5">
+            <div class="card-body center-phone">
+                <div class="mb-4  mx-auto text-center">
+                    <h4 class="card-title fs-2">About the 
+                        <span class="text-danger">
+                            author 
+                        </span>
+                    </h4>
                 </div>
+                <h4 class="card-title">
+                    <span class="text-red">
+                        I'm
+                    </span> 
+                    Daniel Diaz
+                </h4>
+                <p class="text-justify">
+                    Hi, I'm Daniel Diaz the creator of Developer Road, I taught my self to code by
+                    the time I was 15,
+                    by watching free tutorials, videos and blogs. I think that learn how to code gives you the
+                    ability of make reality anything you can Imagine.
+                    <br />
+                    And because of that Idea I created this Site, to share knowledge and experience and to let other
+                    people, to do so.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-0 border-top my-2">
+        <div class="col-md-4 my-auto mx-auto d-flex justify-content-center">
+            <img class="rounded-circle mb-2 mt-3 center-phone-img image-opacity" 
+                    width=200px
+                    height=200 
+                    src="https://avatars.githubusercontent.com/u/52179095?s=460&u=3c32f626fcbc00f39db5da407a76ce7a0bb3e7f3&v=4" 
+                    alt="Nicolas j" />
+        </div>
+        <div class="col-md-8 px-2 py-5">
+            <div class="card-body center-phone">
+                <div class="mb-4  mx-auto text-center">
+                    <h4 class="card-title fs-2">
+                        About the 
+                        <span class="text-info">
+                            individual contributor 
+                        </span>
+                    </h4>
+                </div>
+                <h4 class="card-title">
+                    <span class="text-info">I'm</span> 
+                    Nicolas Jiménez
+                </h4>
+                <p class="card-text">
+                    Hi there, I'm Nicolas Jiménez  <span class="text-info">front dev</span>
+                    and individual contributor on Developer Road, you can find me
+                    <a href="https://nicolas-alt.vercel.app" target="_blank" class="text-info">here</a>.
+                </p>
             </div>
         </div>
     </div>
