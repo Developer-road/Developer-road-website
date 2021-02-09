@@ -1,25 +1,29 @@
+
 {% block head_links %}
 {% endblock head_links %}
 
-{% load static %}
+ 
+ 
+ 
 
+<!-- Footer -->
+<footer class="footer-bg text-center text-lg-start">
+    <div class="container p-4">
+      <div class="row">
+        <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+            <div class="text-decoration-none-a">
+                <a class="text-decoration-none-a footer-links" href="{% url 'home:home_page' %}">
+                    <h3 class="text-muted mb-md-0 mb-5 bold-text d-flex align-items-center">
+                        Developer Road 
+                        <i class="fas fa-code mx-3"></i>
+                    </h3>
+                </a>
+            </div>
+  
+          <p class="text-decoration-none-a footer-links">
+            The platform where Developers share knowledge about technology and programming
 
-/*
-|￣￣￣￣￣ | 
-| TODO: Mejorar los estilos y espacios 
-| ＿＿＿＿＿| 
-(\__/) || 
-(•ㅅ•) || 
-/ 　 づ
-*/
-<footer>
-    <section class="section-footer">
-        <div class="text-decoration-none-a div-footer">
-            <a class="text-decoration-none-a" href="{% url 'home:home_page' %}">
-                <h3 class="text-muted mb-md-0 mb-5 bold-text"><i class="fas fa-code"></i> Developer Road</h3>
-            </a>
-            <p class="footer-p">The platform where Developers share knowledge about technology and programming</p>
-            <div class="social text-muted mb-2 pb-0 bold-text text-decoration-none-a">
+            <div class="d-flex w-100  justify-content-center justify-content-sm-center">
                 <a href="https://github.com/Daniel1404" target="_blank">
                     <span class="mx-2">
                         <i class="fab fa-github" aria-hidden="true"></i>
@@ -41,32 +45,56 @@
                     </span>
                 </a>
             </div>
+          </p>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase footer-links "><b>MENU</b></h5>
+  
+          <ul class="list-unstyled mb-0">
+            <li><a class="footer-links" href="{% url 'home:home_page' %}">Home</a></li>
+            <li><a class="footer-links" href="{% url 'about:about_page' %}">About</a></li>
+            <li><a class="footer-links" href="{% url 'contact:contact_page' %}">Contact me</a></li>
+            <li><a class="footer-links" href="{% url 'projects:my_projects' %}">Projects</a></li>
+            <li><a class="footer-links" href="{% url 'blog:blog_page' %}">Blog</a></li>
+          </ul>
         </div>
 
-        <div class="div-footer-menu">
-            <div class="div-footer-ul">
-                <h6 class="bold-text text-muted"><b>MENU</b></h6>
-                <ul class="list-unstyled mb-0 mr-3">
-                    <li><a class="footer-links" href="{% url 'home:home_page' %}">Home</a></li>
-                    <li><a class="footer-links" href="{% url 'about:about_page' %}">About</a></li>
-                    <li><a class="footer-links" href="{% url 'contact:contact_page' %}">Contact me</a></li>
-                    <li><a class="footer-links" href="{% url 'projects:my_projects' %}">Projects</a></li>
-                    <li><a class="footer-links" href="{% url 'blog:blog_page' %}">Blog</a></li>
-                </ul>
-            </div>
-            <div class="">
-                <h6 class="text-muted bold-text mt-sm-0 mt-5"><b>TECHNOLOGIES USED</b></h6>
-                <p class="mb-1"><a href="https://www.djangoproject.com/" class="footer-links">Django</a></p>
-                <p class="mb-1"><a href="https://getbootstrap.com/" class="footer-links">Bootstrap 5</a></p>
-                <p class="mb-1"><a href="https://django-ckeditor.readthedocs.io/en/latest/"class="footer-links">Ckeditor</a></p>
-                <p class="mb-1"><a href="https://highlightjs.org/" class="footer-links">Highlight.js</a></p>
-            </div>
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase mb-0 footer-links "><b>TECHNOLOGIES USED</b></h5>
+          <ul class="list-unstyled">
+            <li>
+                <a href="https://www.djangoproject.com/" class="footer-links">
+                    <i class='bx bxl-django mx-2'></i>
+                    Django
+                </a>
+            </li>
+            <li>
+                <a href="https://getbootstrap.com/" class="footer-links">
+                    <i class='bx bxl-bootstrap mx-2' ></i>
+                    Bootstrap 5
+                </a>
+            </li>
+            <li>
+                <a href="https://django-ckeditor.readthedocs.io/en/latest/"class="footer-links">
+                    <i class='bx bx-library mx-2' ></i>
+                    Ckeditor
+                </a>
+            </li>
+            <li>
+                <a href="https://highlightjs.org/" class="footer-links">
+                    <i class='bx bx-library mx-2' ></i>
+                    Highlight.js
+                </a>
+            </li>
+          </ul>
         </div>
-    </section>
-    <hr class="hr-footer" />
-    <small class="rights">
-        <span>&#174;</span> 
-        Created with 
-        <i class="heart fas fa-heart "></i> by Daniel Diaz All Rights Reserved.
-    </small>
-</footer>
+      </div>
+    </div>
+
+    <div class="text-center p-3 w-100 footer-bg footer-links ">
+      © 2021 Copyright: Created with 
+         <i class="heart fas fa-heart "></i> 
+         by Daniel Diaz All Rights Reserved.
+    </div>
+  </footer>

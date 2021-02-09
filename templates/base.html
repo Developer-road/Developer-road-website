@@ -28,6 +28,10 @@
 
         {% comment %} Custom css {% endcomment %}
         <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}" />
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet' />
+        {% block customStyle %}{% endblock customStyle %}
+
 
         {% comment %} Favicons {% endcomment %}
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon_io/apple-touch-icon.png' %}" />
