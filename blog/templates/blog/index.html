@@ -11,7 +11,7 @@ Python, Javascript, Frontend, Backend and Django Web Framework.
 
 {% block body_content %}
 
-<div class="posts container-fluid vh-100 d-flex flex-column align-items-center justify-content-center ">
+<div class="posts container-fluid h-100 w-100 d-flex flex-column align-items-center ">
     <h1>Developer Road Blog</h1>
     <p class="intro-post">
         Diverse 
@@ -22,40 +22,10 @@ Python, Javascript, Frontend, Backend and Django Web Framework.
         <span>Tech World</span>
     </p>
 
-
-<div class="m-3">
-    {% include "blog/search_bar.html" %}
-</div>
-
-<div class="blog-posts">
-    <div class="row g-0  d-flex align-items-center justify-content-center flex-column">
-        <div class="col-md-8">
-            {% include "blog/post_list.html"  with object=page_obj %}
-        </div>
-        <div class="col-md-4">
-            {% if user.is_authenticated %}
-            <div class="mb-5 p-3">
-
-                <a href="{% url 'blog:add_post' %}" 
-                   target="_blank" 
-                   rel="#"
-                   class="btn btn-secondary btn-md rounded-pill">
-                   Add post 
-                   <i class="px-2 text-white fas fa-plus-circle"></i>
-                </a>
-                <br />
-            </div>
-            {% endif %}
-            /*
-                |￣￣￣￣￣  
-                | // TODO: Corregir el listado de categorías
-                |＿＿＿_ 
-            (\__/)|| 
-            (•ㅅ•)|| 
-            / 　 づ
-            */
-            <!-- Dropdown button
-            <div class="btn-group dropdown-blog mb-4 p-3">
+    <div class="">
+        {% include "blog/search_bar.html" %}
+    </div>
+                <div class="btn-group dropdown-blog mb-4 p-3">
                 <button type="button" class="btn btn-danger"><a class="text-decoration-none text-white"
                         href="{% url 'blog:categories_page' %}">Categories</a></button>
                 <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
@@ -70,11 +40,29 @@ Python, Javascript, Frontend, Backend and Django Web Framework.
                     {% endfor %}
                 </ul>
             </div>
- -->
+    <div class="col-md-4">
+                {% if user.is_authenticated %}
+                <div class="mb-5 p-3">
+                    <a href="{% url 'blog:add_post' %}" 
+                       target="_blank" 
+                       rel="#"
+                       class="btn btn-secondary btn-md rounded-pill">
+                       Add post 
+                    <i class="px-2 text-white fas fa-plus-circle"></i>
+                    </a>
+                    <br />
+                </div>
+                {% endif %}
+            </div>
+
+    <div class="blog-posts w-100">
+        <div class="row g-0  d-flex align-items-center justify-content-center flex-column">
+            <div class="col-md-8">
+                {% include "blog/post_list.html"  with object=page_obj %}
+            </div>
         </div>
     </div>
-</div>
-    
+
     {% if page_obj.paginator.num_pages > 1 %}
         {% include 'blog/pagination.html' with page_obj=page_obj %}
     {% endif %}
