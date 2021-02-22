@@ -9,6 +9,12 @@
 {{ post.description }}
 {% endblock description %}
 
+
+{% if post.header_image %}
+{% block meta_image %}{{ post.header_image.url }}{% endblock meta_image %}
+{% endif %}
+
+
 {% block head_links %}
 {{ block.super }}
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css">

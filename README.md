@@ -31,3 +31,8 @@ When registering a media photo is used in production.
 Since the media files are served from cloudinary, some media files will be left like the default profile image, but don't worry.
 
 The media files will serve correctly on production,or at least is what I think :).
+
+
+## Templates:
+*Meta image*
+Is the image that appears when the page is shared trough discord, telegram or whatsapp.
