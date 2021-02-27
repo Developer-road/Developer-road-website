@@ -10,9 +10,7 @@
 {% endblock description %}
 
 
-{% if post.header_image %}
-{% block meta_image %}{{ post.header_image.url }}{% endblock meta_image %}
-{% endif %}
+{% block meta_image %} {% if post.header_image %}{{ post.header_image.url }} {% else %} ''{% endif %} {% endblock meta_image %}
 
 
 {% block head_links %}
