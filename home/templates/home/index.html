@@ -21,17 +21,6 @@ This is a page of a guy who is passionate about technology and programming
 
 {% block super_body_content %}
 {% load static %}
-<!-- 
-/*
-    |￣￣￣￣￣  
-    | // TODO: Cambiar y mejorar las animaciónes
-    |＿＿＿_ 
-(\__/)|| 
-(•ㅅ•)|| 
-/ 　 づ
-*/
-
- -->
 
 <div class="home-cover">
     <div class="home-cover-caption">
@@ -40,14 +29,14 @@ This is a page of a guy who is passionate about technology and programming
     </div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid" style="overflow-x: hidden;">
     <div class="text-center mx-auto mt-55 mb-5">
         <h2 class="fs-11 fw-bold">Learn and share your <br /> <span class="text-red">knowledge</span> </h2>
         <p class="text-muted mt-4">Stay aware of the latest technologies</p>
     </div>
     <div class="container">
         <!-- Item -->
-        <div class="div-item-container">
+        <div class="div-item-container" data-aos="fade-right">
             <div class="col-md-7">
                 <h3 class="fs-3 fw-bold">
                     Join a Community of
@@ -76,7 +65,7 @@ This is a page of a guy who is passionate about technology and programming
         </div>
 
         <!-- Item -->
-        <div class="div-item-container">
+        <div class="div-item-container" data-aos="fade-left">
             <div class="col-md-5 ">
                 <img src="{% static 'images/home/blog.svg' %}" alt="Blog Images" class="img-fluid div-img-item" />
             </div>
@@ -100,7 +89,7 @@ This is a page of a guy who is passionate about technology and programming
         </div>
 
         <!-- Item -->
-        <div class="div-item-container">
+        <div class="div-item-container" data-aos="fade-right">
             <div class="col-md-7">
                 <h3 class="fs-3 fw-bold">
                     Want to know more about
@@ -124,7 +113,7 @@ This is a page of a guy who is passionate about technology and programming
         </div>
 
         <!-- Item -->
-        <div class="div-item-container">
+        <div class="div-item-container" data-aos="fade-left">
             <div class="col-md-5">
                 <img src="{% static 'images/home/project.svg' %}" alt="Projects Images" class="img-fluid div-img-item" />
             </div>
@@ -146,7 +135,7 @@ This is a page of a guy who is passionate about technology and programming
         </div>
 
         <!-- Item -->
-        <div class="div-item-container">
+        <div class="div-item-container" data-aos="fade-right">
             <div class="col-md-7">
                 <h3 class="fs-3 fw-bold">
                     Do you have an
