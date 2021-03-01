@@ -6,6 +6,8 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import views as auth_views
 
 
+
+
 class SignUpForm(UserCreationForm):
 
     email = forms.EmailField(required=True, widget=forms.EmailInput(

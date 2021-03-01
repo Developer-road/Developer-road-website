@@ -9,10 +9,13 @@ from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 
+from django.contrib.auth import login, authenticate
+
 # Create your views here.
 from .forms import SignUpForm, UserEditForm, MyPasswordChangeForm
 
 from blog.models import Post
+
 
 class SignUpView(generic.CreateView):
     """
@@ -20,7 +23,18 @@ class SignUpView(generic.CreateView):
     """
     form_class = SignUpForm
     template_name = "registration/singup.html"
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('blog:blog_page')
+
+    # If the form is valid it directly login the user and redirect him to the blog.
+
+    def form_valid(self, form):
+        to_return = super().form_valid(form)
+        user = authenticate(
+            email=form.cleaned_data["email"],
+            password=form.cleaned_data["password1"],
+        )
+        login(self.request, user)
+        return to_return
 
 
 class UserEditView(generic.UpdateView):
@@ -34,7 +48,8 @@ class UserEditView(generic.UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["profile_user"] = get_object_or_404(self.model, id=self.kwargs['pk'])
+        context["profile_user"] = get_object_or_404(
+            self.model, id=self.kwargs['pk'])
         return context
 
 
@@ -58,14 +73,20 @@ class ShowProfileView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        # Get the user or throw a 404 page
+
         requested_user = get_object_or_404(self.model, id=self.kwargs['pk'])
+        
         context["requested_user"] = requested_user
         # Blog Stuff Only use in Blog Project
         try:
-            context["user_posts"] = list(Post.objects.filter(author_id=requested_user.id))
+            # Returns a list of the Post of the requested user, if he has none it passes none
+            context["user_posts"] = list(Post.objects.filter(
+                author_id=requested_user.id).order_by("-date"))
         except Post.DoesNotExist:
             context["user_posts"] = None
-        
+
         context["image_hidden"] = True
-        
+
         return context

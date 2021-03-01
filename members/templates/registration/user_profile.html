@@ -5,6 +5,12 @@
 
 {% block title %}{{ requested_user }}{% endblock title %}
 
+
+{% block meta_image %}
+{{ requested_user.profile_image.url }}
+{% endblock meta_image %}
+
+
 {% block description %}
 {{ requested_user.description }}
 {% endblock description %}
