@@ -60,16 +60,17 @@
 </div>
 
 {% empty %}
-<div class="posts mt-5">
-    <h2 class="text-muted">Sorry there are 
-        <span class="text-danger">
-            not
-        </span>
-         Post with that words included
-        </h2>
-
+<div class="posts vh-100 w-100 d-flex justify-content-center align-items-center flex-column">
+    <img src="{% static 'images/blog/404.svg' %}" 
+         alt="Developer Road"
+         class="img-fluid w-80"
+    />
+    <h2 class="text-muted mt-5">Sorry there are 
+        <span class="text-danger">not</span>
+        Post with that words included
+    </h2>
     <p class="fs-4 mb-0">Try to make another search</p>
-    <p class="fs-5 ">
+    <p class="fs-5 mb-5">
         Or go to the blog 
         <a href="{% url 'blog:blog_page' %}" class="link-danger">
             main page
