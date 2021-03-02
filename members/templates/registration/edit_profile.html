@@ -21,23 +21,33 @@
         {% comment %} {{ form.first_name.label }}
         {{ form.first_name }} {% endcomment %}
         {{ form.as_p }}
-        <div class="mt-5">
-            <button type="submit" class="btn form-btn">Update profile</button>
+        <div class="mt-5 d-flex justify-content-center align-items-center flex-column">
+            <h4 class="fw-bold">Change Password</h4>
+            <p class="mt-3">
+                If you want to change your password click 
+                <a href="{% url 'members:change_password' %}" class="link-danger">here</a>
+            </p>
+        </div>
+        <div class="my-5 d-flex justify-content-center">
+            <button type="submit" class="btn form-btn mx-4">Update profile</button>
+            <a class="btn btn-danger mx-4" href="{% url 'blog:blog_page' %}">Cancel</a>
         </div>
     </form>
-</div>
-
-<div class="mt-5">
-    <h4 class="fw-bold">Change Password</h4>
-    <p class="mt-3">If you want to change your password click <a href="{% url 'members:change_password' %}"
-            class="link-danger">here</a></p>
 </div>
 
 {% else %}
 <div class="posts container-fluid mt-5">
     <h1>Hey there {{ user.first_name }} {{ user.last_name }}</h1>
-    <p class="intro-post">Trying to <span>break</span> the <span>system </span>?<br> Don't worry this site
-        is <span>Prepared</span> for this type of hacks.</p>
+    <p class="intro-post">
+        Trying to 
+        <span>break</span>
+        the
+        <span>system</span>?
+        <br />
+        Don't worry this site is
+        <span>Prepared</span> 
+        for this type of hacks.
+    </p>
 </div>
 
 {% endif %}
@@ -47,11 +57,14 @@
     <h1 class="">You are not registered yet</h1>
 </div>
 
-<hr>
+<hr />
 
 <p class="mt-4">Login to edit your Profile
-    <span class="px-3"><a href="{% url 'login' %}" class=" btn text-decoration-none btn-danger btn-sm">Sing
-            In</a></span>
+    <span class="px-3">
+        <a href="{% url 'login' %}" class=" btn text-decoration-none btn-danger btn-sm">
+            Sing In
+        </a>
+    </span>
 </p>
 
 {% endif %}
