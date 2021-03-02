@@ -68,6 +68,9 @@
 {% comment %} Used only in Blog App {% endcomment %}
 {% if user_posts %}
 
+{% comment %} To access to the number of posts, you do it with "{{user_post_count}}" {% endcomment %}
+{% comment %} Number of Posts: {{ user_posts_count }} {% endcomment %}
+
 <div class="fluid-container mt-4 m-5">
     <h2 class="text-center fs-2 fw-bold">
         Posts by {{ requested_user.first_name }} {{ requested_user.last_name }}
