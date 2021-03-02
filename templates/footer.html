@@ -2,18 +2,13 @@
 {% block head_links %}
 {% endblock head_links %}
 
- 
- 
- 
-
-<!-- Footer -->
 <footer class="footer-bg text-center text-lg-start">
     <div class="container p-4">
       <div class="row">
         <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
             <div class="text-decoration-none-a">
                 <a class="text-decoration-none-a footer-links" href="{% url 'home:home_page' %}">
-                    <h3 class="text-muted mb-md-0 mb-5 bold-text d-flex align-items-center">
+                    <h3 class="text-muted mb-sm-0 mb-md-3 h6-sm  bold-text d-flex align-items-center text-center">
                         Developer Road 
                         <i class="fas fa-code mx-3"></i>
                     </h3>
@@ -48,15 +43,15 @@
           </p>
         </div>
         
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0 d-flex align-items-center flex-column">
           <h5 class="text-uppercase footer-links "><b>MENU</b></h5>
   
-          <ul class="list-unstyled mb-0">
-            <li><a class="footer-links" href="{% url 'home:home_page' %}">Home</a></li>
-            <li><a class="footer-links" href="{% url 'about:about_page' %}">About</a></li>
-            <li><a class="footer-links" href="{% url 'contact:contact_page' %}">Contact me</a></li>
-            <li><a class="footer-links" href="{% url 'projects:my_projects' %}">Projects</a></li>
-            <li><a class="footer-links" href="{% url 'blog:blog_page' %}">Blog</a></li>
+          <ul class="list-unstyled mb-0 w-100">
+            <li class="text-center" ><a class="footer-links" href="{% url 'home:home_page' %}">Home</a></li>
+            <li class="text-center"><a class="footer-links" href="{% url 'about:about_page' %}">About</a></li>
+            <li class="text-center"><a class="footer-links" href="{% url 'contact:contact_page' %}">Contact me</a></li>
+            <li class="text-center"><a class="footer-links" href="{% url 'projects:my_projects' %}">Projects</a></li>
+            <li class="text-center"><a class="footer-links" href="{% url 'blog:blog_page' %}">Blog</a></li>
           </ul>
         </div>
 
