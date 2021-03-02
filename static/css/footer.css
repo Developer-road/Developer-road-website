@@ -9,8 +9,8 @@ small {
     font-size: calc(12px + (15 - 12) * ((100vw - 360px) / (1600 - 360))) !important;
 }
 
-.footer-bg {
-    background-color: #262626;
+footer {
+    background-color: #212738;
 }
 
 .footer-links {
