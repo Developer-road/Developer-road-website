@@ -1,39 +1,34 @@
 {% load static %}
 
 <header class="nav-container">
-    <nav class="my-navbar overlay">
-        {% comment %} Logo navbar {% endcomment %}
-        <div class="logo">
-            <a href="{% url 'home:home_page' %}">
-                <h1>DeveloperRoad<i class="fas fa-code mx-3"></i></h1>
-            </a>
-        </div>
-        {% comment %} Navbar links for the page {% endcomment %}
-        <ul class="my-nav-menu">
-            <li><a class="nav-links" href="{% url 'home:home_page' %}">Home</a></li>
-            <li><a class="nav-links" href="{% url 'about:about_page' %}">About</a></li>
-            <li><a class="nav-links" href="{% url 'contact:contact_page' %}">Contact us</a></li>
-            <li><a class="nav-links" href="{% url 'projects:my_projects' %}">Projects</a></li>
-            <li><a class="nav-links" href="{% url 'blog:blog_page' %}">Blog</a></li>
-            {% if user.is_authenticated %}
-            <div class="navbar-image-phone dropdown">
-                <img src="{{ user.profile_image.url }}" alt="{{ user.first_name }} {{user.last_name}}"
-                    class="rounded-circle user-navbar-image dropdown-toggle" id="navbarDarkDropdownMenuLink" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                <ul class="dropdown-menu dropdown-menu-dark">
-                    <li class="ps-2"><a class="nav-links" href="{% url 'members:profile' user.id %}">Your Profile</a></li>
-                    <li class="ps-2"><a class="nav-links" href="{% url 'logout' %}">Logout</a></li>
-                </ul>
-            </div>
-            {% else %}
-            <li><a class="nav-links sign-button" href="{% url 'login' %}">Sign in</a></li>
-            {% endif %}
-        </ul>
-        {% comment %} hamburger menu {% endcomment %}
-        <div class="menu-toggle" id="mobile-menu">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-        </div>
-    </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <ul class="navbar-nav">
+        <!-- Avatar -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle d-flex align-items-center"
+            href="#"
+            id="navbarDropdownMenuLink"
+            role="button"
+            data-mdb-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
+              class="rounded-circle"
+              height="22"
+              alt=""
+              loading="lazy"
+            />
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="#">My profile</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </header>

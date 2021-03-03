@@ -12,14 +12,15 @@ Page of Category: {{ category_name.title|title }}
 
 <div class="posts my-5 mx-auto text-center">
     <h2 class="fw-bold">{{ category_name.name|title }}</h1>
-        <p class="mx-auto text-center text-muted">{{ category_name.description }}</p>
-        {% if user.is_admin %}
+    <p class="mx-auto text-center text-muted">{{ category_name.description }}</p>
+    {% if user.is_admin %}
         <div class="m-4">
             <a href="{% url 'blog:category_edit' category_name.id %}"
-                class="btn-sm btn-danger rounded-pill text-decoration-none">Edit Category</a>
+                class="btn-sm btn-danger rounded-pill text-decoration-none">
+                Edit Category
+            </a>
         </div>
-
-        {% endif %}
+    {% endif %}
 </div>
 
 {% include "blog/post_list.html"  with object=category_post %}

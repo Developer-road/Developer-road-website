@@ -14,7 +14,6 @@
         <meta property="og:image" content="{% block meta_image %}
         {% endblock meta_image %}">
 
-
         <title>{% block title %}{% endblock title %} | Developer Road</title>
 
         {% comment %} google fonts: Montserrat {% endcomment %}
@@ -24,6 +23,7 @@
         {% block fontawesome %}
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
             integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous" />
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet' />
         {% endblock fontawesome %}
 
         {% comment %} Bootstrap CSS {% endcomment %}
@@ -36,17 +36,15 @@
 
         {% comment %} Custom css {% endcomment %}
         <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
-        <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}" />
-        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet' />
         {% block customStyle %}{% endblock customStyle %}
 
 
         {% comment %} Favicons {% endcomment %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon_io/apple-touch-icon.png' %}" />
         <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon_io/favicon-32x32.png' %}" />
         <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon_io/favicon-16x16.png' %}" />
         <link rel="manifest" href="{% static 'images/favicon_io/site.webmanifest' %}" />
-        <script src="https://unpkg.com/scrollreveal"></script>
         {% endblock head_links %}
 
     </head>
@@ -74,10 +72,9 @@
         </script>
 
         {% block scripts %}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+        <script src="{% static 'js/toggleMenuClass.js' %}" type="text/javascript"></script>
         <script src="https://unpkg.com/aos@2.3.0/dist/aos.js"></script>
         <script src="{% static 'js/aos.js' %}" type="text/javascript"></script>
-        <script src="{% static 'js/navbar.js' %}" type="text/javascript"></script>
         {% endblock scripts %}
     </body>
 

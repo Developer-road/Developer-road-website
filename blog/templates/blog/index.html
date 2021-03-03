@@ -25,42 +25,21 @@ Python, Javascript, Frontend, Backend and Django Web Framework.
     <div class="">
         {% include "blog/search_bar.html" %}
     </div>
-                <div class="btn-group dropdown-blog mb-4 p-3">
-                <button type="button" class="btn btn-danger"><a class="text-decoration-none text-white"
-                        href="{% url 'blog:categories_page' %}">Categories</a></button>
-                <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="visually-hidden">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu">
+    <div class="btn-group dropdown-blog mb-4 p-3">
+        <a class="text-decoration-none text-white"
+            href="{% url 'blog:categories_page' %}">
+            Categories
+        </a>
+        {% for item in cat_items %}
+            <a class="dropdown-item"
+               href="{% url 'blog:category_page' item.name|string|myslug %}">
+               {{ item.name }}
+            </a>
+        {% endfor %}
+    </div>
 
-                    {% for item in cat_items %}
-                    <li><a class="dropdown-item"
-                            href="{% url 'blog:category_page' item.name|string|myslug %}">{{ item.name }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-    <div class="col-md-4">
-                {% if user.is_authenticated %}
-                <div class="mb-5 p-3">
-                    <a href="{% url 'blog:add_post' %}" 
-                       target="_blank" 
-                       rel="#"
-                       class="btn btn-secondary btn-md rounded-pill">
-                       Add post 
-                    <i class="px-2 text-white fas fa-plus-circle"></i>
-                    </a>
-                    <br />
-                </div>
-                {% endif %}
-            </div>
-
-    <div class="blog-posts w-100">
-        <div class="row g-0  d-flex align-items-center justify-content-center flex-column">
-            <div class="col-md-8">
-                {% include "blog/post_list.html"  with object=page_obj %}
-            </div>
-        </div>
+    <div class="blog-posts w-100 d-flex align-items-center justify-content-center flex-column flex-wrap">
+        {% include "blog/post_list.html"  with object=page_obj %}
     </div>
 
     {% if page_obj.paginator.num_pages > 1 %}

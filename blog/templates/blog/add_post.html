@@ -5,23 +5,21 @@
 
 {% block body_content %}
 {% if user.is_authenticated %}
-<h1>Add post</h1>
-<div class="form-group">
-    <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.media}}
-        {{ form.as_p }}
-        <button type="submit" class="btn form-btn">Post</button>
-    </form>
-</div>
-<hr>
-
-<p>There is not the category you are looking for?<br>
-    <a href="{% url 'blog:add_category' %}" class="link-danger">Create one</a>
-</p>
-
+    <h1>Add post</h1>
+    <div class="form-group">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>There is not the category you are looking for?<br>
+                <a href="{% url 'blog:add_category' %}" class="link-danger">Create one</a>
+            </p>
+            <hr>
+            {{ form.as_p }}
+            {{ form.media}}
+            <button type="submit" class="btn form-btn">Post</button>
+        </form>
+    </div>
 {% else %}
-<h1>Sorry. You are not Allowed to add a Post</h1>
+    <h1>Sorry. You are not Allowed to add a Post</h1>
 {% endif %}
 
 {% endblock body_content %}
