@@ -23,20 +23,20 @@ This is a page of a guy who is passionate about technology and programming
 {% load static %}
 
 <div class="home-cover">
-    <div class="home-cover-caption">
-        <h2>Developer Road <i class="fas fa-code"></i></h2>
-        <p class="mt-4">The platform where Developers share knowledge about technology and programming</p>
+    <div class="home-cover-caption h-100 w-100 d-flex flex-column align-items-center justify-content-center ">
+        <h2 class="display-1">Developer Road <i class="fas fa-code"></i></h2>
+        <p class="mt-4 fs-6 fs-md-4 text-center">The platform where Developers share knowledge about technology and programming</p>
     </div>
 </div>
 
-<div class="container-fluid" style="overflow-x: hidden;">
+<section class="container-fluid" style="overflow-x: hidden;">
     <div class="text-center mx-auto mt-55 mb-5">
         <h2 class="h1 sm-h3 fw-bold mt-4">Learn and share your <br /> <span class="text-red">knowledge</span> </h2>
         <p class="text-muted mt-4">Stay aware of the latest technologies</p>
     </div>
     <div class="container">
         <!-- Item -->
-        <div class="w-100 d-flex align-items-center justify-content-center flex-column-reverse flex-sm-row py-3 mt-1 mt-sm-5" data-aos="fade-right">
+        <aside class="w-100 d-flex align-items-center justify-content-center flex-column-reverse flex-sm-row py-3 mt-1 mt-sm-5" data-aos="fade-right">
             <div class="col-md-7">
                 <h3 class="fs-3 fw-bold text-center text-sm-start">
                     Join a Community of
@@ -48,27 +48,31 @@ This is a page of a guy who is passionate about technology and programming
                     touch with awesome people
                 </p>
                 <hr />
-                <div class="social-links mt-3 i-fs-1">
-                    <a class="px-3 " href="https://www.instagram.com/developerroad/" target="_blank"><i
-                            class="fab fa-instagram" title="Developer Road Instagram"></i></a>
-                    <a class="px-3 " href="https://github.com/Developer-road" target="_blank"><i class="fab fa-github"
-                            title="Developer Road Github"></i></a>
-                    <a class="px-3 " href="https://twitter.com/RoadDeveloper" target="_blank"><i class="fab fa-twitter"
-                            title="Developer Road Twitter"></i></a>
-                    <a class="px-3 " href="https://discord.gg/w8CMGjsvA8" target="_blank"><i class="fab fa-discord"
-                            title="Developer Road Discord"></i></a>
+                <div class="social-links mt-3 d-flex justify-content-center">
+                    <a class="px-3 " href="https://www.instagram.com/developerroad/" target="_blank">
+                        <i class="fab fa-instagram icons-home fs-2" title="Developer Road Instagram"></i>
+                    </a>
+                    <a class="px-3 " href="https://github.com/Developer-road" target="_blank">
+                        <i class="fab fa-github icons-home fs-2" title="Developer Road Github"></i>
+                    </a>
+                    <a class="px-3 " href="https://twitter.com/RoadDeveloper" target="_blank">
+                        <i class="fab fa-twitter icons-home fs-2" title="Developer Road Twitter"></i>
+                    </a>
+                    <a class="px-3" href="https://discord.gg/w8CMGjsvA8" target="_blank">
+                        <i class="fab fa-discord icons-home fs-2" title="Developer Road Discord"></i>
+                    </a>
                 </div>
             </div>
-            <div class="col-md-5">
+            <figure class="col-md-5">
                 <img src="{% static 'images/home/social.svg' %}" alt="Social Images" class="img-fluid div-img-item" />
-            </div>
-        </div>
+            </figure>
+        </aside>
 
         <!-- Item -->
-        <div class="w-100 d-flex align-items-center justify-content-center flex-column-reverse flex-sm-row py-3 mt-1 mt-sm-5" data-aos="fade-left">
-            <div class="col-md-5 ">
+        <aside class="w-100 d-flex align-items-center justify-content-center flex-column-reverse flex-sm-row py-3 mt-1 mt-sm-5" data-aos="fade-left">
+            <figure class="col-md-5 ">
                 <img src="{% static 'images/home/blog.svg' %}" alt="Blog Images" class="img-fluid div-img-item" />
-            </div>
+            </figure>
             <div class="col-md-7">
                 <h3 class="fs-3 fw-bold text-center text-sm-start">
                     The most Recent technologies in
@@ -86,10 +90,10 @@ This is a page of a guy who is passionate about technology and programming
                     </a>
                 </p>
             </div>
-        </div>
+        </aside>
 
         <!-- Item -->
-        <div class="w-100 d-flex align-items-center justify-content-center flex-column-reverse flex-sm-row py-3 mt-1 mt-sm-5" data-aos="fade-right">
+        <aside class="w-100 d-flex align-items-center justify-content-center flex-column-reverse flex-sm-row py-3 mt-1 mt-sm-5" data-aos="fade-right">
             <div class="col-md-7">
                 <h3 class="fs-5 fs-sm-3 fw-bold text-center text-sm-start">
                     Want to know more about
@@ -107,16 +111,16 @@ This is a page of a guy who is passionate about technology and programming
                     </a>
                 </p>
             </div>
-            <div class="col-md-5">
+            <figure class="col-md-5">
                 <img src="{% static 'images/home/about.svg' %}" alt="About Images" class="img-fluid div-img-item">
-            </div>
-        </div>
+            </figure>
+        </aside>
 
         <!-- Item -->
-        <div class="w-100 d-flex align-items-center justify-content-center flex-column-reverse flex-sm-row py-3 mt-1 mt-sm-5" data-aos="fade-left">
-            <div class="col-md-5">
+        <aside class="w-100 d-flex align-items-center justify-content-center flex-column-reverse flex-sm-row py-3 mt-1 mt-sm-5" data-aos="fade-left">
+            <figure class="col-md-5">
                 <img src="{% static 'images/home/project.svg' %}" alt="Projects Images" class="img-fluid div-img-item" />
-            </div>
+            </figure>
             <div class="col-md-7">
                 <h3 class="fs-3 fw-bold text-center text-sm-start">
                     Review Projects of us and
@@ -132,10 +136,10 @@ This is a page of a guy who is passionate about technology and programming
                     </a>
                 </p>
             </div>
-        </div>
+        </aside>
 
         <!-- Item -->
-        <div class="w-100 d-flex align-items-center justify-content-center flex-column-reverse flex-sm-row py-3 mt-1 mt-sm-5" data-aos="fade-right">
+        <aside class="w-100 d-flex align-items-center justify-content-center flex-column-reverse flex-sm-row py-3 mt-1 mt-sm-5" data-aos="fade-right">
             <div class="col-md-7">
                 <h3 class="fs-3 fw-bold text-center text-sm-start">
                     Do you have an
@@ -153,11 +157,11 @@ This is a page of a guy who is passionate about technology and programming
                     </a>
                 </p>
             </div>
-            <div class="col-md-5">
+            <figure class="col-md-5">
                 <img src="{% static 'images/home/contact.svg' %}" alt="Contact Images" class="img-fluid div-img-item">
-            </div>
-        </div>
+            </figure>
+        </aside>
     </div>
-</div>
+</section>
 
 {% endblock super_body_content %}
