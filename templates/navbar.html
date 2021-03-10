@@ -1,34 +1,113 @@
 {% load static %}
 
-<header class="nav-container">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <ul class="navbar-nav">
-        <!-- Avatar -->
-        <li class="nav-item dropdown">
+<header class="header-base">
+  <nav class="nav-base header-nav d-flex align-items-center justify-content-between px-4">
+    <a class="text-decoration-none" href="{% url 'home:home_page' %}">
+      <h1 class="d-flex">
+        <span class="d-none d-md-block fs-sm-2 text-white m-0">DeveloperRoad</span> <i class="fas fa-code mx-3 icons-home"></i>
+      </h1>
+    </a>
+    <div>
+      <i class='d-sm-none text-white fs-3 bx bx-search-alt-2'></i>
+      <div class="d-none d-sm-block">
+
+        {% comment %} Search bar {% endcomment %} 
+        {% include "blog/search_bar.html" %}
+      </div>
+    </div>
+
+    <ul class="h-100  m-0 d-flex d-flex align-items-center position-relative">
+      <li id="iconDropDown" ><i class='fs-3  bx bxs-category-alt text-white'></i></li>
+      <ul id="menuLinks" class="ul_dropDown-none">
+        <li class="mx-2">
           <a
-            class="nav-link dropdown-toggle d-flex align-items-center"
-            href="#"
-            id="navbarDropdownMenuLink"
-            role="button"
-            data-mdb-toggle="dropdown"
-            aria-expanded="false"
+            class="nav-links text-decoration-none"
+            href="{% url 'blog:blog_page' %}"
           >
-            <img
-              src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
-              class="rounded-circle"
-              height="22"
-              alt=""
-              loading="lazy"
-            />
+            Popular
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="#">My profile</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Logout</a></li>
-          </ul>
+        </li>
+        <li class="mx-2">
+          <a
+            class="nav-links text-decoration-none"
+            href="{% url 'home:home_page' %}"
+          >
+            Categories
+          </a>
+        </li>
+        <li class="mx-2">
+          <a
+            class="nav-links text-decoration-none"
+            href="{% url 'about:about_page' %}"
+          >
+            About
+          </a>
         </li>
       </ul>
-    </div>
+      {% if user.is_authenticated %}
+      <li>
+         <a class="nav-links text-decoration-none" href="{% url 'blog:add_post' %}">
+           <i class='fs-3 mx-3 bx bx-plus text-white'></i>
+        </a>
+      </li>
+      <li class="d-flex">
+        <ul class="h-100 m-0 p-0">
+          <li class="nav-item dropdown">
+            {% comment %} Avatar {% endcomment %}
+            <a
+              class="nav-link text-decoration-none  d-flex flex-row-reverse align-items-center w-100"
+              href="#"
+              id="navbarDropdownMenuLink"
+            >
+              <p class="m-0 d-none d-md-block text-white">
+                {{ user.first_name }}
+              </p>
+              <img
+                src="{{ user.profile_image.url }}"
+                alt="{{ user.first_name }} {{user.last_name}}"
+                class="rounded-circle mx-2"
+                height="40"
+                loading="lazy"
+              />
+            </a>
+
+            <ul
+              class="ul_dropDown-none h-100 m-0"
+              id="ulDropDown"
+              aria-labelledby="navbarDropdownMenuLink"
+            >
+              <li class="d-md-block d-md-none">
+                <p>
+                  {{ user.first_name }}
+                </p>
+              </li>
+              <li>
+                <a
+                  class="nav-links text-decoration-none"
+                  href="{% url 'members:profile' user.id %}"
+                  >My Profile
+                </a>
+              </li>
+              <li>
+                <a
+                  class="nav-links text-decoration-none"
+                  href="{% url 'logout' %}"
+                  >Logout</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      {% else %}
+      <li>
+        <a
+          class="nav-links sign-button text-decoration-none p-2 mx-4"
+          href="{% url 'login' %}"
+          >Sign in</a
+        >
+      </li>
+      {% endif %}
+    </ul>
   </nav>
 </header>

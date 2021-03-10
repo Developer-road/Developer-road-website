@@ -22,6 +22,8 @@ It shouldn't be like that but now it seems to break up if you don't set up a pos
 Now run:
 
 ```python
+python manage.py livereload
+
 python manage.py runserver
 ```
 
