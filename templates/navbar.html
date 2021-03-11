@@ -4,7 +4,7 @@
   <nav class="nav-base header-nav d-flex align-items-center justify-content-between px-4">
     <a class="text-decoration-none" href="{% url 'home:home_page' %}">
       <h1 class="d-flex">
-        <span class="d-none d-md-block fs-sm-2 text-white m-0">DeveloperRoad</span> <i class="fas fa-code mx-3 icons-home"></i>
+        <span class="d-none d-md-block fs-4 text-white m-0">DeveloperRoad</span> <i class="fas fa-code mx-3 icons-home fs-4"></i>
       </h1>
     </a>
     <div>
@@ -30,7 +30,7 @@
         <li class="mx-2">
           <a
             class="nav-links text-decoration-none"
-            href="{% url 'home:home_page' %}"
+            href="#"
           >
             Categories
           </a>
@@ -74,8 +74,8 @@
               id="ulDropDown"
               aria-labelledby="navbarDropdownMenuLink"
             >
-              <li class="d-md-block d-md-none">
-                <p class="text-white">
+              <li class="d-md-block d-md-none w-100">
+                <p class="text-white p__dropDownUserName">
                   {{ user.first_name }}
                 </p>
               </li>
@@ -100,7 +100,7 @@
       {% else %}
       <li>
         <a
-          class="nav-links sign-button text-decoration-none p-2 mx-4"
+          class="text-white sign-button text-decoration-none p-2 mx-4"
           href="{% url 'login' %}"
           >Sign in</a
         >

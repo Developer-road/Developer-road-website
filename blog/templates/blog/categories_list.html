@@ -18,25 +18,20 @@ Categories of the Developer Road Blog:
 
 <div class="row">
     <div class="col-md-7 text-center">
-
-        <div class="align-content-sm-around">
+        <ul class="text-decoration-none list-unstyled d-flex flex-wrap justify-content-center">
             {% for category in object_list %}
-            <ul class="text-decoration-none list-unstyled px-4">
-                <li>
-                    <a class="text-decoration-none text-dark"
+                <li class="card card__relavant">
+                    <a class="text-decoration-none text-dark w-100 h-100  p-3"
                         href="{% url 'blog:category_page' category.name|myslug %}">
                         <h5 class="">{{category.name|title}} 
-                            <span class="text-danger fs-6 fw-light text-decoration-underline">
+                            <span class="text-danger fs-6 fw-light text-decoration-none">
                                 Show Posts
                             </span>
                         </h5>
                     </a>
                 </li>
-            </ul>
-
             {% endfor %}
-
-        </div>
+        </ul>
     </div>
     <div class="col-md-5 my-auto">
         <div class="mt-4">
@@ -45,10 +40,10 @@ Categories of the Developer Road Blog:
     </div>
 </div>
 
-<div class="mt-5">
+<div class="my-3  text-center">
     <span class="text-muted">
         There isn't the category you are looking for?
-        <a href="{% url 'blog:add_category' %}" class="link-danger">
+        <a href="{% url 'blog:add_category' %}" class="link-danger text-decoration-none">
             Create one
         </a>
     </span>
