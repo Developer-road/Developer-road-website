@@ -80,6 +80,8 @@ body {
 */
 
 .header-nav {
+  position: relative;
+  z-index: 10;
   height: var(--nav-height) !important;
   background-color: var(--myblack);
 }
@@ -242,6 +244,49 @@ body {
 .error-title {
   color: var(--secondary-red);
 }
+
+/*
+==================
+-> User profile <- 
+==================
+*/
+
+
+.div__userBackground {
+  position: absolute;
+  left: 0;
+  z-index: 0;
+  background-color: #273764;
+  margin-top: -3em;
+  height: 14em;
+  width: 100%;
+}
+
+.div__userProfile {
+  border-radius: 1em;
+  position: relative;
+  z-index: 5;
+  margin-top: 3em;
+  padding: 1em;
+  background-color: white;
+}
+
+
+.a__userImageProfile {
+  position: relative;
+  bottom: 3rem;
+  width: auto;
+}
+
+.a__userImageProfile img {
+  border: 5px solid #273764;
+  width: 5em;
+}
+
+.a__userEditProfile {
+  height: 50%;
+}
+
 
 /*
 ==================

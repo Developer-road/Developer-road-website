@@ -59,9 +59,7 @@
               href="#"
               id="navbarDropdownMenuLink"
             >
-              <p class="m-0 d-none d-md-block text-white">
-                {{ user.first_name }}
-              </p>
+            
               <img
                 src="{{ user.profile_image.url }}"
                 alt="{{ user.first_name }} {{user.last_name}}"
@@ -77,7 +75,7 @@
               aria-labelledby="navbarDropdownMenuLink"
             >
               <li class="d-md-block d-md-none">
-                <p>
+                <p class="text-white">
                   {{ user.first_name }}
                 </p>
               </li>
