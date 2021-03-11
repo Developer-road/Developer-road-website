@@ -192,6 +192,14 @@ body {
   color: var(--myred);
 }
 
+/* About */
+.h2__about {
+  text-align: center;
+  font-family: 'Courgette', cursive;
+  color: var(--mywhite);
+  text-shadow: 2px 2px rgb(82 92 112);
+}
+
 /*
 ==================
 -> Blog Actions <- 
@@ -255,12 +263,11 @@ body {
 
 .div__profileCard {
   border-radius: 0.5em;
-  box-shadow: 15px 15px 15px -3px rgba(0,0,0,0.09);
+  box-shadow: 15px 15px 15px -3px rgba(0, 0, 0, 0.09);
 }
 
-
 .img__cardPostDeails {
-  border: 0.3em solid #E8F1FD;
+  border: 0.3em solid #e8f1fd;
 }
 /*
 ==================
