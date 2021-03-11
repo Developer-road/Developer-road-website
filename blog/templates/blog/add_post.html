@@ -5,7 +5,7 @@
 
 {% block body_content %}
 {% if user.is_authenticated %}
-    <h1>Add post</h1>
+    <h1 class="mt-3">Add post</h1>
     <div class="form-group">
         <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
@@ -15,7 +15,7 @@
             <hr>
             {{ form.as_p }}
             {{ form.media}}
-            <button type="submit" class="btn form-btn">Post</button>
+            <button type="submit" class="btn form-btn mb-3">Post</button>
         </form>
     </div>
 {% else %}

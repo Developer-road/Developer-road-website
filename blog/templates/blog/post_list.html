@@ -3,64 +3,81 @@
 {% load extra_filters %}
 
 {% for post in object %}
-<div class="card w-20 rounded m-3">
-    {% if post.header_image %}
-    <div class="mb-3">
-        <a href="{% url 'blog:article_page' post.pk %}">
-            <img src="{{ post.header_image.url }}" alt="No image for this Post" class=" card-img-top">
-        </a>
-    </div>
-    {% endif %}
-    <div class="blog-abv p-2 pt-3">
-        {% if not image_hidden %}
-        <a href="{% url 'members:profile' post.author.id %}">
-            <span class="px-2">
-                <img
-                    src="{{ post.author.profile_image.url }}" 
-                    alt="" 
-                    class="rounded-circle image-opacity"
-                    width=30
-                    height=30 /> 
-            </span>
-            <span> {{ post.author.first_name }} {{ post.author.last_name }} </span>
-        </a>
-        <span class="px-2">·</span>
-        <span class="">{{ post.date }}</span>
-        {% else %}
-        <span class="ms-3">{{ post.date }}</span>
-        {% endif %}
-        {% if post.category and not category_hidden%}
-        <span class="px-2 ">·</span>
-        <div class="category">
-            <span><a href="{% url 'blog:category_page'  post.category|myslug %}">{{ post.category }}</a></span>
+<div class="m-3">
+    <div class="card m-0 w-100 rounded m-3">
+        {% if post.header_image %}
+        <div class="mb-3">
+            <a href="{% url 'blog:article_page' post.pk %}">
+                <img src="{{ post.header_image.url }}" alt="No image for this Post" class=" card-img-top">
+            </a>
         </div>
         {% endif %}
+        <div class="
+                p-3
+                d-flex 
+                flex-column 
+                flex-md-row 
+                justify-content-sm-start
+                justify-content-md-between
+                align-items-center"
+            >
+            {% if not image_hidden %}
+                <a href="{% url 'members:profile' post.author.id %}"
+                    class="text-decoration-none"
+                >
+                    <span class="px-2">
+                        <img
+                            src="{{ post.author.profile_image.url }}" 
+                            alt="" 
+                            class="rounded-circle image-opacity"
+                            width=30
+                            height=30 /> 
+                    </span>
+                    <span class="text-gray"> {{ post.author.first_name }} {{ post.author.last_name }} </span>
+                </a>
+                <span class="">{{ post.date }}</span>
+            {% else %}
+                <span class="ms-3">{{ post.date }}</span>
+            {% endif %}
+            {% if post.category and not category_hidden%}
+                <span class="px-2 ">·</span>
+                <div class="category">
+                    <span>
+                        <a href="{% url 'blog:category_page'  post.category|myslug %}" 
+                        class="span__category text-decoration-none btn">
+                        {{ post.category }}
+                        </a>
+                    </span>
+                </div>
+            {% endif %}
+              {% if user.is_authenticated and  user.id == post.author.id %}
+                <div class="p-3">
+                    <a href="{% url 'blog:delete_page' post.pk %}" class="btn btn-outline-danger">
+                        <i class='bx bx-trash' ></i>
+                        Delete post
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="blog-title semibold p-3">
+            <h3 class="fs-2">{{ post.title|title }}</h3>
+        </div>
+
+        {% if post.description %}
+            <p class="blog-description p-3 fs-5">{{ post.description | slice:":200" }}</p>
+        {% else %}
+            <p class="blog-description p-3 fs-5">{{ post.body | striptags | slice:":200" }}</p>
+        {% endif %}
+
+
+        <a href="{% url 'blog:article_page' post.pk %}" 
+            class="text-red text-decoration-none fw-bold d-flex justify-content-center align-items-center mb-3">
+            <i class='bx bx-show-alt fs-3 me-2'></i>
+            Read full Post
+        </a>
     </div>
-
-    <div class="blog-title semibold p-3">
-        <h3 class="fs-2">{{ post.title|title }}</h3>
-    </div>
-
-    {% if post.description %}
-        <p class="blog-description p-3 fs-5">{{ post.description | slice:":200" }}</p>
-    {% else %}
-        <p class="blog-description p-3 fs-5">{{ post.body | striptags | slice:":200" }}</p>
-    {% endif %}
-
-
-    <a href="{% url 'blog:article_page' post.pk %}" class="Read-full p-3">Read full Post</a>
-
-    {% if user.is_authenticated and  user.id == post.author.id %}
-    <div class="p-3">
-        <small>
-            <a href="{% url 'blog:delete_page' post.pk %}" class="link-danger">
-                Delete post
-            </a>
-        </small>
-    </div>
-    {% endif %}
 </div>
-
 {% empty %}
 <div class="posts vh-100 w-100 pt-5 d-flex justify-content-center align-items-center flex-column">
     <img src="{% static 'images/blog/404.svg' %}" 

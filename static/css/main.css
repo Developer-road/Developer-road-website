@@ -4,6 +4,7 @@
   --mywhite: #e8e9f3;
   --myblue: #0075c4;
   --secondary-red: #db162f;
+  --red: rgb(206, 60, 60);
   --menu-color: #212940;
   --nav-height: 75px;
   --base-10: #eef0f1;
@@ -228,11 +229,37 @@ body {
   width: 100%;
 }
 
+/*
+==================
+-> Pagination <- 
+==================
+*/
+
+.mypagination-number {
+  padding: 0.5em 0.8em;
+  border-radius: 2px;
+  color: #fff;
+  background-color: var(--myred);
+}
+
+.mypagination-action {
+  margin: 0 0.1em;
+  display: inline-block;
+  color: #b9b9b9;
+  font-size: 1.3em !important;
+}
+
 .mypagination-action:hover,
 .mypagination-previous,
 .mypagination-next {
   color: var(--myred);
 }
+
+/*
+==================
+-> Color text <- 
+==================
+*/
 
 .text-red {
   color: var(--myred);
@@ -259,6 +286,7 @@ body {
 
 .card__relavant {
   margin: 1em !important;
+  box-shadow: 15px 15px 20px -10px rgba(0, 0, 0, 0.09);
 }
 
 .div__profileCard {

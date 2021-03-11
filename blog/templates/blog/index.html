@@ -11,9 +11,9 @@ Python, Javascript, Frontend, Backend and Django Web Framework.
 
 {% block body_content %}
 
-<div class="posts container-fluid h-100 w-100 d-flex flex-column align-items-center ">
-    <h1>Developer Road Blog</h1>
-    <p class="intro-post">
+<div class=" h-100 w-100 d-flex flex-column align-items-center">
+    <h1 class="mt-5 text-center">Developer Road Blog</h1>
+    <p class="mb-5 text-center">
         Diverse 
         <span>Programming tips</span> 
         and 
@@ -21,27 +21,26 @@ Python, Javascript, Frontend, Backend and Django Web Framework.
         of the most recent topics in the 
         <span>Tech World</span>
     </p>
+    <div class="row mw-100">
+        <div class="col-md-3 pt-3">
+            <div class="div__categories">
+                <a class="text-decoration-none text-black"
+                    href="{% url 'blog:categories_page' %}">
+                    Categories
+                </a>
+                {% for item in cat_items %}
+                    <a class="text-decoration-none my-2 text-dark"
+                    href="{% url 'blog:category_page' item.name|string|myslug %}">
+                    {{ item.name }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
 
-    <div class="">
-        {% include "blog/search_bar.html" %}
+        <div class="col-12 col-md-9 p-0">
+            {% include "blog/post_list.html"  with object=page_obj %}
+        </div>
     </div>
-    <div class="btn-group dropdown-blog mb-4 p-3">
-        <a class="text-decoration-none text-white"
-            href="{% url 'blog:categories_page' %}">
-            Categories
-        </a>
-        {% for item in cat_items %}
-            <a class="dropdown-item"
-               href="{% url 'blog:category_page' item.name|string|myslug %}">
-               {{ item.name }}
-            </a>
-        {% endfor %}
-    </div>
-
-    <div class="blog-posts w-100 d-flex align-items-center justify-content-center flex-column flex-wrap">
-        {% include "blog/post_list.html"  with object=page_obj %}
-    </div>
-
     {% if page_obj.paginator.num_pages > 1 %}
         {% include 'blog/pagination.html' with page_obj=page_obj %}
     {% endif %}
