@@ -115,7 +115,9 @@ body {
   background-color: var(--menu-color);
 }
 
+/* Drop down profile options*/
 .ul_dropDown-visible {
+  right: 10%;
   clip-path: polygon(
     70% 10%,
     79% 0,
@@ -126,9 +128,15 @@ body {
     0 10%
   );
 }
+
+.ul_dropDown-visible .p__dropDownUserName {
+  font-size: 16px;
+}
+
+/* Drop down for nav options*/
 .ul_dropDownLinks-visible {
   top: 4.6em;
-  right: 50%;
+  right: 35%;
   clip-path: polygon(
     38% 10%,
     52% 0,
@@ -222,8 +230,65 @@ body {
   color: var(--myred);
 }
 
+.text-gray {
+  color: #73818d;
+}
+
 .logo h1 {
   color: var(--mywhite);
+}
+
+/*
+==================
+-> Blog card <- 
+==================
+*/
+
+.card {
+  margin: 0 !important;
+  border: none !important;
+}
+
+.card__relavant {
+  margin: 1em !important;
+}
+
+.div__profileCard {
+  border-radius: 0.5em;
+  box-shadow: 15px 15px 15px -3px rgba(0,0,0,0.09);
+}
+
+
+.img__cardPostDeails {
+  border: 0.3em solid #E8F1FD;
+}
+/*
+==================
+-> Blog categories list  <- 
+==================
+*/
+.div__categories {
+  position: sticky;
+  top: 0;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 1em;
+  height: auto;
+  overflow-x: auto;
+}
+
+.span__category {
+  font-size: 11px;
+  background-color: rgb(210, 215, 233);
+  color: #73818d;
+  padding: 3px 5px;
+  border-radius: 3px;
+  border-width: 1px;
+  text-align: center;
 }
 
 /*
@@ -237,10 +302,6 @@ body {
   background-color: var(--myred);
 }
 
-.sign-button:hover {
-  border: solid 1px var(--myred);
-}
-
 .error-title {
   color: var(--secondary-red);
 }
@@ -250,7 +311,6 @@ body {
 -> User profile <- 
 ==================
 */
-
 
 .div__userBackground {
   position: absolute;
@@ -271,7 +331,6 @@ body {
   background-color: white;
 }
 
-
 .a__userImageProfile {
   position: relative;
   bottom: 3rem;
@@ -286,7 +345,6 @@ body {
 .a__userEditProfile {
   height: 50%;
 }
-
 
 /*
 ==================
