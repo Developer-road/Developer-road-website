@@ -147,7 +147,7 @@ body {
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   top: 5em;
-  right: 1%;
+  right: 10%;
   padding: 0;
   min-width: 90vw;
 }
@@ -174,9 +174,22 @@ body {
 }
 
 @media screen and (min-width: 768px) {
+  /* Logged user*/
   .ul_dropDown-visible {
     min-height: 150px;
     min-width: 20vw;
+  }
+
+  /* Links */
+  .ul_dropDownLinks-visible {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    top: 5em;
+    right: 10%;
+    padding: 0;
+    min-height: 100px;
+    min-width: 90vw;
   }
 }
 

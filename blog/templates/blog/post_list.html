@@ -61,13 +61,13 @@
         </div>
 
         <div class="blog-title semibold p-3">
-            <h3 class="fs-2">{{ post.title|title }}</h3>
+            <h3 class="fs-5 fs-sm-3 ">{{ post.title|title }}</h3>
         </div>
 
         {% if post.description %}
-            <p class="blog-description p-3 fs-5">{{ post.description | slice:":200" }}</p>
+            <p class="blog-description p-3 fs-6 fs-md-5">{{ post.description | slice:":200" }}</p>
         {% else %}
-            <p class="blog-description p-3 fs-5">{{ post.body | striptags | slice:":200" }}</p>
+            <p class="blog-description p-3 fs-6 fs-md-5">{{ post.body | striptags | slice:":200" }}</p>
         {% endif %}
 
 
