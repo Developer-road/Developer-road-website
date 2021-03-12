@@ -280,30 +280,8 @@
         </div>
     {% endif %}
 
-    {% for comment in comments %}
-        <div class="card border-light card__relavant w-75">
-            <div class="card-header">
-                <a href="{% url 'members:profile' post.author.id%}">
-                    <span class="px-2">
-                        <img src="{{ comment.commenter.profile_image.url }}" 
-                            alt="" 
-                            class="rounded-circle" 
-                            width=30
-                            height=30 />
-                    </span>
-                </a>
-                <span class="fst-italic font-size-abv-comments">
-                    {{ comment.commenter }} <span class="px-2">·</span>
-                    {{ comment.date_added }} 
-                </span>
-            </div>
-            <div class="card-body">
-                <p class="card-text">{{ comment.body|bleach }}</p>
-            </div>
-        </div>
-    {% empty %}
-        <h3 class="my-4">Be the first in make a comment!</h3>
-    {% endfor %}
+    {% include "blog/comments/comments.html" %}
+
 </div>
 
 
