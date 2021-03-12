@@ -13,6 +13,7 @@
   --hover-color: #b8c2c9;
   --hover-color: #b8c2c9;
   --footer-color: #627482;
+  --footer-margin-top: 22vh;
 }
 
 * {
@@ -425,6 +426,12 @@ body {
 -> Footer <- 
 ==================
 */
+
+
+
+footer {
+  margin-top: var(--footer-margin-top);
+}
 
 footer {
   background-color: #212738;
