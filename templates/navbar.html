@@ -8,8 +8,10 @@
       </h1>
     </a>
     <div>
-      <i class='d-sm-none text-white fs-3 bx bx-search-alt-2' id="i_search" ></i>
-      <div class="d-none d-sm-block">
+      <a href="#" id="a_search" class="text-decoration-none">
+        <i class='d-sm-none text-white fs-3 bx bx-search-alt-2' ></i>
+      </a>
+      <div class="d-none d-sm-block animate__animated  animate__slideInDown" id="div_showSearchBar">
         {% comment %} Search bar {% endcomment %} 
         {% include "blog/search_bar.html" %}
       </div>
@@ -72,7 +74,7 @@
             </a>
 
             <ul
-              class="ul_dropDown-none animate__animated animate__backInDown h-100 m-0"
+              class="ul_dropDown-none animate__animated  animate__slideInDown h-100 m-0"
               id="ulDropDown"
               aria-labelledby="navbarDropdownMenuLink"
             >

@@ -99,6 +99,21 @@ body {
   color: var(--myred);
 }
 
+.div__searchBar {
+  display: flex !important;
+  padding: 1em 0.3em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  background-color: var(--menu-color);
+  height: var(--nav-height);
+  width: 100vw;
+}
+
+
+
+
 .ul_dropDown-none {
   display: none;
 }

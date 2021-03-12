@@ -5,9 +5,20 @@ menuIcons.addEventListener('click', () =>
   menuLinks.classList.toggle('ul_dropDownLinks-visible')
 );
 
+// Open search bar
+const searchBar = document.getElementById('div_showSearchBar');
+
+// Search icon 
+const openSearchBar = document.getElementById('a_search');
+openSearchBar.addEventListener('click', () =>
+  searchBar.classList.add('div__searchBar')
+);
+
 // Close search bar
-const closeSearchBar = document.getElementById('i_search');
-closeSearchBar.addEventListener('click', () => console.log('f'));
+const closeSearchBar = document.getElementById('a_searchClose');
+closeSearchBar.addEventListener('click', () =>
+  searchBar.classList.remove('div__searchBar')
+);
 
 // Menú profile options
 const menu = document.getElementById('navbarDropdownMenuLink');
