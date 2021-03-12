@@ -40,7 +40,6 @@
                 <span class="ms-3">{{ post.date }}</span>
             {% endif %}
             {% if post.category and not category_hidden%}
-                <span class="px-2 ">·</span>
                 <div class="category">
                     <span>
                         <a href="{% url 'blog:category_page'  post.category|myslug %}" 
