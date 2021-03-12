@@ -65,17 +65,36 @@ class BlogSearchView(ListView):
         return context
 
 
-class ArticleDetail(DetailView):
+class ArticleDetail(CreateView):
     """
     View that shows in detail the chosen blog post.
     """
-    model = Post
+    model = Comment
+    form_class = CommentForm
+
     template_name = 'blog/details.html'
+
+
+    def get_detail_post(self):
+        return get_object_or_404(Post, id=self.kwargs['pk'])
+
+
+    # Redirects when the comment is created
+    def get_success_url(self, *args, **kwargs):
+        return reverse('blog:article_page', kwargs={'pk': self.kwargs['pk']})
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        detail_post = get_object_or_404(Post, id=self.kwargs['pk'])
+
+        detail_post = self.get_detail_post()
+
+        # Pass the detail post as the object
+        context["post"] = detail_post
+
+        # Calls the Post property of counting the upvotes of the post
         context["upvotes"] = detail_post.total_likes()
+
         upvoted = False
 
         if detail_post.upvotes.filter(id=self.request.user.id).exists():
@@ -89,14 +108,17 @@ class ArticleDetail(DetailView):
         except:
             context["comments"] = None
 
-        if self.request.user.is_authenticated:
-            context["comment_form"] = CommentForm(instance=self.request.user)
-
-        recent = True        
+        recent = True
         other_posts = list(Post.objects.all().order_by('-date'))[:4]
 
         if detail_post.category:
-            related_posts = list(Post.objects.filter(category=detail_post.category))
+            # If the post has a category, related posts are from the category
+
+            related_posts = list(Post.objects.filter(
+                category=detail_post.category))
+
+            # We have to take into account the same post
+
             if len(related_posts) > 1:
                 other_posts = related_posts
                 recent = False
@@ -106,12 +128,19 @@ class ArticleDetail(DetailView):
 
         return context
 
-    def post(self, request, *args, **kwargs):
-        new_comment = Comment(body=request.POST.get('body'),
-                              commenter=self.request.user,
-                              post=self.get_object())
-        new_comment.save()
-        return HttpResponseRedirect(reverse('blog:article_page', args=[str(self.kwargs['pk'])]))
+    # Validate the form with the user, and post
+    def form_valid(self, form):
+
+        detail_post = self.get_detail_post()
+
+        user = self.request.user
+
+        form.instance.commenter = user
+
+        form.instance.post = detail_post
+
+        return super().form_valid(form)
+
 
 
 class PostCreateView(CreateView):
@@ -164,6 +193,7 @@ class CategoryCreateView(CreateView):
     # fields = "__all__"
     form_class = CreateCategoryForm
     template_name = "blog/add_category.html"
+
 
 class CategoryUpdateView(UpdateView):
     model = Category

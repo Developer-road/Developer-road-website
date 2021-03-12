@@ -50,6 +50,8 @@ class CreateCategoryForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
+
+
     class Meta:
         """
         Returns the form of the comment  page
@@ -59,3 +61,8 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'body': BleachField()
         }
+
+    def __init__(self, *args, **kwargs):
+        super(CommentForm, self).__init__(*args, **kwargs)
+        self.fields["body"].required = True
+
