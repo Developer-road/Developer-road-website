@@ -1,6 +1,7 @@
-<div class="w-10">
+<div class="w-10 d-flex align-items-center">
     <form class="d-flex w-100 h-100" action="{% url 'blog:search' %}" method="GET">
         <input name="q" class="form-control me-2" type="text" placeholder="Search an awesome post! 🤯" aria-label="Search">
         <button class="btn btn-danger" type="submit"><i class="fas fa-search text-white"></i></button>
     </form>
+    <i class='bx bx-plus btn btn-outline-danger mx-2' id="i_search"></i>
 </div>

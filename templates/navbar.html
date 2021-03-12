@@ -8,9 +8,8 @@
       </h1>
     </a>
     <div>
-      <i class='d-sm-none text-white fs-3 bx bx-search-alt-2'></i>
+      <i class='d-sm-none text-white fs-3 bx bx-search-alt-2' id="i_search" ></i>
       <div class="d-none d-sm-block">
-
         {% comment %} Search bar {% endcomment %} 
         {% include "blog/search_bar.html" %}
       </div>
@@ -18,12 +17,13 @@
 
     <ul class="h-100  m-0 d-flex d-flex align-items-center position-relative">
       <li id="iconDropDown" ><i class='fs-3  bx bxs-category-alt text-white'></i></li>
-      <ul id="menuLinks" class="ul_dropDown-none">
+      <ul id="menuLinks" class="ul_dropDown-none animate__animated  animate__slideInDown">
         <li class="mx-2">
           <a
             class="nav-links text-decoration-none"
             href="{% url 'blog:blog_page' %}"
           >
+          <i class='bx bx-user-voice text-white'></i>
             Popular
           </a>
         </li>
@@ -32,6 +32,7 @@
             class="nav-links text-decoration-none"
             href="#"
           >
+          <i class='bx bx-category text-white' ></i>
             Categories
           </a>
         </li>
@@ -40,6 +41,7 @@
             class="nav-links text-decoration-none"
             href="{% url 'about:about_page' %}"
           >
+          <i class='bx bx-info-circle text-white' ></i>
             About
           </a>
         </li>
@@ -70,7 +72,7 @@
             </a>
 
             <ul
-              class="ul_dropDown-none h-100 m-0"
+              class="ul_dropDown-none animate__animated animate__backInDown h-100 m-0"
               id="ulDropDown"
               aria-labelledby="navbarDropdownMenuLink"
             >

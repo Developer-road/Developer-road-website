@@ -112,22 +112,16 @@ body {
   align-items: center;
   justify-content: center;
   padding: 2.5em;
-  min-height: 100px;
+  border-radius: 1em;
   background-color: var(--menu-color);
+  min-height: 200px;
+  min-width: 60vw;
 }
 
 /* Drop down profile options*/
 .ul_dropDown-visible {
+  top: 4.5em;
   right: 10%;
-  clip-path: polygon(
-    70% 10%,
-    79% 0,
-    87% 10%,
-    100% 10%,
-    100% 100%,
-    0 100%,
-    0 10%
-  );
 }
 
 .ul_dropDown-visible .p__dropDownUserName {
@@ -136,21 +130,32 @@ body {
 
 /* Drop down for nav options*/
 .ul_dropDownLinks-visible {
-  top: 4.6em;
-  right: 35%;
-  clip-path: polygon(
-    38% 10%,
-    52% 0,
-    64% 10%,
-    100% 10%,
-    100% 100%,
-    0 100%,
-    0 10%
-  );
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  top: 5em;
+  right: 1%;
+  padding: 0;
+  min-width: 90vw;
+}
+
+.ul_dropDownLinks-visible li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.ul_dropDownLinks-visible li a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Drop down all options */
-#iconDropDown {
+#iconDropDown, #i_search {
   cursor: pointer;
 }
 
