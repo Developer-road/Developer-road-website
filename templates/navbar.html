@@ -1,7 +1,7 @@
 {% load static %}
 
 <header class="header-base">
-  <nav class="nav-base header-nav d-flex align-items-center justify-content-between px-4">
+  <nav class="nav-base header-nav d-flex align-items-center justify-content-between ps-4">
     <a class="text-decoration-none" href="{% url 'home:home_page' %}">
       <h1 class="d-flex">
         <span class="d-none d-md-block fs-4 text-white m-0">DeveloperRoad</span> <i class="fas fa-code mx-3 icons-home fs-4"></i>
@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <ul class="h-100  m-0 d-flex d-flex align-items-center position-relative">
+    <ul class="h-100 p-0 m-0 d-flex d-flex align-items-center position-relative">
       <li id="iconDropDown" ><i class='fs-3  bx bxs-category-alt text-white'></i></li>
       <ul id="menuLinks" class="ul_dropDown-none animate__animated  animate__slideInDown">
         <li class="mx-2">
@@ -79,7 +79,7 @@
               aria-labelledby="navbarDropdownMenuLink"
             >
               <li class="d-md-block d-md-none w-100">
-                <p class="text-white p__dropDownUserName">
+                <p class="text-white p__dropDownUserName text-center">
                   {{ user.first_name }}
                 </p>
               </li>
@@ -87,14 +87,18 @@
                 <a
                   class="nav-links text-decoration-none"
                   href="{% url 'members:profile' user.id %}"
-                  >My Profile
+                  >
+                  <i class='bx bx-user text-white'></i>
+                  My Profile
                 </a>
               </li>
               <li>
                 <a
                   class="nav-links text-decoration-none"
                   href="{% url 'logout' %}"
-                  >Logout</a
+                  >
+                  <i class='bx bx-log-out text-white' ></i>
+                  Logout</a
                 >
               </li>
             </ul>
@@ -102,12 +106,13 @@
         </ul>
       </li>
       {% else %}
-      <li>
+      <li class="w-100">
         <a
-          class="text-white sign-button text-decoration-none p-2 mx-4"
+          class="text-white sign-button text-decoration-none p-2 ms-4 me-2 me-md-4 bt btn-sm"
           href="{% url 'login' %}"
-          >Sign in</a
-        >
+          >
+          Sign in
+          </a>
       </li>
       {% endif %}
     </ul>

@@ -111,9 +111,6 @@ body {
   width: 100vw;
 }
 
-
-
-
 .ul_dropDown-none {
   display: none;
 }
@@ -126,7 +123,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2.5em;
   border-radius: 1em;
   background-color: var(--menu-color);
   min-height: 200px;
@@ -137,6 +133,8 @@ body {
 .ul_dropDown-visible {
   top: 4.5em;
   right: 10%;
+  padding: 0;
+  height: auto;
 }
 
 .ul_dropDown-visible .p__dropDownUserName {
@@ -170,8 +168,16 @@ body {
 }
 
 /* Drop down all options */
-#iconDropDown, #i_search {
+#iconDropDown,
+#i_search {
   cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  .ul_dropDown-visible {
+    min-height: 150px;
+    min-width: 20vw;
+  }
 }
 
 /*

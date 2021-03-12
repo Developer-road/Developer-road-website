@@ -26,6 +26,7 @@ const menu = document.getElementById('navbarDropdownMenuLink');
 if (menu) {
   const dropDown = document.getElementById('ulDropDown');
   menu.addEventListener('click', () =>
-    dropDown.classList.toggle('ul_dropDown-visible')
+    dropDown.classList.toggle('ul_dropDown-visible'),
+    menuLinks.classList.remove('ul_dropDownLinks-visible')
   );
 }

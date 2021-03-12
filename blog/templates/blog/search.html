@@ -15,8 +15,6 @@ Search for a specific blog Post
     <h2> Results for : {{ string_query|title }}</h1>
 </div>
 
-{% include "blog/search_bar.html" %}
-
 {% include "blog/post_list.html"  with object=object_list %}
 
 {% endblock body_content %}
