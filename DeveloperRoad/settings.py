@@ -355,6 +355,6 @@ COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
 
 # Determinates if it's in staging or production server
 # Used for media files
-STAGIGN = config("STAGIGN", default=False, cast=bool)
+STAGING = config("STAGING", default=False, cast=bool)
 
 django_heroku.settings(locals())
