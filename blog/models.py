@@ -16,6 +16,8 @@ class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField(default="This category hasn't a description yet", blank=True, null=True)
 
+    
+
     def __str__(self):
         """
         Show the category name in the admin Page
@@ -25,17 +27,29 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse("blog:blog_page")
 
+    @property
+    def number_of_category_posts(self):
+        category_posts = Post.objects.filter(category_id=self.id).count()
+        return category_posts
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
+
+    # Foreign key with the custom user model
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    # Optional image uploaded to media files
     header_image = models.ImageField(
         blank=True, null=True, upload_to="images/post_header/")
+
+    # Created day
     date = models.DateField(auto_now_add=True)
+
     description = models.TextField(blank=True, null=True)
+
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
-    # body = models.TextField()
+
     body = RichTextField()
     upvotes = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name="post_votes")
@@ -58,6 +72,8 @@ class Post(models.Model):
     @property
     def number_of_comments(self):
         return Comment.objects.filter(post=self).count()
+
+    
 
 class Comment(models.Model):
     """
