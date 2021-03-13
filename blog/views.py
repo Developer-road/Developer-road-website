@@ -3,7 +3,12 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.views import View
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
+
+# Search functionality
 from django.db.models import Q
+
+
+from django.db.models import Count
 
 # Import the Post object and Category object
 
@@ -12,20 +17,39 @@ from .models import Post, Category, Comment
 from .forms import PostForm, EditPostForm, CreateCategoryForm, CommentForm
 
 
+
+ALL_CATEGORIES = Category.objects.all()
+
 class BlogView(ListView):
     """
-    View that shows the list of all the existent blogs
+    View that shows the list of all the newest
     """
     model = Post
     queryset = Post.objects.order_by('-date')
-    paginate_by = 4
+    paginate_by = 6
     template_name = 'blog/index.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["cat_items"] = Category.objects.all()
+        context["cat_items"] = ALL_CATEGORIES
 
         return context
+
+class BlogMostLikedView(ListView):
+    """
+    View that shows the list of all the existent blogs
+    """
+    model = Post
+    queryset = Post.objects.annotate(most_liked=Count("upvotes")).order_by('-most_liked')
+    paginate_by = 6
+    template_name = 'blog/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["cat_items"] = ALL_CATEGORIES
+
+        return context
+
 
 
 class BlogSearchView(ListView):
@@ -45,7 +69,7 @@ class BlogSearchView(ListView):
                 object_list = Post.objects.filter(
                     Q(title__icontains=query) | Q(
                         description__icontains=query) | Q(body__icontains=query)
-                ).distinct()
+                ).distinct().order_by("-date")
             else:
                 object_list = None
             return object_list
@@ -74,15 +98,13 @@ class ArticleDetail(CreateView):
 
     template_name = 'blog/details.html'
 
-
     def get_detail_post(self):
         return get_object_or_404(Post, id=self.kwargs['pk'])
 
-
     # Redirects when the comment is created
+
     def get_success_url(self, *args, **kwargs):
         return reverse('blog:article_page', kwargs={'pk': self.kwargs['pk']})
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -142,7 +164,6 @@ class ArticleDetail(CreateView):
         return super().form_valid(form)
 
 
-
 class PostCreateView(CreateView):
     """
     Used to create a brand new blog post
@@ -165,22 +186,36 @@ class CategoryView(View):
 
     def get(self, request, cat):
 
+        # Custom slug name
+        # Terrible decision by the way
+
         category_name = get_object_or_404(Category, name=cat.replace("-", " "))
 
         try:
-            category_post = list(Post.objects.filter(
-                category_id=category_name.id))
+            category_post = Post.objects.filter(
+                category_id=category_name.id).order_by("-date")
         except Post.DoesNotExist:
             category_post = None
 
-        context = {"category_name": category_name,
-                   "category_post": category_post,
-                   "category_hidden": True}
+        context = {}
+
+        context["category_name"] = category_name
+
+        context["category_post"] = category_post
+
+        # This is to don't show the category link
+        context["category_hidden"] = True
+
         return render(request, "blog/categories.html", context)
 
 
 class CategoryListView(ListView):
+
     model = Category
+
+    queryset = Category.objects.annotate(
+        post_count=Count('post')).order_by("-post_count")
+
     template_name = "blog/categories_list.html"
 
 
