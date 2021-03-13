@@ -12,37 +12,27 @@ Python, Javascript, Frontend, Backend and Django Web Framework.
 {% block body_content %}
 
 <div class=" h-100 w-100 d-flex flex-column align-items-center">
-    <h1 class="mt-5 text-center">Developer Road Blog</h1>
+    <div class="my-3">
+        <h1 class="mt-5 text-center fw-bold ">Developer Road Blog<i class="fas fa-code mx-3 icons-home fs-4"></i>
+        </h1>
+    </div>
     <p class="mb-5 text-center">
-        Diverse 
-        <span>Programming tips</span> 
-        and 
-        <span>tutorials</span>
-        of the most recent topics in the 
-        <span>Tech World</span>
+        Diverse
+        <span class="span__red">Programming tips</span>
+        and
+        <span class="span__red">tutorials</span>
+        of the most recent topics in the
+        <span class="span__red">Tech World</span>
     </p>
     <div class="row mw-100">
-        <div class="col-md-3 pt-3">
-            <div class="div__categories">
-                <a class="text-decoration-none text-black"
-                    href="{% url 'blog:categories_page' %}">
-                    Categories
-                </a>
-                {% for item in cat_items %}
-                    <a class="text-decoration-none my-2 text-dark"
-                    href="{% url 'blog:category_page' item.name|string|myslug %}">
-                    {{ item.name }}
-                    </a>
-                {% endfor %}
-            </div>
-        </div>
+        {% include "blog/category_items.html" %}
 
         <div class="col-12 col-md-9 p-0">
             {% include "blog/post_list.html"  with object=page_obj %}
         </div>
     </div>
     {% if page_obj.paginator.num_pages > 1 %}
-        {% include 'blog/pagination.html' with page_obj=page_obj %}
+    {% include 'blog/pagination.html' with page_obj=page_obj %}
     {% endif %}
 
 </div>

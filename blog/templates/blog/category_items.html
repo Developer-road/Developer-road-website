@@ -1,0 +1,14 @@
+{% load extra_filters %}
+
+<div class="col-md-3 pt-3">
+    <div class="div__categories">
+        <a class="text-decoration-none text-black" href="{% url 'blog:categories_page' %}">
+            Categories
+        </a>
+        {% for item in cat_items %}
+        <a class="text-decoration-none my-2 text-dark" href="{% url 'blog:category_page' item.name|string|myslug %}">
+            {{ item.name }}
+        </a>
+        {% endfor %}
+    </div>
+</div>
