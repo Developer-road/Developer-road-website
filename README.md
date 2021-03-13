@@ -38,3 +38,6 @@ The media files will serve correctly on production,or at least is what I think :
 ## Templates:
 *Meta image*
 Is the image that appears when the page is shared trough discord, telegram or whatsapp.
+
+### Developing
+Each template file **.html**, represents the template of a view, or a web component
