@@ -373,6 +373,10 @@ body {
   text-align: center;
 }
 
+.span__red{
+  color: var(--myred);
+}
+
 /*
 ==================
 -> Sign in & Sign up <- 
