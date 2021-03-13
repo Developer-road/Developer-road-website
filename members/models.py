@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
+from django.conf import settings
 # Used to create the Custom User and it's manager
 
 
@@ -72,7 +73,10 @@ def get_default_profile_image():
     Returns the default profile image
     """
 
-    return "images/default_profile_image/default_gilflc.png"
+    if not settings.STAGING:
+        return "images/default_profile_image/default_gilflc.png"
+    else:
+        return "images/default_profile_image/default_gilflc_bss0u2.png"
 
 
 # Custom User Model

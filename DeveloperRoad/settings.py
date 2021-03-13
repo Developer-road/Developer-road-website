@@ -352,4 +352,9 @@ LOGGING = {
 DEBUG_PROPAGATE_EXCEPTIONS = True
 COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
 
+
+# Determinates if it's in staging or production server
+# Used for media files
+STAGIGN = config("STAGIGN", default=False, cast=bool)
+
 django_heroku.settings(locals())
