@@ -12,8 +12,13 @@
   --blog-author-details: #73818d;
   --hover-color: #b8c2c9;
   --hover-color: #b8c2c9;
+  /* Footer stuff */
   --footer-color: #627482;
   --footer-margin-top: 22vh;
+  /* Post content stuff */
+  --radius: 5px;
+  --img-radius: 3px;
+  --content-margin: 1.125rem
 }
 
 * {
@@ -175,6 +180,7 @@ body {
 }
 
 @media screen and (min-width: 768px) {
+
   /* Logged user*/
   .ul_dropDown-visible {
     min-height: 150px;
@@ -337,6 +343,7 @@ body {
 .img__cardPostDeails {
   border: 0.3em solid #e8f1fd;
 }
+
 /*
 ==================
 -> Blog categories list  <- 
@@ -428,7 +435,6 @@ body {
 */
 
 
-
 footer {
   margin-top: var(--footer-margin-top);
 }
@@ -457,4 +463,22 @@ footer a:hover {
 
 .heart {
   font-size: 0.9rem !important;
+}
+
+
+/*
+==================
+-> Detail Post Images <- 
+==================
+*/
+
+
+.post-content-wrapper img,
+.post-content-wrapper video {
+  height: auto;
+  display: block;
+  margin: var(--content-margin) auto;
+  max-width: 100%;
+  max-height: calc(50vh + 180px);
+  border-radius: var(--img-radius);
 }
