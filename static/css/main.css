@@ -2,21 +2,19 @@
   /* Text colors */
   --myblack: #212738;
   --myblack-hover: #404c6d;
-  
+
   --myred: #ef233c;
   --myred-hover: #b91528;
   --mywhite: #e8e9f3;
   --myblue: #0075c4;
-  
 
   --text-gray: #73818d;
   --text-gray-hover: #414b53;
 
-
   --text-white: #fff;
   --text-white-hover: rgb(212, 208, 208);
 
-   /* Category text */
+  /* Category text */
   --text-category: #4e6375;
   --text-category-hover: #1c2f3f;
 
@@ -35,7 +33,7 @@
   /* Post content stuff */
   --radius: 5px;
   --img-radius: 3px;
-  --content-margin: 1.125rem
+  --content-margin: 1.125rem;
 }
 
 * {
@@ -197,7 +195,6 @@ body {
 }
 
 @media screen and (min-width: 768px) {
-
   /* Logged user*/
   .ul_dropDown-visible {
     min-height: 150px;
@@ -340,7 +337,7 @@ body {
   color: var(--text-gray);
 }
 
-.text-gray:hover{
+.text-gray:hover {
   color: var(--text-gray-hover);
 }
 
@@ -406,18 +403,17 @@ body {
   color: var(--text-category-hover);
 }
 
-.span__red{
+.span__red {
   color: var(--myred);
 }
 
-.title__color{
+.title__color {
   color: var(--myblack);
 }
 
-.title__color:hover{
+.title__color:hover {
   color: var(--myblack-hover);
 }
-
 
 /*
 ==================
@@ -461,26 +457,33 @@ body {
 
 .a__userImageProfile {
   position: relative;
+  left: 50%;
   bottom: 3rem;
   width: auto;
+}
+
+@media screen and (max-width: 780px) {
+  .a__userImageProfile {
+    left: 0%;
+  }
 }
 
 .a__userImageProfile img {
   border: 5px solid #273764;
   width: 5em;
+  min-height: 5em;
+  min-width: 5em;
 }
 
 .a__userEditProfile {
   height: 50%;
 }
 
-
 /*
 ==================
 -> Detail Post Images <- 
 ==================
 */
-
 
 .post-content-wrapper img,
 .post-content-wrapper video {
@@ -492,14 +495,12 @@ body {
   border-radius: var(--img-radius);
 }
 
-
 /*
 ==================
 
 -> Footer <- 
 ==================
 */
-
 
 footer {
   margin-top: var(--footer-margin-top);
@@ -530,4 +531,3 @@ footer a:hover {
 .heart {
   font-size: 0.9rem !important;
 }
-
