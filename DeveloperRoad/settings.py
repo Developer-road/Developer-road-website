@@ -81,6 +81,8 @@ INSTALLED_APPS = [
     # Healthy Html
     'django_bleach',
 
+    # Livereload
+    'livereload',
 ]
 
 # Used by the allauth providers
@@ -97,6 +99,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # livereload
+    'livereload.middleware.LiveReloadScript',
 ]
 
 ROOT_URLCONF = 'DeveloperRoad.urls'
