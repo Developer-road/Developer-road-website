@@ -1,8 +1,25 @@
 :root {
+  /* Text colors */
   --myblack: #212738;
+  --myblack-hover: #404c6d;
+  
   --myred: #ef233c;
+  --myred-hover: #b91528;
   --mywhite: #e8e9f3;
   --myblue: #0075c4;
+  
+
+  --text-gray: #73818d;
+  --text-gray-hover: #414b53;
+
+
+  --text-white: #fff;
+  --text-white-hover: rgb(212, 208, 208);
+
+   /* Category text */
+  --text-category: #4e6375;
+  --text-category-hover: #1c2f3f;
+
   --secondary-red: #db162f;
   --red: rgb(206, 60, 60);
   --menu-color: #212940;
@@ -284,8 +301,12 @@ body {
 .mypagination-number {
   padding: 0.5em 0.8em;
   border-radius: 2px;
-  color: #fff;
+  color: var(--text-white);
   background-color: var(--myred);
+}
+
+.mypagination-number:hover {
+  color: var(--text-white-hover);
 }
 
 .mypagination-action {
@@ -311,8 +332,16 @@ body {
   color: var(--myred);
 }
 
+.text-red:hover {
+  color: var(--myred-hover);
+}
+
 .text-gray {
-  color: #73818d;
+  color: var(--text-gray);
+}
+
+.text-gray:hover{
+  color: var(--text-gray-hover);
 }
 
 .logo h1 {
@@ -366,16 +395,29 @@ body {
 .span__category {
   font-size: 11px;
   background-color: rgb(210, 215, 233);
-  color: #73818d;
+  color: var(--text-category);
   padding: 3px 5px;
   border-radius: 3px;
   border-width: 1px;
   text-align: center;
 }
 
+.span__category:hover {
+  color: var(--text-category-hover);
+}
+
 .span__red{
   color: var(--myred);
 }
+
+.title__color{
+  color: var(--myblack);
+}
+
+.title__color:hover{
+  color: var(--myblack-hover);
+}
+
 
 /*
 ==================
@@ -432,8 +474,28 @@ body {
   height: 50%;
 }
 
+
 /*
 ==================
+-> Detail Post Images <- 
+==================
+*/
+
+
+.post-content-wrapper img,
+.post-content-wrapper video {
+  height: auto;
+  display: block;
+  margin: var(--content-margin) auto;
+  max-width: 100%;
+  max-height: calc(50vh + 180px);
+  border-radius: var(--img-radius);
+}
+
+
+/*
+==================
+
 -> Footer <- 
 ==================
 */
@@ -469,20 +531,3 @@ footer a:hover {
   font-size: 0.9rem !important;
 }
 
-
-/*
-==================
--> Detail Post Images <- 
-==================
-*/
-
-
-.post-content-wrapper img,
-.post-content-wrapper video {
-  height: auto;
-  display: block;
-  margin: var(--content-margin) auto;
-  max-width: 100%;
-  max-height: calc(50vh + 180px);
-  border-radius: var(--img-radius);
-}

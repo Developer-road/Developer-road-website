@@ -51,7 +51,6 @@ class CreateCategoryForm(forms.ModelForm):
 
 class CommentForm(forms.ModelForm):
 
-
     class Meta:
         """
         Returns the form of the comment  page
