@@ -41,11 +41,11 @@ class CreateCategoryForm(forms.ModelForm):
         """
         Returns the form of the add category page
         """
+
         model = Category
-        fields = ('name', 'description')
+        fields = ('name', 'image', 'description')
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'The name of your Category'}),
-            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'A brief description'}),
+            'image': forms.FileInput(attrs={'class': 'form-control'}),
         }
 
 
