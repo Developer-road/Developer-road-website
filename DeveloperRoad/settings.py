@@ -84,6 +84,9 @@ INSTALLED_APPS = [
     # Django powered forms: better error messages
     "crispy_forms",
     "crispy_bootstrap5",
+
+    # Livereload
+    'livereload',
 ]
 
 # The boostrap pack for the crispy forms
@@ -107,6 +110,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # livereload
+    'livereload.middleware.LiveReloadScript',
 ]
 
 ROOT_URLCONF = 'DeveloperRoad.urls'
