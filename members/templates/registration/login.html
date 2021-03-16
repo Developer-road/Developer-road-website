@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% load crispy_forms_tags %}
+
 {% block title %}Sign in{% endblock title %}
 
 {% block head_links %}
@@ -18,22 +21,6 @@
 
 {% block navbar %}
 
-<!-- Navbar-->
-{% comment %} 
-    <header class="header">
-        <nav class="navbar navbar-expand-lg navbar-light py-3">
-            <div class="container">
-                <!-- Navbar Brand -->
-                <a href="#" class="navbar-brand">
-                    <span>
-                        <h1>DeveloperRoad</h1>
-                    </span>
-                </a>
-            </div>
-        </nav>
-    </header> 
-{% endcomment %}
-
 {% endblock navbar %}
 
 {% block body_content %}
@@ -42,24 +29,33 @@
     <div class="row align-items-center">
         <!-- For Demo Purpose -->
         <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
-            <img src="{% static 'images/register/login.svg' %}" 
-                 alt="Developer Road"
-                 class="img-fluid mb-3 d-none d-md-block"/>
+            <img src="{% static 'images/register/login.svg' %}" alt="Developer Road"
+                class="img-fluid mb-3 d-none d-md-block" />
         </div>
 
         <!-- Sign In Form -->
         <div class="col-md-7 col-lg-6 ml-auto h-100">
             <h1>Login</h1>
             <p class="font-italic text-muted mb-4">
-                Start a new session of learning programming in 
-                <a href="{% url 'home:home_page' %}" 
-                   class="text-muted">
+                Start a new session of learning programming in
+                <a href="{% url 'home:home_page' %}" class="text-muted">
                     <u>Developer Road</u>
                 </a>
             </p>
             <form action="#" method="POST">
                 {% csrf_token %}
                 <div class="row">
+
+                    {% if form.errors %}
+                    <div class="col-12">
+                        <div class="d-flex justify-content-center">
+                            <div class="error-message-wrapper">
+                                <span class="error-title error-login-size px-3"><i class="fas fa-exclamation-triangle px-3"></i>Sorry, Password or Email
+                                    Invalid</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
 
                     <!-- Email Address -->
                     <div class="input-group col-lg-12 mb-4">
@@ -68,19 +64,9 @@
                                 <i class="fa fa-envelope text-muted"></i>
                             </span>
                         </div>
-                        <input type="text" 
-                               name="username" 
-                               autofocus="" 
-                               placeholder="Email" 
-                               autocapitalize="none"
-                               autocomplete="off" 
-                               maxlength="70" 
-                               required="" 
-                               id="id_username"
-                               class="form-control bg-white border-left-0 border-md" />
-                    </div>
-                    <div class="font-italic text-muted mb-2 ml-3 mr-3 ">
-                        {{ form.invalid_login.errors }}
+                        <input type="text" name="username" autofocus="" placeholder="Email" autocapitalize="none"
+                            autocomplete="off" maxlength="70" required="" id="id_username"
+                            class="form-control bg-white border-left-0 border-md" />
                     </div>
 
 
@@ -91,16 +77,8 @@
                                 <i class="fa fa-lock text-muted"></i>
                             </span>
                         </div>
-                        <input type="password" 
-                               name="password" 
-                               autocomplete="off" 
-                               required="" 
-                               placeholder="Password"
-                               id="id_password" 
-                               class="form-control bg-white border-left-0 border-md" />
-                    </div>
-                    <div class="font-italic text-muted mb-2 ml-3 mr-3 ">
-                        {{ form.password.errors }}
+                        <input type="password" name="password" autocomplete="off" required="" placeholder="Password"
+                            id="id_password" class="form-control bg-white border-left-0 border-md" />
                     </div>
 
 
@@ -118,27 +96,26 @@
                         <div class="border-bottom w-100 mr-5"></div>
                     </div>
 
-                    {% comment %} 
+                    {% comment %}
                     <!-- Social Login -->
-                        <div class="form-group col-lg-12 mx-auto">
-                            <a href="#" class="btn btn-primary btn-block py-2 btn-facebook">
-                                <i class="fa fa-facebook-f mr-2"></i>
-                                <span class="font-weight-bold">Continue with Facebook</span>
-                            </a>
-                            <a href="#" class="btn btn-primary btn-block py-2 btn-twitter">
-                                <i class="fa fa-twitter mr-2"></i>
-                                <span class="font-weight-bold">Continue with Twitter</span>
-                            </a>
-                        </div> 
+                    <div class="form-group col-lg-12 mx-auto">
+                        <a href="#" class="btn btn-primary btn-block py-2 btn-facebook">
+                            <i class="fa fa-facebook-f mr-2"></i>
+                            <span class="font-weight-bold">Continue with Facebook</span>
+                        </a>
+                        <a href="#" class="btn btn-primary btn-block py-2 btn-twitter">
+                            <i class="fa fa-twitter mr-2"></i>
+                            <span class="font-weight-bold">Continue with Twitter</span>
+                        </a>
+                    </div>
                     {% endcomment %}
 
                     <!-- Not Registered -->
                     <div class="text-center w-100">
                         <p class="text-muted font-weight-bold">
-                            Not registered yet? 
-                            <a href="{% url 'members:signup' %}"
-                               class="text-primary ml-2">
-                               Create an account
+                            Not registered yet?
+                            <a href="{% url 'members:signup' %}" class="text-primary ml-2">
+                                Create an account
                             </a>
                         </p>
                     </div>

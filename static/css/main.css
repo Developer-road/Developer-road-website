@@ -195,6 +195,7 @@ body {
 }
 
 @media screen and (min-width: 768px) {
+
   /* Logged user*/
   .ul_dropDown-visible {
     min-height: 150px;
@@ -429,6 +430,21 @@ body {
 .error-title {
   color: var(--secondary-red);
 }
+
+.error-message-wrapper {
+  border: 1px solid var(--myred-hover);
+  padding: 7px;
+  border-radius: 25px;
+  margin: 0 auto;
+
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.error-login-size {
+  font-size: 0.8rem;
+}
+
 
 /*
 ==================

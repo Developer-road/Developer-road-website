@@ -50,7 +50,7 @@
             <img class="card-img-top" src="{{ project.image.url }}">
             {% endif %}
             <div class="card-body">
-                <h4 class="card-title fw-bold">{{ project.title }}</h5>
+                <h4 class="card-title fw-bold">{{ project.title }}</h4>
                     <p class="card-text text-muted">{{ project.description }}</p>
                     <a href="{% url 'projects:detail-project' project.pk %}" class="btn btn-danger">
                         Read More
