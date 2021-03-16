@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
 {% block title %}Edit Category{% endblock title %}
 
 {% block body_content %}
@@ -10,12 +12,24 @@
 <div class="form-group">
     <form action="" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="row">
+            <div class="col-12 col-md-8">
+                {{form.name|as_crispy_field}}
+            </div>
+            <div class="col-12 col-md-4">
+                {{form.image|as_crispy_field}}
+            </div>
+            <div class="col-12">
+                {{ form.description|as_crispy_field }}
+            </div>
+        </div>
+
         <div class="mt-5">
             <button type="submit" class="btn form-btn">Edit Category</button>
         </div>
     </form>
 </div>
+
 {% else %}
 <div class="m-5 mx-auto text-center">
     <h1 class="fw-bold">Sorry you can't be here!</h1>
