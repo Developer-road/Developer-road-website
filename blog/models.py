@@ -13,10 +13,26 @@ from django_bleach.models import BleachField
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-    description = models.TextField(default="This category hasn't a description yet", blank=True, null=True)
 
-    
+    # The name for the category
+    name = models.CharField(max_length=100,
+                            unique=True)
+
+    date = models.DateTimeField(auto_now_add=True,
+                                blank=True,
+                                null=True)
+
+    # A short description to the
+    description = models.TextField(
+        default="This category hasn't a description yet",
+        blank=True,
+        null=True)
+
+    # Category image
+    image = models.ImageField(
+        upload_to="images/categories/",
+        blank=True,
+        null=True)
 
     def __str__(self):
         """
@@ -32,7 +48,9 @@ class Category(models.Model):
         category_posts = Post.objects.filter(category_id=self.id).count()
         return category_posts
 
+
 class Post(models.Model):
+
     title = models.CharField(max_length=200)
 
     # Foreign key with the custom user model
@@ -41,16 +59,30 @@ class Post(models.Model):
 
     # Optional image uploaded to media files
     header_image = models.ImageField(
-        blank=True, null=True, upload_to="images/post_header/")
+        blank=True,
+        null=True,
+        upload_to="images/post_header/")
 
-    # Created day
-    date = models.DateField(auto_now_add=True)
+    # Date and hour of the creation
+    date = models.DateTimeField(auto_now_add=True,
+                            blank=True,
+                            null=True)
 
-    description = models.TextField(blank=True, null=True)
+    # An optional description text
+    description = models.TextField(blank=True,
+                                   null=True)
 
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+    # A optional relation with the category
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True)
 
+    # The content of the post
     body = RichTextField()
+
+    # A relation, between the custom user model and the post
     upvotes = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name="post_votes")
 
@@ -73,19 +105,25 @@ class Post(models.Model):
     def number_of_comments(self):
         return Comment.objects.filter(post=self).count()
 
-    
 
 class Comment(models.Model):
     """
     The comment system in The Blog
     """
+
+    # Assigned Post
     post = models.ForeignKey(
         Post, verbose_name="comment", on_delete=models.CASCADE)
-    # commenter = models.CharField(max_length=255, default="Anonymous")
+
+    # The user that made the comment
     commenter = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    # The comment itself. It has bold, italic, link and code.
     body = RichTextField(config_name="comment")
-    date_added = models.DateField(auto_now_add=True)
+
+    # The date and hour the comment was added
+    date_added = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
     def __str__(self):
         return f"{str(self.post.title)}, {str(self.commenter)}"

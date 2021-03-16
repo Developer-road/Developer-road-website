@@ -2,6 +2,7 @@
 
 The official website of developer road
 
+
 ## Installation:
 
 ```python
@@ -26,6 +27,12 @@ python manage.py livereload
 
 python manage.py runserver
 ```
+
+Remember to migrate the database before start developing:
+```
+python manage.py migrate
+```
+
 
 ## Warning:
 

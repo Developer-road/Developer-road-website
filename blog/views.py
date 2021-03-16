@@ -131,7 +131,7 @@ class ArticleDetail(CreateView):
             context["comments"] = None
 
         recent = True
-        other_posts = list(Post.objects.all().order_by('-date'))[:4]
+        other_posts = Post.objects.all().order_by('-date')[:4]
 
         if detail_post.category:
             # If the post has a category, related posts are from the category
@@ -225,8 +225,9 @@ class CategoryCreateView(CreateView):
     """
 
     model = Category
-    # fields = "__all__"
+
     form_class = CreateCategoryForm
+
     template_name = "blog/add_category.html"
 
 
