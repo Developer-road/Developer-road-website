@@ -8,6 +8,7 @@ cffi==1.14.4
 chardet==4.0.0
 cloudinary==1.24.0
 colorama==0.4.4
+crispy-bootstrap5==0.3.1
 cryptography==3.3.1
 defusedxml==0.6.0
 dj-database-url==0.5.0
@@ -16,6 +17,7 @@ django-allauth==0.44.0
 django-bleach==0.6.1
 django-ckeditor==6.0.0
 django-cloudinary-storage==0.3.0
+django-crispy-forms==1.11.1
 django-heroku==0.3.1
 django-js-asset==1.2.2
 django-livereload-server==0.3.2
