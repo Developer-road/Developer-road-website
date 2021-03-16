@@ -21,16 +21,20 @@
                 justify-content-md-between
                 align-items-center">
             {% if not image_hidden %}
-            <a href="{% url 'members:profile' post.author.id %}" class="text-decoration-none">
-                <span class="px-2">
-                    <img src="{{ post.author.profile_image.url }}" alt="" class="rounded-circle image-opacity" width=30
-                        height=30 />
-                </span>
-                <span class="text-gray"> {{ post.author.first_name }} {{ post.author.last_name }} </span>
-            </a>
-            <span class="">{{ post.date }}</span>
+            <div class="">
+                <a href="{% url 'members:profile' post.author.id %}" class="text-decoration-none">
+                    <span class="px-2">
+                        <img src="{{ post.author.profile_image.url }}" alt="" class="rounded-circle image-opacity"
+                            width=30 height=30 />
+                    </span>
+                    <div class="">
+                        <span class="text-gray"> {{ post.author.first_name }} {{ post.author.last_name }} </span>
+                        <span class="">{{ post.date|date:"d/M/y" }}</span>
+                    </div>
+                </a>
+            </div>
             {% else %}
-            <span class="ms-3">{{ post.date }}</span>
+            <span class="ms-3">{{ post.date|date:"d/M/y" }}</span>
             {% endif %}
             {% if post.category and not category_hidden%}
             <div class="category">
