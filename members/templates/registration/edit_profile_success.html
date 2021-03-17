@@ -8,35 +8,37 @@ Profile has been succesfully updated.
 
 {% block body_content %}
 {% if user.is_authenticated %}
-<div class="mt-5 posts">
-    <h1>Your account was succesfully updated</h1>
-    <div class="font-italic text-muted mb-2 ml-3 mr-3 ">
-        <p>Hey there {{ user.first_name }} {{ user.last_name }} your account has been updated</p>
-    </div>
-</div>
+<div class="margin-20">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="mt-5 text-center">
+                <h1 class="fw-bold">Succesfully updated</h1>
+                <div class="font-italic text-muted mb-2 ml-3 mr-3 ">
+                    <p>Hey there {{ user.first_name }} {{ user.last_name }} your account has been updated</p>
+                </div>
+            </div>
 
-<div class="row">
-    <div class="col-md-8">
 
-        <div class="m-4">
-            <p class="mt-4  mb-3 text-center fs-lg-3">
-                Take me to the <span class="px-3"><a href="{% url 'blog:blog_page' %}"
-                        class=" btn text-decoration-none btn-danger btn-sm">Blog</a></span>
-            </p>
+            <div class="m-4">
+                <p class="mt-4  mb-3 text-center fs-lg-3">
+                    Take me to the <span class="px-3"><a href="{% url 'blog:blog_page' %}"
+                            class=" btn text-decoration-none btn-danger btn-sm">Blog</a></span>
+                </p>
 
-            <p class="mt-4 mb-3 text-center fs-lg-3">
-                Let's go to my <span class="px-3"><a href="{% url 'members:profile' user.id%}"
-                        class=" btn text-decoration-none btn-danger btn-sm">Profile</a></span>
-            </p>
+                <p class="mt-4 mb-3 text-center fs-lg-3">
+                    Let's go to my <span class="px-3"><a href="{% url 'members:profile' user.id%}"
+                            class=" btn text-decoration-none btn-danger btn-sm">Profile</a></span>
+                </p>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <div class="mt-4">
+                <img src="{% static 'images/blog/success.svg' %}" alt="Success image" class="img-fluid">
+            </div>
         </div>
 
     </div>
-    <div class="col-md-4">
-        <div class="mt-4">
-            <img src="{% static 'images/blog/success.svg' %}" alt="Success image" class="img-fluid">
-        </div>
-    </div>
-
 </div>
 
 {% endif %}
