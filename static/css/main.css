@@ -522,10 +522,8 @@ body {
 
 footer {
   margin-top: var(--footer-margin-top);
-}
-
-footer {
   background-color: #212738;
+  margin-bottom: -1em;
 }
 
 footer a:hover {
