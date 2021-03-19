@@ -45,6 +45,7 @@
 
 body {
   background-color: var(--base-10);
+  overflow-x: hidden;
 }
 
 /*
@@ -369,6 +370,8 @@ body {
 
 .img__cardPostDeails {
   border: 0.3em solid #e8f1fd;
+  max-width: 16em;
+  min-height: 8em;
 }
 
 /*
