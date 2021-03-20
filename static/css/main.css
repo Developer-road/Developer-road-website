@@ -369,8 +369,19 @@ body {
 
 .img__cardPostDeails {
   border: 0.3em solid #e8f1fd;
-  max-width: 16em;
-  min-height: 8em;
+  max-width: 6em;
+  min-width: 6em;
+  min-height: 6em;
+  margin-right: 1em;
+}
+
+@media screen and (max-width: 768px) {
+  .img__cardPostDeails {
+    max-width: 4em;
+    min-width: 4em;
+    min-height: 4em;
+    margin-right: 0;
+  }
 }
 
 /*
@@ -378,6 +389,8 @@ body {
 -> Blog categories list  <- 
 ==================
 */
+
+
 .div__categories {
   position: sticky;
   top: 1em;
@@ -423,6 +436,25 @@ body {
   min-width: 3em;
   max-width: 3em;
   max-height: 3em;
+}
+
+.blog__itemsSticky {
+  top: 1em;
+  background-color: white;
+}
+
+.a__zIndex{
+  position: relative;
+  z-index: 10;
+}
+
+
+.blog__itemStikyBackground {
+  position: absolute;
+  left: 0;
+  height: 50px;
+  width: 100%;
+  background-color: var(--myblack);
 }
 
 @media screen and (max-width: 768px) {
@@ -490,14 +522,14 @@ body {
 
 .a__userImageProfile {
   position: relative;
-  left: 50%;
+  margin: 0 auto;
   bottom: 3rem;
   width: auto;
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 576px) {
   .a__userImageProfile {
-    left: 0%;
+    margin: 0;
   }
 }
 

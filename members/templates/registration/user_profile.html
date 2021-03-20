@@ -34,14 +34,14 @@
                 </a>
             {% endif %}
         </div>
-    <h4 class="fs-5 fs-md-3 fw-bold mb-3">
+    <h4 class="fs-5 fs-md-3 fw-bold mb-3 text-start text-sm-center">
         {{ requested_user.first_name }} {{ requested_user.last_name }}
     </h4>
-    <p class="mw-100 text-center text-break">
+    <p class="mw-100 text-start text-sm-center text-break">
         {{ requested_user.description }}
     </p>
-    <div class="d-flex justify-content-center">
-        <p class="card-text text-muted mx-5">
+    <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center">
+        <p class=" text-start text-muted mx-sm-5">
             <i class='bx bxs-cake'></i> Joined on {{ requested_user.date_joined|date:"M d, Y" }}
         </p>
         <p>
