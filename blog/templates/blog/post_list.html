@@ -5,9 +5,10 @@
 {% for post in object %}
 <article class="bg-white my-3 rounded">
     {% if post.header_image %}
-    <div class="mb-3">
+    <div class="mb-3" >
         <a href="{% url 'blog:article_page' post.pk %}" rel="noopener">
-            <img src="{{ post.header_image.url }}" alt="No image for this Post" class=" card-img-top" loading="lazy">
+            <img src="{{ post.header_image.url }}" alt="{{ post.author.first_name }} {{ post.author.last_name }} post" 
+            class=" card-img-top " style="max-height: 250px; height: auto;"  loading="lazy">
         </a>
     </div>
     {% endif %}
@@ -67,7 +68,7 @@
             {% endif %}
         </a>
         {% if post.category and not category_hidden%}
-        <div class="category">
+        <div class="category mb-3">
             <span>
                 <a href="{% url 'blog:category_page'  post.category|myslug %}"
                     class="span__category text-decoration-none btn"
@@ -77,7 +78,7 @@
             </span>
         </div>
         {% endif %}
-        <a href="{% url 'blog:article_page' post.id %}" class="text-decoration-none fs-5 fs-sm-4 title__color pb-2">
+        <a href="{% url 'blog:article_page' post.id %}" class="text-decoration-none fs-5 fs-sm-4 title__color pb-2 d-flex align-items-center">
             <i class='fs-6 fs-md-5 bx bx-upvote'></i><span class="fs-6 fs-md-5 mx-1">{{ post.total_likes }} Upvotes</span>
             <i class='fs-6 fs-md-5 bx bx-comment ms-2'></i><span class="fs-6 fs-md-5 mx-1">{{ post.number_of_comments }} Comments</span>
         </a>
