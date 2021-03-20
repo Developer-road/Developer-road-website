@@ -196,7 +196,6 @@ body {
 }
 
 @media screen and (min-width: 768px) {
-
   /* Logged user*/
   .ul_dropDown-visible {
     min-height: 150px;
@@ -419,6 +418,22 @@ body {
   color: var(--myblack-hover);
 }
 
+.image__postOwner {
+  min-height: 3em;
+  min-width: 3em;
+  max-width: 3em;
+  max-height: 3em;
+}
+
+@media screen and (max-width: 768px) {
+  .image__postOwner {
+    min-height: 2.5em;
+    min-width: 2.5em;
+    max-width: 2.5em;
+    max-height: 2.5em;
+  }
+}
+
 /*
 ==================
 -> Sign in & Sign up <- 
@@ -447,7 +462,6 @@ body {
 .error-login-size {
   font-size: 0.8rem;
 }
-
 
 /*
 ==================
@@ -513,8 +527,6 @@ body {
   max-height: calc(50vh + 180px);
   border-radius: var(--img-radius);
 }
-
-
 
 /*
 ==================

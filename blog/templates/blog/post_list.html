@@ -19,22 +19,27 @@
                 flex-md-row 
                 justify-content-sm-start
                 justify-content-md-between
-                align-items-center">
+                ">
             {% if not image_hidden %}
             <div class="">
-                <a href="{% url 'members:profile' post.author.id %}" class="text-decoration-none">
-                    <span class="px-2">
-                        <img src="{{ post.author.profile_image.url }}" alt="" class="rounded-circle image-opacity"
-                            width=30 height=30 />
-                    </span>
-                    <div class="">
-                        <span class="text-gray"> {{ post.author.first_name }} {{ post.author.last_name }} </span>
-                        <span class="">{{ post.date|date:"d/M/y" }}</span>
+                <a href="{% url 'members:profile' post.author.id %}"
+                    class="text-decoration-none d-flex align-items-center"
+                >
+                    <img src="{{ post.author.profile_image.url }}" alt="" 
+                        class="rounded-circle image-opacity me-2 image__postOwner"
+                        />
+                    <div class="d-flex flex-column">
+                        <span class="text-gray"> 
+                            <b class="fs-6">
+                                {{ post.author.first_name }} {{ post.author.last_name }}
+                            </b>
+                        </span>
+                        <span class="text-gray fs-6">{{ post.date|date:"d M y" }}</span>
                     </div>
                 </a>
             </div>
             {% else %}
-            <span class="ms-3">{{ post.date|date:"d/M/y" }}</span>
+            <span class="ms-3">{{ post.date|date:"d M y" }}</span>
             {% endif %}
             {% if post.category and not category_hidden%}
             <div class="category">
@@ -47,7 +52,7 @@
             </div>
             {% endif %}
             {% if user.is_authenticated and  user.id == post.author.id %}
-            <div class="p-3">
+            <div class="p-3 d-none d-md-block">
                 <a href="{% url 'blog:delete_page' post.pk %}" class="btn btn-outline-danger">
                     <i class='bx bx-trash'></i>
                     Delete post
@@ -56,18 +61,35 @@
             {% endif %}
         </div>
 
-        <div class="blog-title semibold px-3">
+        <div class="blog-title semibold px-3 ms-2 ms-md-5">
             <a href="{% url 'blog:article_page' post.id %}" class="text-decoration-none fs-5 fs-sm-4 title__color">
-                <h3 class="fw-bold">{{ post.title|title }}</h3>
+                <h3 class="fw-bold fs-6 fs-md-3">{{ post.title|title }}</h3>
             </a>
         </div>
 
         {% if post.description %}
-        <p class="blog-description p-3 fs-6 fs-md-5">{{ post.description | slice:":200" }}</p>
+        <p class="blog-description p-3 ms-2 ms-md-5 fs-6 fs-md-5">{{ post.description | slice:":200" }}</p>
         {% else %}
-        <p class="blog-description p-3 fs-6 fs-md-5">{{ post.body | striptags | slice:":200" }}</p>
+        <p class="blog-description p-3 ms-2 ms-md-5 fs-6 fs-md-5">{{ post.body | striptags | slice:":200" }}</p>
         {% endif %}
 
+        <div class="ms-2 ms-md-5">
+            {% if upvotes <= 1 %}
+              0 <i class='bx bx-upvote'></i>
+            {% else %}
+            {{ upvotes }} <i class='bx bx-upvote'></i>
+            {% endif %}
+            {{ upvotes }} 
+        </div>
+
+        {% if user.is_authenticated and  user.id == post.author.id %}
+        <div class="p-3 d-block d-md-none d-flex justify-content-center">
+            <a href="{% url 'blog:delete_page' post.pk %}" class="btn btn-outline-danger">
+                <i class='bx bx-trash'></i>
+                Delete post
+            </a>
+        </div>
+        {% endif %}
 
         <a href="{% url 'blog:article_page' post.pk %}"
             class="text-red text-decoration-none fw-bold d-flex justify-content-center align-items-center mb-3">
