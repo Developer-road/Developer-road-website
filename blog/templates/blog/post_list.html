@@ -96,16 +96,16 @@
 
 {% empty %}
 <div class="posts vh-100 w-100 pt-5 d-flex justify-content-center align-items-center flex-column">
-    <img src="{% static 'images/blog/404.svg' %}" alt="Developer Road" class="img-fluid w-80 mt-5 h-100" loading="lazy" />
-    <h2 class="text-muted mt-5">Sorry there are
-        <span class="text-danger">not</span>
-        Post with that words included
+    <img src="{% static 'images/blog/noPosts.svg' %}" alt="Developer Road" class="img-fluid w-80 mt-5 h-100" loading="lazy" />
+    <h2 class="text-muted mt-5">Sorry,
+        <span class="text-danger"> we don't</span>
+         have a post, with that words included
     </h2>
     <p class="fs-4 mb-0">Try to make another search</p>
     <p class="fs-5 mb-5">
-        Or go to the blog
-        <a href="{% url 'blog:blog_page' %}" class="link-danger">
-            main page
+        Or 
+        <a href="{% url 'blog:add_post' %}" class="link-danger">
+            Start writing!
         </a>
     </p>
 </div>

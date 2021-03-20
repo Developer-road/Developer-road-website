@@ -97,15 +97,18 @@
 
 {% comment %} Used only in Blog App {% endcomment %}
 {% if user_posts %}
-
-{% comment %} To access to the number of posts, you do it with "{{user_post_count}}" {% endcomment %}
-
-<div class="fluid-container mt-4 m-5">
+<div class="container mt-4 m-5">
     <h2 class="text-center fs-2 fw-bold">
         Posts by {{ requested_user.first_name }} {{ requested_user.last_name }}
     </h2>
 </div>
+{% include "blog/post_list.html" with object=user_posts %}
+{% else  %}
+<div class="container py-3 d-flex flex-column align-items-center justify-content-center">
+    <h2>This user don't have post yet</h2>
+    <img src="{% static 'images/blog/noUserPost.svg' %}" alt="" class="img-fluid">
+</div>
 {% endif %}
 
-{% include "blog/post_list.html" with object=user_posts %}
+
 {% endblock body_content %}

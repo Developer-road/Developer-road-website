@@ -10,11 +10,11 @@ Search for a specific blog Post
 
 {% block body_content %}
 
-
-<div class="posts mt-4">
-    <h2> Results for : {{ string_query|title }}</h1>
-</div>
-
-{% include "blog/post_list.html"  with object=object_list %}
+<section class="container">
+    <div class="posts mt-4">
+        <h2> Results for : {{ string_query|title }}</h1>
+    </div>
+    {% include "blog/post_list.html"  with object=object_list %}
+</section>
 
 {% endblock body_content %}

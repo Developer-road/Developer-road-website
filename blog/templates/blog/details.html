@@ -37,7 +37,7 @@
                 blog__itemsSticky
                 ">
         <div class=" d-flex flex-column align-items-center justify-content-center">
-            <span class="py-md-2  d-flex justify-content-center align-items-center">
+            <span class="py-md-2  d-flex justify-content-center align-items-center" title="Upvote">
                 {{ upvotes }}  <i class='ms-md-2 bx bx-upvote'></i>
             </span>
             
@@ -51,13 +51,15 @@
                     text-decoration-none 
                     btn-sm
                     py-md-2
-                    ">
+                    "
+                    title="Delete post"
+                    >
                     <i class='bx bx-trash text-gray fs-6 fs-md-4'></i>
                 </a>
                 {% endif %}
 
                 {% if user.is_authenticated and  user.id == post.author.id %}
-                <a class="py-md-2 btn btn-sm " href="{% url 'blog:edit_page' post.pk %}" rel="#">
+                <a class="py-md-2 btn btn-sm " href="{% url 'blog:edit_page' post.pk %}" rel="#" title="Edit post">
                     <i class='bx bx-edit-alt text-gray fs-6 fs-md-4 '></i>
                 </a>
                 {% endif %}
@@ -65,11 +67,11 @@
                 <form action="{% url 'blog:upvotes' post.pk %}" method="post">
                     {% csrf_token %}
                     {% if upvoted %}
-                    <button type="submit" name="post_upvote" value="{{ post.id }}" class="py-md-2 btn btn-sm">
+                    <button type="submit" name="post_upvote" value="{{ post.id }}" class="py-md-2 btn btn-sm" title="DownVote">
                         <i class='bx bx-dislike text-red fs-6 fs-md-4'></i>
                     </button>
                     {% else %}
-                    <button type="submit" name="post_upvote" value="{{ post.id }}" class="py-md-2 btn btn-sm">
+                    <button type="submit" name="post_upvote" value="{{ post.id }}" class="py-md-2 btn btn-sm" title="UpVote">
                         <i class='bx bx-like text-gray fs-6 fs-md-4'></i>
                     </button>
                     {% endif %}
@@ -93,7 +95,7 @@
                     {% if post.header_image %}
                     <div class="card mb-3 rounded-top rounded-3">
                         <img src="{{ post.header_image.url }}" alt="{{ post.author.first_name }} post"
-                            class="card-img-top mvh-50 rounded-top rounded-3">
+                            class="card-img-top mvh-50 rounded-top rounded-3" title="Post image">
                     </div>
                     {% endif %}
                     <h1 class="py-4 text-center fs-4 fs-md-2 fw-bolder text-break">

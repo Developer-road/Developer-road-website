@@ -13,7 +13,7 @@ Categories of the Developer Road Blog:
 {% block body_content %}
 
 <div class="m-5">
-    <h1 class="fw-bold h1 text-center">Categorie</h1>
+    <h1 class="fw-bold h1 text-center">Categories</h1>
 </div>
 
 <div class="row">
@@ -24,7 +24,7 @@ Categories of the Developer Road Blog:
                     <a class="text-decoration-none text-dark w-100 h-100  p-3"
                         href="{% url 'blog:category_page' category.name|myslug %}">
                         {% if category.image %}
-                        <img src="{{ category.image.url }}" alt="">
+                        <img src="{{ category.image.url }}" class="img-fluid"  alt="">
                         {% endif %}
                         <h5 class="">{{category.name|title}} 
                             <span class="text-danger fs-6 fw-light text-decoration-none">

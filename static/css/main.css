@@ -466,6 +466,10 @@ body {
   z-index: 0  !important;
 }
 
+.div__search {
+  width: 50% !important;
+}
+
 @media screen and (max-width: 768px) {
   .image__postOwner {
     min-height: 2.5em;
@@ -473,6 +477,11 @@ body {
     max-width: 2.5em;
     max-height: 2.5em;
   }
+
+  
+.div__search {
+  width: 25% !important;
+}
 }
 
 /*
