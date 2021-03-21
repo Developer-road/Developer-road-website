@@ -16,31 +16,20 @@ Categories of the Developer Road Blog:
     <h1 class="fw-bold h1 text-center">Categories</h1>
 </div>
 
-<div class="row">
-    <div class="col-md-7 text-center">
-        <ul class="text-decoration-none list-unstyled d-flex flex-wrap justify-content-center">
-            {% for category in object_list %}
-                <li class="card card__relavant">
-                    <a class="text-decoration-none text-dark w-100 h-100  p-3"
-                        href="{% url 'blog:category_page' category.name|myslug %}">
-                        {% if category.image %}
-                        <img src="{{ category.image.url }}" class="img-fluid"  alt="">
-                        {% endif %}
-                        <h5 class="">{{category.name|title}} 
-                            <span class="text-danger fs-6 fw-light text-decoration-none">
-                                Show Posts
-                            </span>
-                        </h5>
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div class="col-md-5 my-auto">
-        <div class="mt-4">
-            <img src="{% static 'images/blog/category.svg' %}" alt="Categories image" class="img-fluid">
-        </div>
-    </div>
+<div class="container min-vh-100">
+    <ul class="w-100 text-decoration-none list-unstyled d-flex flex-row flex-wrap justify-content-center align-items-center">
+        {% for category in object_list %}
+            <li class="card card__relavant span__category" style="max-width: 18em;">
+                <a class="text-decoration-none text-dark w-100 h-100 d-flex align-items-center justify-content-start"
+                    href="{% url 'blog:category_page' category.name|myslug %}">
+                    {% if category.image %}
+                    <img src="{{ category.image.url }}" class="w-50 rounded-circle" style="max-width: 10em; min-height: 5em;"  alt="">
+                    {% endif %}
+                    <h5 ># {{category.name|title}}</h5>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
 </div>
 
 <div class="my-3  text-center">
