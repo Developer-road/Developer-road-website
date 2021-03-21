@@ -10,29 +10,15 @@ Python, Javascript, Frontend, Backend and Django Web Framework.
 
 
 {% block body_content %}
-<div class=" h-100 w-100 d-flex flex-column align-items-center">
-    <div class="my-3">
-        <h1 class="mt-5 text-center fw-bold ">Developer Road Blog<i class="fas fa-code mx-3 icons-home fs-4"></i>
-        </h1>
-    </div>
-    <p class="mb-5 text-center">
-        Diverse
-        <span class="span__red">Programming tips</span>
-        and
-        <span class="span__red">tutorials</span>
-        of the most recent topics in the
-        <span class="span__red">Tech World</span>
-    </p>
-    <div class="row mw-100">
+<section class=" h-100 w-100 d-flex flex-column flex-md-column align-items-center">
+    <div class="row mw-100 d-flex flex-column-reverse flex-md-row">
         {% include "blog/category_items.html" %}
-
-        <div class="col-12 col-md-9 p-0">
+        <section class="col col-md-10 p-0 px-md-5">
             {% include "blog/post_list.html"  with object=page_obj %}
-        </div>
+        </section>
     </div>
     {% if page_obj.paginator.num_pages > 1 %}
     {% include 'blog/pagination.html' with page_obj=page_obj %}
     {% endif %}
-
-</div>
+</section>
 {% endblock body_content %}

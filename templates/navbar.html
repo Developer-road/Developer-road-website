@@ -2,12 +2,12 @@
 
 <header class="header-base">
   <nav class="nav-base header-nav d-flex align-items-center justify-content-between ps-4">
-    <a class="text-decoration-none" href="{% url 'home:home_page' %}">
+    <a class="text-decoration-none" href="{% url 'blog:blog_page' %}">
       <h1 class="d-flex">
         <span class="d-none d-md-block fs-4 text-white m-0">DeveloperRoad</span> <i class="fas fa-code mx-3 icons-home fs-4"></i>
       </h1>
     </a>
-    <div>
+    <div class="div__search px-md-5">
       <a href="#" id="a_search" class="text-decoration-none">
         <i class='d-sm-none text-white fs-3 bx bx-search-alt-2' ></i>
       </a>
@@ -19,14 +19,22 @@
 
     <ul class="h-100 p-0 m-0 d-flex d-flex align-items-center position-relative">
       <li id="iconDropDown" ><i class='fs-3  bx bxs-category-alt text-white'></i></li>
-      <ul id="menuLinks" class="ul_dropDown-none animate__animated  animate__slideInDown">
-        <li class="mx-2">
+      <li class="mx-2">
           <a
             class="nav-links text-decoration-none"
             href="{% url 'blog:blog_page' %}"
           >
-          <i class='bx bx-user-voice text-white'></i>
-            Blog
+          <i class='fs-3 bx bx-user-voice text-white'></i>
+          </a>
+        </li>
+      <ul id="menuLinks" class="ul_dropDown-none animate__animated  animate__slideInDown">
+        <li class="mx-2">
+          <a
+            class="nav-links text-decoration-none"
+            href="{% url 'home:home_page' %}"
+          >
+          <i class='bx bx-home'></i>
+            Home
           </a>
         </li>
         <li class="mx-2">

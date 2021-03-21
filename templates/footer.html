@@ -4,7 +4,7 @@
             <div class="row g-3">
                 <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
                     <div class="text-decoration-none-a">
-                        <a class="text-decoration-none-a footer-links" href="{% url 'home:home_page' %}">
+                        <a class="text-decoration-none-a footer-links" href="{% url 'home:home_page' %}" rel="noopener"`>
                             <h3
                                 class="mb-sm-0 mb-md-3 h6-sm fs-3 fs-s-5 d-flex align-items-center justify-content-center justify-content-lg-start">
                                 Developer Road
@@ -17,22 +17,22 @@
                         The platform where Developers share knowledge about technology and programming
 
                         <div class="d-flex w-100  justify-content-center justify-content-sm-center">
-                            <a href="https://github.com/Daniel1404" target="_blank">
+                            <a href="https://github.com/Daniel1404" target="_blank" rel="noopener"`>
                                 <span class="mx-2">
-                                    <i class="fab fa-github footer-icons" aria-hidden="true"></i>
+                                    <i class="fab fa-github footer-icons" aria-hidden="true" rel="noopener"`></i>
                                 </span>
                             </a>
-                            <a href="https://www.linkedin.com/in/daniel-diaz-3617831a6/" target="_blank">
+                            <a href="https://www.linkedin.com/in/daniel-diaz-3617831a6/" target="_blank" rel="noopener"`>
                                 <span class="mx-2">
                                     <i class="fab fa-linkedin footer-icons" aria-hidden="true"></i>
                                 </span>
                             </a>
-                            <a href="https://twitter.com/DaniDiazTech" target="_blank">
+                            <a href="https://twitter.com/DaniDiazTech" target="_blank" rel="noopener"`>
                                 <span class="mx-2">
                                     <i class="fab fa-twitter footer-icons" aria-hidden="true"></i>
                                 </span>
                             </a>
-                            <a href="https://www.instagram.com/daniel._.diaz1404/" target="_blank">
+                            <a href="https://www.instagram.com/daniel._.diaz1404/" target="_blank" rel="noopener"`>
                                 <span class="mx-2">
                                     <i class="fab fa-instagram footer-icons" aria-hidden="true"></i>
                                 </span>
@@ -45,14 +45,31 @@
                     <h5 class="text-uppercase footer-links "><b>MENU</b></h5>
 
                     <ul class="list-unstyled mb-0 w-100">
-                        <li class="text-center"><a class="footer-links" href="{% url 'home:home_page' %}">Home</a></li>
-                        <li class="text-center"><a class="footer-links" href="{% url 'about:about_page' %}">About</a>
+                        <li class="text-center">
+                            <a class="footer-links" href="{% url 'home:home_page' %}" rel="noopener"`>
+                                Home
+                            </a>
                         </li>
-                        <li class="text-center"><a class="footer-links" href="{% url 'contact:contact_page' %}">Contact
-                                us</a></li>
-                        <li class="text-center"><a class="footer-links"
-                                href="{% url 'projects:my_projects' %}">Projects</a></li>
-                        <li class="text-center"><a class="footer-links" href="{% url 'blog:blog_page' %}">Blog</a></li>
+                        <li class="text-center">
+                            <a class="footer-links" href="{% url 'about:about_page' %}" rel="noopener"`>
+                                About
+                            </a>
+                        </li>
+                        <li class="text-center">
+                            <a class="footer-links" href="{% url 'contact:contact_page' %}" rel="noopener"`>
+                                Contact us
+                            </a>
+                        </li>
+                        <li class="text-center">
+                            <a class="footer-links" href="{% url 'projects:my_projects' %}" rel="noopener"`>
+                                Projects
+                            </a>
+                        </li>
+                        <li class="text-center">
+                            <a class="footer-links" href="{% url 'blog:blog_page' %}" rel="noopener"`>
+                                Blog
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
@@ -60,25 +77,25 @@
                     <h5 class="text-uppercase mb-0 footer-links "><b>TECHNOLOGIES USED</b></h5>
                     <ul class="list-unstyled">
                         <li>
-                            <a href="https://www.djangoproject.com/" class="footer-links">
+                            <a href="https://www.djangoproject.com/" class="footer-links" rel="noopener"`>
                                 <i class='bx bxl-django mx-2 footer-icons'></i>
                                 Django
                             </a>
                         </li>
                         <li>
-                            <a href="https://getbootstrap.com/" class="footer-links">
+                            <a href="https://getbootstrap.com/" class="footer-links" rel="noopener"`>
                                 <i class='bx bxl-bootstrap mx-2 footer-icons'></i>
                                 Bootstrap 5
                             </a>
                         </li>
                         <li>
-                            <a href="https://django-ckeditor.readthedocs.io/en/latest/" class="footer-links">
+                            <a href="https://django-ckeditor.readthedocs.io/en/latest/" class="footer-links" rel="noopener"`>
                                 <i class='bx bx-library mx-2 footer-icons'></i>
                                 Ckeditor
                             </a>
                         </li>
                         <li>
-                            <a href="https://highlightjs.org/" class="footer-links">
+                            <a href="https://highlightjs.org/" class="footer-links" rel="noopener"`>
                                 <i class='bx bx-library mx-2 footer-icons'></i>
                                 Highlight.js
                             </a>

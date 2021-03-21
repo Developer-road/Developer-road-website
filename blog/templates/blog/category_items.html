@@ -1,6 +1,6 @@
 {% load extra_filters %}
 
-<div class="col-md-3 pt-3">
+<div class=" col-md-2 p-0 pt-3">
     <div class="div__categories">
         <a class="text-decoration-none text-black" href="{% url 'blog:categories_page' %}">
             Categories
@@ -10,5 +10,18 @@
             {{ item.name }}
         </a>
         {% endfor %}
+
+        <h1 class="mt-5 mb-2 text-center fw-bold fs-6 ">
+            Developer Road Blog
+            <i class="fas fa-code mx-3 icons-home fs-6"></i>
+        </h1>
+        <p class="mb-5 text-center">
+            Diverse
+            <span class="span__red">Programming tips</span>
+            and
+            <span class="span__red">tutorials</span>
+            of the most recent topics in the
+            <span class="span__red">Tech World</span>
+        </p>
     </div>
 </div>

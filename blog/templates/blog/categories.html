@@ -23,6 +23,8 @@ Page of Category: {{ category_name.title|title }}
     {% endif %}
 </div>
 
-{% include "blog/post_list.html"  with object=category_post %}
+<section class="container">
+    {% include "blog/post_list.html"  with object=category_post %}
+</section>
 
 {% endblock body_content %}
