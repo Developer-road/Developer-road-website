@@ -99,11 +99,13 @@ class ArticleDetail(CreateView):
     template_name = 'blog/details.html'
 
     def get_detail_post(self):
+
         return get_object_or_404(Post, id=self.kwargs['pk'])
 
     # Redirects when the comment is created
 
     def get_success_url(self, *args, **kwargs):
+        
         return reverse('blog:article_page', kwargs={'pk': self.kwargs['pk']})
 
     def get_context_data(self, **kwargs):
@@ -218,6 +220,24 @@ class CategoryListView(ListView):
 
     template_name = "blog/categories_list.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Excluded Pre created categories that has as image field None
+        categories_created_before_image_migration = Category.objects.exclude(
+            image=None)        
+
+        # Excluded Categories created after image field migration but without image
+
+        categories_created_without_images = Category.objects.exclude(
+            image="")
+
+        # Intersection between these two querysets
+
+        context["categories_with_image"] = categories_created_before_image_migration.intersection(categories_created_without_images)
+
+        return context
+    
 
 class CategoryCreateView(CreateView):
     """
@@ -229,6 +249,12 @@ class CategoryCreateView(CreateView):
     form_class = CreateCategoryForm
 
     template_name = "blog/add_category.html"
+
+
+    def get_success_url(self, *args, **kwargs):
+        
+        return reverse_lazy('blog:categories_page')
+    
 
 
 class CategoryUpdateView(UpdateView):
