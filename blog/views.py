@@ -257,11 +257,14 @@ class CategoryCreateView(CreateView):
 
     
 
-
 class CategoryUpdateView(UpdateView):
     model = Category
     form_class = CreateCategoryForm
     template_name = "blog/edit_category.html"
+    
+    def get_success_url(self, *args, **kwargs):
+        
+        return reverse_lazy('blog:categories_page')
 
 
 class EditPost(UpdateView):
