@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from ckeditor.fields import RichTextField
 
+
 # For pub date
 from datetime import date, datetime
 
@@ -10,6 +11,7 @@ from datetime import date, datetime
 from django.conf import settings
 
 from django_bleach.models import BleachField
+
 
 
 class Category(models.Model):
@@ -33,6 +35,7 @@ class Category(models.Model):
         upload_to="images/categories/",
         blank=True,
         null=True)
+
 
     def __str__(self):
         """

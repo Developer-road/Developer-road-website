@@ -191,7 +191,7 @@ class CategoryView(View):
         # Custom slug name
         # Terrible decision by the way
 
-        category_name = get_object_or_404(Category, name=cat.replace("-", " "))
+        category_name = get_object_or_404(Category, name__iexact=cat.replace("-", " "))
 
         try:
             category_post = Post.objects.filter(
@@ -254,6 +254,7 @@ class CategoryCreateView(CreateView):
     def get_success_url(self, *args, **kwargs):
         
         return reverse_lazy('blog:categories_page')
+
     
 
 

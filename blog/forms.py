@@ -48,6 +48,16 @@ class CreateCategoryForm(forms.ModelForm):
             'image': forms.FileInput(attrs={'class': 'form-control'}),
         }
 
+    def clean_name(self):
+
+        data = self.cleaned_data.get('name').lower()
+
+        if Category.objects.filter(name__iexact=data).count() >= 1:
+            raise forms.ValidationError('Sorry that category already exist')
+
+        return data
+
+
 
 class CommentForm(forms.ModelForm):
 
