@@ -50,11 +50,10 @@ class CreateCategoryForm(forms.ModelForm):
 
     def clean_name(self):
 
-        data = self.cleaned_data.get('name').lower()
+        data = self.cleaned_data.get('name')
 
         if Category.objects.filter(name__iexact=data).count() >= 1:
             raise forms.ValidationError('Sorry that category already exist')
-
         return data
 
 
