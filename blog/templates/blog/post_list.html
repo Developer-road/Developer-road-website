@@ -70,7 +70,7 @@
         {% if post.category and not category_hidden%}
         <div class="category mb-3">
             <span>
-                <a href="{% url 'blog:category_page'  post.category|myslug %}"
+                <a href="{{ post.category.get_absolute_url }}"
                     class="span__category text-decoration-none btn"
                     rel="noopener">
                 # {{ post.category }}
