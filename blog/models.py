@@ -24,7 +24,7 @@ class Category(models.Model):
                                 blank=True,
                                 null=True)
 
-    # A short description to the
+    # A short description for the category
     description = models.TextField(
         default="This category hasn't a description yet",
         blank=True,
@@ -44,7 +44,7 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("blog:blog_page")
+        return reverse("blog:category_page", args=[self.name.lower().replace(" ", "-")])
 
     @property
     def number_of_category_posts(self):
@@ -78,7 +78,7 @@ class Post(models.Model):
     # A optional relation with the category
     category = models.ForeignKey(
         Category,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         null=True,
         blank=True)
 
@@ -102,6 +102,7 @@ class Post(models.Model):
         return self.title + " by " + str(self.author)
 
     def get_absolute_url(self):
+        
         return reverse("blog:article_page", kwargs={"pk": self.pk})
 
     @property
