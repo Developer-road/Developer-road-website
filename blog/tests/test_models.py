@@ -130,10 +130,6 @@ class TestCategoryModel(TestCase):
         self.assertEquals(self.category2.number_of_category_posts, 0)
 
 
-
-
-
-
 class SetUpPostAndCommentMixin(object):
     def setUp(self):
         self.user1 = get_user_model().objects.create(
@@ -174,9 +170,13 @@ class SetUpPostAndCommentMixin(object):
             body="A cool comment 2"
         )
 
+        self.category1 = Category.objects.create(
+            name="category1",
+            description="A cool description"
+        )
 
 
-class TestCommentModel(SetUpPostAndCommentMixin,TestCase):
+class TestCommentModel(SetUpPostAndCommentMixin, TestCase):
     def test_comment_post_assignment(self):
 
         # Test the comment 1 is only assigned to post 1
@@ -213,11 +213,11 @@ class TestCommentModel(SetUpPostAndCommentMixin,TestCase):
         # Asserts that the comment doesn't exist when the user has been deleted
         self.assertFalse(Comment.objects.filter(commenter=commenter1).exists())
 
+
 class TestPostModel(SetUpPostAndCommentMixin, TestCase):
 
     def setUp(self):
         super().setUp()
-
 
         self.test_image = SimpleUploadedFile(
             name='test_image.jpg',
@@ -225,7 +225,145 @@ class TestPostModel(SetUpPostAndCommentMixin, TestCase):
             content_type='image/jpeg'
         )
 
+        self.image_post = Post.objects.create(
+            title="Image Post",
+            description="Hi there this is a Image Post",
+            author=self.user1,
+            category=self.category1,
+            header_image=self.test_image
+        )
 
+    def test_well_assigned_title(self):
+        self.assertEquals(self.image_post.title, "Image Post")
+
+    def test_post_author_DELETE_on_cascade(self):
+
+        post_id = self.image_post.id
+
+        self.assertTrue(Post.objects.filter(id=post_id).exists())
+
+        self.user1.delete()
+
+        self.assertFalse(Post.objects.filter(id=post_id).exists())
+
+    def test_post_author_email(self):
+
+        self.assertEquals(self.image_post.author.email, "user1@gmail.com")
+
+    def test_header_image_on_creation(self):
+
+        self.assertEquals(self.post1.header_image, None)
+
+        self.assertEquals(self.post2.header_image, None)
+
+        self.assertNotEquals(self.image_post.header_image, None)
+
+        self.assertTrue(self.image_post.header_image.url.startswith(
+            "/media/images/post_header/test_"))
+
+    def test_well_assigned_description(self):
+
+        self.assertIsNone(self.post1.description)
+        self.assertIsNone(self.post2.description)
+
+        self.assertEquals(self.image_post.description,
+                          "Hi there this is a Image Post")
+
+    def test_post_category_DELETE_set_null(self):
+
+        test_category = Category.objects.create(
+            name="category-test"
+        )
+
+        test_post = Post.objects.create(
+            title="Test project",
+            author=self.user1,
+            category=test_category,
+            body="Some body"
+        )
+
+        test_category_id = test_category.id
+
+        self.assertEquals(test_post.category, test_category)
+
+        self.assertTrue(Post.objects.filter(
+            category__id=test_category_id).exists())
+
+        test_category.delete()
+
+        # Since now the category1 doesn't exist the filtered object return False
+        self.assertFalse(Post.objects.filter(
+            category__id=test_category_id).exists())
+
+        self.assertTrue(Post.objects.filter(id=test_post.id).exists())
+
+    def test_post_upvotes_count(self):
+
+        self.assertEquals(self.image_post.upvotes.count(), 0)
+        self.assertEquals(self.post1.upvotes.count(), 0)
+        self.assertEquals(self.post2.upvotes.count(), 0)
+
+        self.image_post.upvotes.add(self.user1)
+
+        self.assertEquals(self.image_post.upvotes.count(), 1)
+
+        self.post1.upvotes.add(self.user1, self.user2)
+
+        self.assertEquals(self.post1.upvotes.count(), 2)
+
+        self.post1.upvotes.remove(self.user1)
+
+        self.assertEquals(self.post1.upvotes.count(), 1)
+
+        self.user2.delete()
+
+        self.assertEquals(self.post1.upvotes.count(), 0)
+
+    ###########################
+    #    Testing properties   #
+    ###########################
+
+    def testing_total_likes(self):
+
+        self.assertEquals(self.post1.total_likes(), 0)
+
+        self.post1.upvotes.add(self.user1)
+
+        self.assertEquals(self.post1.total_likes(), 1)
+
+    def test_post_get_absolute_url(self):
+        Cool_post = Post.objects.create(
+            title="A cool post xd",
+            body="Body",
+            author=self.user1
+        )
+
+        post_id = Cool_post.id
+
+        self.assertEquals(
+            Cool_post.get_absolute_url(),
+            reverse("blog:article_page", args=[post_id])
+        )
+
+        self.assertEquals(
+            Cool_post.get_absolute_url(),
+            reverse("blog:article_page", args=[post_id])
+        )
+
+        self.assertEquals(
+            Cool_post.get_absolute_url(),
+            f"/blog/article/{post_id}/"
+        )
+
+    def test_post_number_of_comments_property(self):
         
+        self.assertEquals(self.post1.number_of_comments, 1)
+        self.assertEquals(self.post2.number_of_comments, 1)
 
+        Comment.objects.create(
+            post=self.post1,
+            commenter=self.user1,
+            body="A comment xd"
+        )
 
+        self.assertEquals(self.post1.number_of_comments, 2)
