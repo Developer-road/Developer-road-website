@@ -63,6 +63,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Django extensions
+
+    'django_extensions',
+
     # Media Cloudinary
     'cloudinary',
     'cloudinary_storage',
