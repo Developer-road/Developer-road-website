@@ -131,3 +131,5 @@ dmypy.json
 # Media stuff, not pushed to git
 
 media/
+
+staticfiles/
