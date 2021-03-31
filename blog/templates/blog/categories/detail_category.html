@@ -15,7 +15,7 @@ Page of Category: {{ category_name.title|title }}
     <p class="mx-auto text-center text-muted">{{ category_name.description }}</p>
     {% if user.is_admin %}
         <div class="m-4">
-            <a href="{% url 'blog:category_edit' category_name.id %}"
+            <a href="{% url 'blog:edit_category' category_name.id %}"
                 class="btn-sm btn-danger rounded-pill text-decoration-none">
                 Edit Category
             </a>

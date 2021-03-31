@@ -1,0 +1,40 @@
+<div class="container mt-5">
+    <hr class="mt-5 mb-4" />
+    <div class="mt-2">
+        <h2 class="fw-bold mb-4">Comments</h2>
+        {% if post.number_of_comments %}
+        <span class="text-muted fst-italic">
+            {% if post.number_of_comments > 1 %} {{ post.number_of_comments }} comments
+            {% else %} {{post.number_of_comments}} comment
+            {% endif %}
+        </span>
+        {% else %}
+        <span class="text-muted fst-italic">No comments yet</span>
+        {% endif %}
+    </div>
+    <div class="mb-4 mt-4 fst-italic text-black-50">
+        <h3>Join the discussion!</h3>
+    </div>
+
+    {% if user.is_authenticated %}
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.body }}
+        <div class="text-muted">
+            {{ form.body.errors }}
+        </div>
+        <div class="mt-4 mb-5">
+            <button class="btn btn-danger btn-sm" type="submit">Add comment
+                <i class="fas fa-comments text-white px-2"></i>
+            </button>
+        </div>
+    </form>
+    {% else %}
+    <div class="mb-5 d-flex justify-content-start">
+        <a class="btn btn-outline-danger" href="{% url 'login' %}">Log in to add a comment!</a>
+    </div>
+    {% endif %}
+
+    {% include "blog/comments/comments.html" %}
+</div>

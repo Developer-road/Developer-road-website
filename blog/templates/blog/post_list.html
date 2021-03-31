@@ -6,7 +6,7 @@
 <article class="bg-white my-3 rounded">
     {% if post.header_image %}
     <div class="mb-3" >
-        <a href="{% url 'blog:article_page' post.pk %}" rel="noopener">
+        <a href="{% url 'blog:article' post.pk %}" rel="noopener">
             <img src="{{ post.header_image.url }}" alt="{{ post.author.first_name }} {{ post.author.last_name }} post" 
             class=" card-img-top " style="max-height: 250px; height: auto;"  loading="lazy">
         </a>
@@ -38,16 +38,16 @@
                             {{ post.author.first_name }} {{ post.author.last_name }}
                         </b>
                     </span>
-                    <span class="text-gray fs-6">{{ post.date|date:"d M y" }}</span>
+                    <span class="text-gray fs-6">{{ post.date|date:"M d, y" }}</span>
                 </div>
             </a>
         </div>
         {% else %}
-        <span class="ms-3">{{ post.date|date:"d M y" }}</span>
+        <span class="ms-3">{{ post.date|date:"M d, y" }}</span>
         {% endif %}
         {% if user.is_authenticated and  user.id == post.author.id %}
         <div class="p-3 d-none d-md-block">
-            <a href="{% url 'blog:delete_page' post.pk %}" class="btn btn-outline-danger" rel="noopener">
+            <a href="{% url 'blog:delete_article' post.pk %}" class="btn btn-outline-danger" rel="noopener">
                 <i class='bx bx-trash'></i>
                 Delete post
             </a>
@@ -56,7 +56,7 @@
     </div>
 
     <div class="blog-title semibold px-3 ms-2 ms-md-5 pb-2">
-        <a href="{% url 'blog:article_page' post.id %}" 
+        <a href="{% url 'blog:article' post.id %}" 
             class="text-decoration-none fs-5 fs-sm-4 title__color pb-2" 
             rel="noopener"
         >
@@ -78,7 +78,7 @@
             </span>
         </div>
         {% endif %}
-        <a href="{% url 'blog:article_page' post.id %}" class="text-decoration-none fs-5 fs-sm-4 title__color pb-2 d-flex align-items-center">
+        <a href="{% url 'blog:article' post.id %}" class="text-decoration-none fs-5 fs-sm-4 title__color pb-2 d-flex align-items-center">
             <i class='fs-6 fs-md-5 bx bx-upvote'></i><span class="fs-6 fs-md-5 mx-1">{{ post.total_likes }} Upvotes</span>
             <i class='fs-6 fs-md-5 bx bx-comment ms-2'></i><span class="fs-6 fs-md-5 mx-1">{{ post.number_of_comments }} Comments</span>
         </a>
@@ -86,7 +86,7 @@
 
     {% if user.is_authenticated and  user.id == post.author.id %}
     <div class="p-3 d-block d-md-none d-flex justify-content-center">
-        <a href="{% url 'blog:delete_page' post.pk %}" class="btn btn-outline-danger">
+        <a href="{% url 'blog:delete_article' post.pk %}" class="btn btn-outline-danger">
             <i class='bx bx-trash'></i>
             Delete post
         </a>
@@ -104,7 +104,7 @@
     <p class="fs-4 mb-0">Try to make another search</p>
     <p class="fs-5 mb-5">
         Or 
-        <a href="{% url 'blog:add_post' %}" class="link-danger">
+        <a href="{% url 'blog:create_article' %}" class="link-danger">
             Start writing!
         </a>
     </p>

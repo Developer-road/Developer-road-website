@@ -1,0 +1,46 @@
+<div class="d-block d-md-none card mb-3 p-3 div__profileCard d-flex flex-md-row align-items-center">
+    <a href="{% url 'members:profile' post.author.id%}" class="d-flex justify-content-center">
+        <img title="{{ post.author.first_name }} {{ post.author.last_name }}"
+            class="rounded-circle mb-2 mt-3 w-50 img__cardPostDeails" src="{{ post.author.profile_image.url }}"
+            alt="{{ post.author.first_name }} {{ post.author.last_name }}" />
+    </a>
+    <div class="w-75">
+        <a href="{% url 'members:profile' post.author.id%}" class="text-decoration-none text-dark">
+            <h4 class="card-title text-center text-md-start">{{ post.author.first_name }}
+                {{ post.author.last_name }}</h4>
+        </a>
+        <p class="card-text text-gray text-center text-sm-start">{{ post.author.description }}</p>
+
+        <div class="d-flex justify-content-center mt-3">
+            {% if post.author.website_url %}
+            <a class="px-3 text-decoration-none text-red" href="{{ post.author.website_url }}" target="_blank">
+                <i class="fas fa-cloud-upload-alt" title="Author Website"></i>
+            </a>
+            {% endif %}
+
+            {% if post.author.instagram_url %}
+            <a class="px-3 text-decoration-none text-red" href="{{ post.author.instagram_url }}" target="_blank">
+                <i class="fab fa-instagram" title="Author Instagram"></i>
+            </a>
+            {% endif %}
+
+            {% if post.author.github_url %}
+            <a class="px-3 text-decoration-none text-red" href="{{ post.author.github_url }}" target="_blank">
+                <i class="fab fa-github" title="Author Github"></i>
+            </a>
+            {% endif %}
+
+            {% if post.author.twitter_url %}
+            <a class="px-3 text-decoration-none text-red" href="{{ post.author.twitter_url }}" target="_blank">
+                <i class="fab fa-twitter" title="Author Twitter"></i>
+            </a>
+            {% endif %}
+
+            {% if post.author.linkedin_url %}
+            <a class="px-3 text-decoration-none text-red" href="{{ post.author.linkedin_url }}" target="_blank">
+                <i class="fab fa-linkedin" title="Author Linkedin"></i>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>

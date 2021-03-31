@@ -10,7 +10,7 @@
         <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <p>There is not the category you are looking for?<br>
-                <a href="{% url 'blog:add_category' %}" class="link-danger">Create one</a>
+                <a href="{% url 'blog:create_category' %}" class="link-danger">Create one</a>
             </p>
             <hr>
             {{ form.as_p }}

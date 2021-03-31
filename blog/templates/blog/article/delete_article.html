@@ -18,7 +18,7 @@
                 <p>This action is irreversible</p>
             </form>
         </div>
-        <a href="{% url 'blog:article_page' post.pk %}" class="btn btn-primary btn-sm">Cancel</a>
+        <a href="{% url 'blog:article' post.pk %}" class="btn btn-primary btn-sm">Cancel</a>
     {% else %}
         <h1>Sorry, You are not allowed to Delete this Post</h1>
     {% endif %}

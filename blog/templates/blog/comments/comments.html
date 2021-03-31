@@ -14,7 +14,7 @@
         </a>
         <span class="fst-italic font-size-abv-comments">
             {{ comment.commenter }} <span class="px-3">·</span>
-            {{ comment.date_added }}
+            {{ comment.date_added|date:"M d, y" }}
         </span>
     </div>
     <div class="card-body">

@@ -12,13 +12,21 @@ Python, Javascript, Frontend, Backend and Django Web Framework.
 {% block body_content %}
 <section class=" h-100 w-100 d-flex flex-column flex-md-column align-items-center">
     <div class="row mw-100 d-flex flex-column-reverse flex-md-row">
-        {% include "blog/category_items.html" %}
+        {% include "blog/categories/items.html" %}
+
         <section class="col col-md-10 p-0 px-md-5">
-            {% include "blog/post_list.html"  with object=page_obj %}
+            {% block listing %}
+                {% include "blog/listing/filter.html" %}
+            {% endblock listing %}
+            {% block post_list %}
+                {% include "blog/post_list.html"  with object=page_obj %}
+            {% endblock post_list %}
         </section>
     </div>
-    {% if page_obj.paginator.num_pages > 1 %}
+
+    {% block paginator %} {% if page_obj.paginator.num_pages > 1 %}
     {% include 'blog/pagination.html' with page_obj=page_obj %}
     {% endif %}
+    {% endblock paginator %}
 </section>
 {% endblock body_content %}

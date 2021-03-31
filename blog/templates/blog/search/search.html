@@ -1,0 +1,15 @@
+{% extends 'blog/blog_home.html' %}
+
+{% block title %}Search | {{string_query|title}}{% endblock title %}
+
+{% block post_list %}
+{% include "blog/post_list.html"  with object=posts %}
+{% endblock post_list %}
+
+{% block listing %}
+{% comment %} Doesn't show listing {% endcomment %}
+{% endblock listing %}
+
+{% block paginator %}
+{% comment %} Doesn't show paginator {% endcomment %}
+{% endblock paginator %}

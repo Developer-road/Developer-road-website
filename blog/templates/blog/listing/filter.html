@@ -1,0 +1,18 @@
+<div
+    class="d-flex flex-md-row justify-content-center justify-content-lg-end justify-content-xll-end justify-content-xl-end">
+    <div class="filter-collection my-3">
+        <a href="?filter=newest"
+            class="btn 
+            btn__top 
+            text-my-black 
+            {% if request.GET.filter != "liked" and request.GET.filter != "commented" %}btn__top--active{% endif %} ">Newest</a>
+        <a href="?filter=liked" class="btn 
+            btn__top 
+            text-my-black
+            {% if request.GET.filter == "liked" %}btn__top--active{% endif %}">Liked</a>
+        <a href="?filter=commented" class="btn 
+        btn__top 
+        text-my-black
+        {% if request.GET.filter == "commented"%}btn__top--active{% endif %}">Commented</a>
+    </div>
+</div>

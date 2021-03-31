@@ -1,8 +1,14 @@
 {% load extra_filters %}
 
 <div class=" col-md-2 p-0 pt-3">
+    {% comment %} Search stuff {% endcomment %}
+    {% if string_query %}
+    <div class="d-flex align-items-center my-4 text-align-center">
+        <h3 class="text-my-black"><b>Results:</b> {{string_query|title}}</h2>
+    </div>
+    {% endif %}
     <div class="div__categories">
-        <a class="text-decoration-none text-black" href="{% url 'blog:categories_page' %}">
+        <a class="text-decoration-none text-black" href="{% url 'blog:categories' %}">
             Categories
         </a>
         {% for item in cat_items %}
