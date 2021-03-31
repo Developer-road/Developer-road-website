@@ -1,3 +1,6 @@
+"""Blog Views"""
+
+# Django
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, RedirectView, FormView
 from django.views import View
@@ -6,153 +9,145 @@ from django.http import HttpResponseRedirect
 
 # Search functionality
 from django.db.models import Q
-
-
 from django.db.models import Count
 
 # Import the Post object and Category object
+from .models import (Post,
+                     Category,
+                     Comment
+                     )
 
-from .models import Post, Category, Comment
+from .forms import (PostForm,
+                    EditPostForm,
+                    CreateCategoryForm,
+                    EditCategoryForm,
+                    CommentForm,
+                    )
 
-from .forms import PostForm, EditPostForm, CreateCategoryForm, CommentForm
+# All Categories
+from .utils import ALL_CATEGORIES
 
+class BaseBlogListView(ListView):
+    """Base view blog list view:
 
+    queryset: The default queryset is ordered by the 
+    newest published  
 
-ALL_CATEGORIES = Category.objects.all()
+    template: /blog/blog_home.html
 
-class BlogView(ListView):
-    """
-    View that shows the list of all the newest
+    context: categories with most posts
     """
     model = Post
-    queryset = Post.objects.order_by('-date')
     paginate_by = 6
-    template_name = 'blog/index.html'
+    template_name = 'blog/blog_home.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["cat_items"] = ALL_CATEGORIES
+    def get_if_parameter_in_request(self, parameter):
 
-        return context
+        return parameter in self.request.GET
 
-class BlogMostLikedView(ListView):
-    """
-    View that shows the list of all the existent blogs
-    """
-    model = Post
-    queryset = Post.objects.annotate(most_liked=Count("upvotes")).order_by('-most_liked')
-    paginate_by = 6
-    template_name = 'blog/index.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["cat_items"] = ALL_CATEGORIES
-
-        return context
-
-
-
-class BlogSearchView(ListView):
-    """
-    View that shows the list of all the existent blogs
-    """
-    model = Post
-    # queryset = Post.objects.order_by('-date')
-
-    # paginate_by = 4
-    template_name = 'blog/search.html'
-
-    def get_queryset(self):  # new
-        if "q" in self.request.GET:
-            if str(self.request.GET.get('q')) not in ["", " "]:
-                query = self.request.GET.get('q')
-                object_list = Post.objects.filter(
-                    Q(title__icontains=query) | Q(
-                        description__icontains=query) | Q(body__icontains=query)
-                ).distinct().order_by("-date")
-            else:
-                object_list = None
-            return object_list
+    def get_content_of_parameter_in_request(self, parameter):
+        if self.get_if_parameter_in_request(parameter):
+            return str(self.request.GET.get(parameter))
         else:
-            object_list = None
-            return object_list
+            return None
+
+    def get_content_of_parameter_in_request_no_assertion(self, parameter):
+        return str(self.request.GET.get(parameter))
+
+    def get_queryset(self):
+        query = self.get_content_of_parameter_in_request("filter")
+
+        if query == "liked":
+            # returns the most liked posts
+            return self.model.objects.annotate(
+                most_liked=Count("upvotes")).order_by("-most_liked")
+        
+        elif query == "commented":
+            return self.model.objects.annotate(
+                most_commented=Count("comment")).order_by("-most_commented")
+
+        # If there isn't filter, Posts are ordered by date
+        return self.model.objects.all().order_by("-date")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["cat_items"] = Category.objects.all()
-
-        query = "No search"
-        if "q" in self.request.GET:
-            query = str(self.request.GET.get('q'))
-        context["string_query"] = query
+        context["cat_items"] = ALL_CATEGORIES[:5]
 
         return context
 
 
-class ArticleDetail(CreateView):
+class BaseBlogSearchView(BaseBlogListView):
+    """Extends BaseBlogListView
+    Same parameters and models
+    Adds search functionality
+
+    queryset: Latest(Default), Most liked (?filter=liked), search (?q={SEARCH query})
+    context: Main category items, string of ?q query
+
+    Doesn't paginate
     """
-    View that shows in detail the chosen blog post.
+
+    paginate_by = None
+    context_object_name = "posts"
+
+    def get_queryset(self):
+        search_queryset = None
+
+        search_parameter = self.get_content_of_parameter_in_request("q")
+        # If q is in the request, the process continues
+        # If q is in the request and it isn't empty gets the query results
+        if search_parameter not in ["", " "] and search_parameter is not None:
+
+            # Get the query from the request
+            query = search_parameter
+
+            search_queryset = self.model.objects.filter(
+                Q(title__icontains=query) | Q(
+                    description__icontains=query) | Q(body__icontains=query)
+            ).distinct().order_by("-date")
+
+        return search_queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["string_query"] = self.get_content_of_parameter_in_request("q")
+        return context
+
+
+class BlogView(BaseBlogListView):
     """
+    View that shows the list of all the newest blog posts
+    """
+
+
+class BlogSearchView(BaseBlogSearchView):
+    """
+    View that shows the list of all the newest blog posts
+    """
+
+    template_name = "blog/search/search.html"
+
+
+class BaseCreateCommentView(CreateView):
+
+    """Base Create Comment
+
+    Extends from Create view
+
+    Involves all the functionality of creating a commeny:
+    - Success url
+    - Form validation
+    """
+
+    # Creates a comment
     model = Comment
     form_class = CommentForm
-
-    template_name = 'blog/details.html'
-
-    def get_detail_post(self):
-
-        return get_object_or_404(Post, id=self.kwargs['pk'])
-
-    # Redirects when the comment is created
+    template_name = 'blog/article/detail_article.html'
 
     def get_success_url(self, *args, **kwargs):
-        
-        return reverse('blog:article_page', kwargs={'pk': self.kwargs['pk']})
+        return reverse('blog:article', kwargs={'pk': self.kwargs['pk']})
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        detail_post = self.get_detail_post()
-
-        # Pass the detail post as the object
-        context["post"] = detail_post
-
-        # Calls the Post property of counting the upvotes of the post
-        context["upvotes"] = detail_post.total_likes()
-
-        upvoted = False
-
-        if detail_post.upvotes.filter(id=self.request.user.id).exists():
-            upvoted = True
-
-        context["upvoted"] = upvoted
-
-        try:
-            context["comments"] = list(Comment.objects.filter(
-                post_id=detail_post.id).order_by('-date_added'))
-        except:
-            context["comments"] = None
-
-        recent = True
-        other_posts = Post.objects.all().order_by('-date')[:4]
-
-        if detail_post.category:
-            # If the post has a category, related posts are from the category
-
-            related_posts = list(Post.objects.filter(
-                category=detail_post.category))
-
-            # We have to take into account the same post
-
-            if len(related_posts) > 1:
-                other_posts = related_posts
-                recent = False
-
-        context["recent"] = recent
-        context["other_posts"] = other_posts
-
-        return context
-
-    # Validate the form with the user, and post
+    # Validates the form with the user, and post
     def form_valid(self, form):
 
         detail_post = self.get_detail_post()
@@ -166,24 +161,76 @@ class ArticleDetail(CreateView):
         return super().form_valid(form)
 
 
-class PostCreateView(CreateView):
-    """
-    Used to create a brand new blog post
+class BaseArticleDetailView(BaseCreateCommentView):
+    """Base Article Detail View
+    Extends Base Create Comment class
+
+    Gets all the detail article related information
     """
 
-    model = Post
-    form_class = PostForm
-    template_name = "blog/add_post.html"
-    # fields = "__all__"
+    # Returns the detail post
+    def get_detail_post(self):
+        return get_object_or_404(Post, id=self.kwargs['pk'])
 
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super(PostCreateView, self).form_valid(form)
+    def get_context_data(self, **kwargs):
+        # Gets the previous info
+        context = super().get_context_data(**kwargs)
+
+        # Get the post with the self.pk
+        detail_post = self.get_detail_post()
+
+        # Pass the detail post as the object
+        context["post"] = detail_post
+
+        # Calls the Post property of counting the upvotes of the post
+        context["upvotes"] = detail_post.total_likes()
+
+        upvoted = False
+
+        # If the post has upvotes it means it's upvoted
+        if detail_post.upvotes.filter(id=self.request.user.id).exists():
+            upvoted = True
+
+        context["upvoted"] = upvoted
+
+        try:
+            # Gets all the related comments
+            context["comments"] = Comment.objects.filter(
+                post=detail_post).order_by('-date_added')
+
+        except Comment.DoesNotExist:
+            context["comments"] = None
+
+        recent = True
+        other_posts = Post.objects.all().order_by('-date')[:4]
+
+        if detail_post.category:
+            # If the post has a category, related posts are from the category
+
+            related_posts = Post.objects.filter(
+                category=detail_post.category).exclude(id=self.get_detail_post().id)
+
+            if related_posts.count() > 0:
+                other_posts = related_posts
+                recent = False
+
+        context["recent"] = recent
+        context["other_posts"] = other_posts
+
+        return context
+
+
+class ArticleDetail(BaseArticleDetailView):
+    """
+    View that shows in detail the chosen blog post.
+    """
 
 
 class CategoryView(View):
     """
     Display a category page
+
+    Takes from the url the name with hypens and gets the object from the database
     """
 
     def get(self, request, cat):
@@ -191,12 +238,15 @@ class CategoryView(View):
         # Custom slug name
         # Terrible decision by the way
 
-        category_name = get_object_or_404(Category, name__iexact=cat.replace("-", " "))
+        category_name = get_object_or_404(
+            Category, name__iexact=cat.replace("-", " "))
 
         try:
             category_post = Post.objects.filter(
-                category_id=category_name.id).order_by("-date")
+                category=category_name).order_by("-date")
+
         except Post.DoesNotExist:
+
             category_post = None
 
         context = {}
@@ -208,24 +258,23 @@ class CategoryView(View):
         # This is to don't show the category link
         context["category_hidden"] = True
 
-        return render(request, "blog/categories.html", context)
+        return render(request, "blog/categories/detail_category.html", context)
 
 
 class CategoryListView(ListView):
 
     model = Category
 
-    queryset = Category.objects.annotate(
-        post_count=Count('post')).order_by("-post_count")
+    queryset = ALL_CATEGORIES
 
-    template_name = "blog/categories_list.html"
+    template_name = "blog/categories/all_categories.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         # Excluded Pre created categories that has as image field None
         categories_created_before_image_migration = Category.objects.exclude(
-            image=None)        
+            image=None)
 
         # Excluded Categories created after image field migration but without image
 
@@ -234,37 +283,49 @@ class CategoryListView(ListView):
 
         # Intersection between these two querysets
 
-        context["categories_with_image"] = categories_created_before_image_migration.intersection(categories_created_without_images)
+        context["categories_with_image"] = categories_created_before_image_migration.intersection(
+            categories_created_without_images)
 
         return context
+
+
+class BaseCategoryData:
+
+    model = Category
+
+    form_class = CreateCategoryForm
+
+    template_name = "blog/categories/create_category.html"
+
+    def get_success_url(self, *args, **kwargs):
+        return reverse('blog:categories')
     
 
-class CategoryCreateView(CreateView):
+class CategoryCreateView(BaseCategoryData, CreateView):
     """
     Used to create a new blog category
     """
 
-    model = Category
 
-    form_class = CreateCategoryForm
+class CategoryUpdateView(BaseCategoryData, UpdateView):
 
-    template_name = "blog/add_category.html"
+    form_class = EditCategoryForm
+
+    template_name = "blog/categories/edit_category.html"
 
 
-    def get_success_url(self, *args, **kwargs):
-        
-        return reverse_lazy('blog:categories_page')
+class PostCreateView(CreateView):
+    """
+    Used to create a brand new blog post
+    """
 
-    
+    model = Post
+    form_class = PostForm
+    template_name = "blog/article/create_article.html"
 
-class CategoryUpdateView(UpdateView):
-    model = Category
-    form_class = CreateCategoryForm
-    template_name = "blog/edit_category.html"
-    
-    def get_success_url(self, *args, **kwargs):
-        
-        return reverse_lazy('blog:categories_page')
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super(PostCreateView, self).form_valid(form)
 
 
 class EditPost(UpdateView):
@@ -275,7 +336,6 @@ class EditPost(UpdateView):
     model = Post
     template_name = 'blog/edit_post.html'
     form_class = EditPostForm
-    # fields = ('title','meta_description', 'body')
 
 
 class PostDeleteView(DeleteView):
@@ -283,8 +343,8 @@ class PostDeleteView(DeleteView):
     Used to Delete A post
     """
     model = Post
-    template_name = "blog/delete_post.html"
-    success_url = reverse_lazy("blog:blog_page")
+    template_name = "blog/article/delete_article.html"
+    success_url = reverse_lazy("blog:home")
 
 
 def VoteView(request, pk):
@@ -294,4 +354,4 @@ def VoteView(request, pk):
         post.upvotes.remove(request.user)
     else:
         post.upvotes.add(request.user)
-    return HttpResponseRedirect(reverse('blog:article_page', args=[str(pk)]))
+    return HttpResponseRedirect(reverse('blog:article', args=[str(pk)]))
