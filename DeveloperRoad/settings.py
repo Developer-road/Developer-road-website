@@ -225,9 +225,9 @@ MEDIA_ROOT = join(BASE_DIR, 'media')
 
 # Redirect login button to login default template
 
-LOGIN_REDIRECT_URL = 'blog:blog_page'
+LOGIN_REDIRECT_URL = 'blog:home'
 
-LOGOUT_REDIRECT_URL = 'blog:blog_page'
+LOGOUT_REDIRECT_URL = 'blog:home'
 
 # BLEACH STUFF
 # Which HTML tags are allowed
