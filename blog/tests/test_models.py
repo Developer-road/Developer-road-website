@@ -12,12 +12,7 @@ from blog.models import (
     Comment,
 )
 
-SMALL_GIF = (
-    b'\x47\x49\x46\x38\x39\x61\x01\x00\x01\x00\x00\x00\x00\x21\xf9\x04'
-    b'\x01\x0a\x00\x01\x00\x2c\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02'
-    b'\x02\x4c\x01\x00\x3b'
-)
-
+from blog.utils import SMALL_GIF, SIMPLE_IMAGE
 
 class TestCategoryModel(TestCase):
 
@@ -41,7 +36,7 @@ class TestCategoryModel(TestCase):
         # It uploads to media folder when test is runned
         self.test_image = SimpleUploadedFile(
             name='test_image.jpg',
-            content=b"Lets grab a \xf0\x9f\x8d\x95!",
+            content=SIMPLE_IMAGE,
             content_type='image/jpeg'
         )
 
@@ -94,12 +89,12 @@ class TestCategoryModel(TestCase):
 
         self.assertEquals(
             self.category1.get_absolute_url(),
-            reverse("blog:category_page", args=["category1"])
+            reverse("blog:category", args=["category1"])
         )
 
         self.assertEquals(
             spaces_category.get_absolute_url(),
-            reverse("blog:category_page", args=["a-cool-category-xd"])
+            reverse("blog:category", args=["a-cool-category-xd"])
         )
 
     def test_property_number_of_category_posts_NO_POSTS(self):
@@ -342,12 +337,12 @@ class TestPostModel(SetUpPostAndCommentMixin, TestCase):
 
         self.assertEquals(
             Cool_post.get_absolute_url(),
-            reverse("blog:article_page", args=[post_id])
+            reverse("blog:article", args=[post_id])
         )
 
         self.assertEquals(
             Cool_post.get_absolute_url(),
-            reverse("blog:article_page", args=[post_id])
+            reverse("blog:article", args=[post_id])
         )
 
         self.assertEquals(
