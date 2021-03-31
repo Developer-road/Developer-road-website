@@ -2,7 +2,7 @@
 
 <header class="header-base">
   <nav class="nav-base header-nav d-flex align-items-center justify-content-between ps-4">
-    <a class="text-decoration-none" href="{% url 'blog:blog_page' %}">
+    <a class="text-decoration-none" href="{% url 'blog:home' %}">
       <h1 class="d-flex">
         <span class="d-none d-md-block fs-4 text-white m-0">DeveloperRoad</span> <i class="fas fa-code mx-3 icons-home fs-4"></i>
       </h1>
@@ -13,7 +13,7 @@
       </a>
       <div class="d-none d-sm-block animate__animated  animate__slideInDown" id="div_showSearchBar">
         {% comment %} Search bar {% endcomment %} 
-        {% include "blog/search_bar.html" %}
+        {% include "blog/search/search_bar.html" %}
       </div>
     </div>
 
@@ -22,7 +22,7 @@
       <li class="mx-2">
           <a
             class="nav-links text-decoration-none"
-            href="{% url 'blog:blog_page' %}"
+            href="{% url 'blog:home' %}"
           >
           <i class='fs-3 bx bx-user-voice text-white'></i>
           </a>
@@ -40,7 +40,7 @@
         <li class="mx-2">
           <a
             class="nav-links text-decoration-none"
-            href="{% url 'blog:categories_page' %}"
+            href="{% url 'blog:categories' %}"
           >
           <i class='bx bx-category text-white' ></i>
             Categories
@@ -58,7 +58,7 @@
       </ul>
       {% if user.is_authenticated %}
       <li>
-         <a class="nav-links text-decoration-none" href="{% url 'blog:add_post' %}">
+         <a class="nav-links text-decoration-none" href="{% url 'blog:create_article' %}">
            <i class='fs-3 mx-3 bx bx-plus text-white'></i>
         </a>
       </li>
