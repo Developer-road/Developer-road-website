@@ -44,7 +44,7 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("blog:category_page", args=[self.name.lower().replace(" ", "-")])
+        return reverse("blog:category", args=[self.name.lower().replace(" ", "-")])
 
     @property
     def number_of_category_posts(self):
@@ -80,7 +80,8 @@ class Post(models.Model):
         Category,
         on_delete=models.SET_NULL,
         null=True,
-        blank=True)
+        blank=True,
+        related_name="linked_posts")
 
     # The content of the post
     body = RichTextField()
@@ -103,7 +104,7 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         
-        return reverse("blog:article_page", kwargs={"pk": self.pk})
+        return reverse("blog:article", kwargs={"pk": self.pk})
 
     @property
     def number_of_comments(self):
