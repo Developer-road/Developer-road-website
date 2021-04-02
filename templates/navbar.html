@@ -1,41 +1,129 @@
 {% load static %}
 
-<div class="nav-container">
-    <nav class="my-navbar overlay">
+<header class="header-base">
+  <nav class="nav-base header-nav d-flex align-items-center justify-content-between ps-4">
+    <a class="text-decoration-none" href="{% url 'blog:home' %}">
+      <h1 class="d-flex">
+        <span class="d-none d-md-block fs-4 text-white m-0">DeveloperRoad</span> <i class="fas fa-code mx-3 icons-home fs-4"></i>
+      </h1>
+    </a>
+    <div class="div__search px-md-5">
+      <a href="#" id="a_search" class="text-decoration-none">
+        <i class='d-sm-none text-white fs-3 bx bx-search-alt-2' ></i>
+      </a>
+      <div class="d-none d-sm-block animate__animated  animate__slideInDown" id="div_showSearchBar">
+        {% comment %} Search bar {% endcomment %} 
+        {% include "blog/search/search_bar.html" %}
+      </div>
+    </div>
 
-        {% comment %} Logo navbar {% endcomment %}
-        <div class="logo">
-            <a href="{% url 'home:home_page' %}">
-                <h1>DeveloperRoad</h1>
+    <ul class="h-100 p-0 m-0 d-flex d-flex align-items-center position-relative">
+      <li id="iconDropDown" ><i class='fs-3  bx bxs-category-alt text-white'></i></li>
+      <li class="mx-2">
+          <a
+            class="nav-links text-decoration-none"
+            href="{% url 'blog:home' %}"
+          >
+          <i class='fs-3 bx bx-user-voice text-white'></i>
+          </a>
+        </li>
+      <ul id="menuLinks" class="ul_dropDown-none animate__animated  animate__slideInDown">
+        <li class="mx-2">
+          <a
+            class="nav-links text-decoration-none"
+            href="{% url 'home:home_page' %}"
+          >
+          <i class='bx bx-home'></i>
+            Home
+          </a>
+        </li>
+        <li class="mx-2">
+          <a
+            class="nav-links text-decoration-none"
+            href="{% url 'blog:categories' %}"
+          >
+          <i class='bx bx-category text-white' ></i>
+            Categories
+          </a>
+        </li>
+        <li class="mx-2">
+          <a
+            class="nav-links text-decoration-none"
+            href="{% url 'about:about_page' %}"
+          >
+          <i class='bx bx-info-circle text-white' ></i>
+            About
+          </a>
+        </li>
+      </ul>
+      {% if user.is_authenticated %}
+      <li>
+         <a class="nav-links text-decoration-none" href="{% url 'blog:create_article' %}">
+           <i class='fs-3 mx-3 bx bx-plus text-white'></i>
+        </a>
+      </li>
+      <li class="d-flex">
+        <ul class="h-100 m-0 p-0">
+          <li class="nav-item dropdown">
+            {% comment %} Avatar {% endcomment %}
+            <a
+              class="nav-link text-decoration-none  d-flex flex-row-reverse align-items-center w-100"
+              href="#"
+              id="navbarDropdownMenuLink"
+            >
+            
+              <img
+                src="{{ user.profile_image.url }}"
+                alt="{{ user.first_name }} {{user.last_name}}"
+                class="rounded-circle mx-2"
+                height="40"
+                width="40"
+                loading="lazy"
+              />
             </a>
-        </div>
-        {% comment %} Navbar links for the page {% endcomment %}
-        <ul class="my-nav-menu">
-            <li><a class="nav-links" href="{% url 'home:home_page' %}">Home</a></li>
-            <li><a class="nav-links" href="{% url 'about:about_page' %}">About</a></li>
-            <li><a class="nav-links" href="{% url 'contact:contact_page' %}">Contact us</a></li>
-            <li><a class="nav-links" href="{% url 'projects:my_projects' %}">Projects</a></li>
-            <li><a class="nav-links" href="{% url 'blog:blog_page' %}">Blog</a></li>
-            {% if user.is_authenticated %}
-            <div class="navbar-image-phone dropdown">
-                <img src="{{ user.profile_image.url }}" alt="{{ user.first_name }} {{user.last_name}}"
-                    class="rounded-circle user-navbar-image dropdown-toggle" id="navbarDarkDropdownMenuLink" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                <ul class="dropdown-menu dropdown-menu-dark">
-                    <li class="ps-2"><a class="nav-links" href="{% url 'members:profile' user.id %}">Your Profile</a></li>
-                    <li class="ps-2"><a class="nav-links" href="{% url 'logout' %}">Logout</a></li>
-                </ul>
-            </div>
-            {% else %}
-            <li><a class="nav-links sign-button" href="{% url 'login' %}">Sign in</a></li>
-            {% endif %}
-        </ul>
-        {% comment %} hamburger menu {% endcomment %}
-        <div class="menu-toggle" id="mobile-menu">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-        </div>
 
-    </nav>
-</div>
+            <ul
+              class="ul_dropDown-none animate__animated  animate__slideInDown h-100 m-0"
+              id="ulDropDown"
+              aria-labelledby="navbarDropdownMenuLink"
+            >
+              <li class="d-md-block d-md-none w-100">
+                <p class="text-white p__dropDownUserName text-center">
+                  {{ user.first_name }}
+                </p>
+              </li>
+              <li>
+                <a
+                  class="nav-links text-decoration-none"
+                  href="{% url 'members:profile' user.id %}"
+                  >
+                  <i class='bx bx-user text-white'></i>
+                  My Profile
+                </a>
+              </li>
+              <li>
+                <a
+                  class="nav-links text-decoration-none"
+                  href="{% url 'logout' %}"
+                  >
+                  <i class='bx bx-log-out text-white' ></i>
+                  Logout</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      {% else %}
+      <li class="w-100">
+        <a
+          class="text-white sign-button text-decoration-none p-2 ms-4 me-2 me-md-4 bt btn-sm"
+          href="{% url 'login' %}"
+          >
+          Sign in
+          </a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+</header>

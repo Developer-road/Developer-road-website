@@ -1,0 +1,24 @@
+<div class="d-none d-md-block col-3 mt-4 sticky-top border h-25 blog__itemsSticky ">
+    <div class="blog__itemStikyBackground"></div>
+    <a href="{% url 'members:profile' post.author.id%}" class="
+                w-100
+                d-flex
+                flex-column 
+                align-items-center 
+                text-decoration-none 
+                text-gray
+                a__zIndex
+        ">
+        <div class="w-100 d-flex align-items-center justify-content-start py-3">
+            <span class="px-2">
+                <img src="{{ post.author.profile_image.url }}" alt="" class="rounded-circle center-phone-none" width=50
+                    height=50 />
+            </span>
+            <span class="ms-1 text-gray mt-2">{{ post.author.first_name }} {{ post.author.last_name }}</span>
+        </div>
+        <span class="mx-2 text-center">{{ post.author.description }}</span>
+        <span class="d-flex align-items-center py-2">
+            <i class='bx bxs-cake me-2'></i> Joined on {{ post.author.date_joined|date:"M d, Y" }}
+        </span>
+    </a>
+</div>

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Add a post{% endblock title %}
+
+{% block body_content %}
+{% if user.is_authenticated %}
+    <h1 class="mt-3">Add post</h1>
+    <div class="form-group">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>There is not the category you are looking for?<br>
+                <a href="{% url 'blog:create_category' %}" class="link-danger">Create one</a>
+            </p>
+            <hr>
+            {{ form.as_p }}
+            {{ form.media}}
+            <button type="submit" class="btn form-btn mb-3">Post</button>
+        </form>
+    </div>
+{% else %}
+    <h1>Sorry. You are not Allowed to add a Post</h1>
+{% endif %}
+
+{% endblock body_content %}

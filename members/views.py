@@ -23,7 +23,7 @@ class SignUpView(generic.CreateView):
     """
     form_class = SignUpForm
     template_name = "registration/singup.html"
-    success_url = reverse_lazy('blog:blog_page')
+    success_url = reverse_lazy('blog:home')
 
     # If the form is valid it directly login the user and redirect him to the blog.
 
@@ -79,11 +79,16 @@ class ShowProfileView(DetailView):
         requested_user = get_object_or_404(self.model, id=self.kwargs['pk'])
         
         context["requested_user"] = requested_user
+        context["user_posts_count"] = None
+
         # Blog Stuff Only use in Blog Project
         try:
             # Returns a list of the Post of the requested user, if he has none it passes none
             context["user_posts"] = list(Post.objects.filter(
                 author_id=requested_user.id).order_by("-date"))
+            
+            context["user_posts_count"] = len(context["user_posts"])
+
         except Post.DoesNotExist:
             context["user_posts"] = None
 

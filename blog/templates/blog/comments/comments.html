@@ -1,0 +1,26 @@
+{% load static %}
+{% load extra_filters %}
+{% load bleach_tags %}
+
+{% comment %} Iterate over the comments {% endcomment %}
+
+{% for comment in comments %}
+<div class="card border-light card__relavant w-75">
+    <div class="card-header">
+        <a href="{% url 'members:profile' post.author.id%}" class="text-decoration-none">
+            <span class="px-3">
+                <img src="{{ comment.commenter.profile_image.url }}" alt="" class="rounded-circle" width=30 height=30 />
+            </span>
+        </a>
+        <span class="fst-italic font-size-abv-comments">
+            {{ comment.commenter }} <span class="px-3">·</span>
+            {{ comment.date_added|date:"M d, y" }}
+        </span>
+    </div>
+    <div class="card-body">
+        <p class="card-text">{{ comment.body|bleach }}</p>
+    </div>
+</div>
+{% empty %}
+<h3 class="my-4">Be the first in make a comment!</h3>
+{% endfor %}

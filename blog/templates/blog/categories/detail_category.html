@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load extra_filters %}
+{% block title %}{{ category_name.name|title }}{% endblock title %}
+
+{% block description %}
+Page of Category: {{ category_name.title|title }}
+{% endblock description %}
+
+
+{% block body_content %}
+
+<div class="posts my-5 mx-auto text-center">
+    <h2 class="fw-bold">{{ category_name.name|title }}</h2>
+    <p class="mx-auto text-center text-muted">{{ category_name.description }}</p>
+    {% if user.is_admin %}
+        <div class="m-4">
+            <a href="{% url 'blog:edit_category' category_name.id %}"
+                class="btn-sm btn-danger rounded-pill text-decoration-none">
+                Edit Category
+            </a>
+        </div>
+    {% endif %}
+</div>
+
+<section class="container">
+    {% include "blog/post_list.html"  with object=category_post %}
+</section>
+
+{% endblock body_content %}

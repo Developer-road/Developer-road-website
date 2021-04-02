@@ -6,15 +6,17 @@
 {% block body_content %}
 
 <div class="container">
-    <div class="row py-5 mt-4 align-items-center">
+    <div class="row py-5 align-items-center justify-content-center h-100">
         <!-- For Demo Purpose -->
         <div class="col-md-5 pl-lg-5 mb-5 mb-md-0">
             <img src="{% static 'images/contact/mail.svg' %}" alt="Developer Road"
                 class="img-fluid mb-3 d-none d-md-block">
             <h1 class="fw-bold">Contact us</h1>
-            <p class="fst-italic text-muted mb-0">Let's get in touch to build something amazing <a
-                    href="{% url 'home:home_page' %}" class="text-muted">
-                    <u>Developer Road</u></a>
+            <p class="fst-italic text-muted mb-0">
+                Let's get in touch to build something amazing 
+                <a href="{% url 'home:home_page' %}" class="text-muted">
+                    <u>Developer Road</u>
+                </a>
             </p>
         </div>
 

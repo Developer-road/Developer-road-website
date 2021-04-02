@@ -2,6 +2,7 @@
 
 The official website of developer road
 
+
 ## Installation:
 
 ```python
@@ -22,8 +23,16 @@ It shouldn't be like that but now it seems to break up if you don't set up a pos
 Now run:
 
 ```python
+python manage.py livereload
+
 python manage.py runserver
 ```
+
+Remember to migrate the database before start developing:
+```
+python manage.py migrate
+```
+
 
 ## Warning:
 
@@ -36,3 +45,6 @@ The media files will serve correctly on production,or at least is what I think :
 ## Templates:
 *Meta image*
 Is the image that appears when the page is shared trough discord, telegram or whatsapp.
+
+### Developing
+Each template file **.html**, represents the template of a view, or a web component

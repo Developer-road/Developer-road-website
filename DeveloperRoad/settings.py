@@ -63,6 +63,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Django extensions
+
+    'django_extensions',
+
     # Media Cloudinary
     'cloudinary',
     'cloudinary_storage',
@@ -81,7 +85,20 @@ INSTALLED_APPS = [
     # Healthy Html
     'django_bleach',
 
+    # Django powered forms: better error messages
+    "crispy_forms",
+    "crispy_bootstrap5",
+
+    # Livereload
+    'livereload',
 ]
+
+# The boostrap pack for the crispy forms
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 
 # Used by the allauth providers
 SITE_ID = 1
@@ -97,6 +114,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # livereload
+    'livereload.middleware.LiveReloadScript',
 ]
 
 ROOT_URLCONF = 'DeveloperRoad.urls'
@@ -179,7 +199,9 @@ USE_TZ = True
 
 # Custom static files
 STATIC_ROOT = join(BASE_DIR, 'staticfiles')
+
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
     join(BASE_DIR, "static")
 ]
@@ -200,15 +222,18 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = join(BASE_DIR, 'media')
 
 
+
 # Redirect login button to login default template
 
-LOGIN_REDIRECT_URL = 'blog:blog_page'
-LOGOUT_REDIRECT_URL = 'blog:blog_page'
+LOGIN_REDIRECT_URL = 'blog:home'
+
+LOGOUT_REDIRECT_URL = 'blog:home'
 
 # BLEACH STUFF
 # Which HTML tags are allowed
 BLEACH_ALLOWED_TAGS = ['p', 'b', 'i', 'u', 'em', 'strong', 'a', 'h1', 'h2', 'code',
-                       'h3', 'h4', 'h5', 'h6', 'pre', "img", "caption", "table", 'tbody', 'tr', "td", "div", "iframe"]
+                       'h3', 'h4', 'h5', 'h6', 'pre', "img", "caption", "table", 
+                       'tbody', 'tr', "td", "div", "iframe", "ul", "li", "ol", "blockquote"]
 
 # Which HTML attributes are allowed
 BLEACH_ALLOWED_ATTRIBUTES = ['href', 'title', 'style', 'border', 'data-oembed-url', "allow",
@@ -217,7 +242,8 @@ BLEACH_ALLOWED_ATTRIBUTES = ['href', 'title', 'style', 'border', 'data-oembed-ur
 # Which CSS properties are allowed in 'style' attributes (assuming style is
 # an allowed attribute)
 BLEACH_ALLOWED_STYLES = [
-    'font-family', 'font-weight', 'text-decoration', 'height', 'left', 'font-variant', 'width', 'color', "background", "padding",
+    'font-family', 'font-weight', 'text-decoration', 'height', 
+    'left', 'font-variant', 'width', 'color', "background", "padding",
     "padding-bottom", "position"
 ]
 
@@ -233,11 +259,8 @@ BLEACH_STRIP_TAGS = True
 # Strip HTML comments, or leave them in.
 BLEACH_STRIP_COMMENTS = False
 
-# <p><iframe align="middle" frameborder="0" name="Video" scrolling="no" src="https://www.youtube.com/watch?v=IHLqBnE5WOA"></iframe></p>
 CKEDITOR_CONFIGS = {
     'default': {
-        # 'skin': 'moono',
-        # 'skin': 'office2013',
         'toolbar_Basic': [
             ['Source', '-', 'Bold', 'Italic']
         ],
@@ -351,5 +374,10 @@ LOGGING = {
 
 DEBUG_PROPAGATE_EXCEPTIONS = True
 COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
+
+
+# Determinates if it's in staging or production server
+# Used for media files
+STAGING = config("STAGING", default=False, cast=bool)
 
 django_heroku.settings(locals())

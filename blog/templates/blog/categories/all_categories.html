@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load extra_filters %}
+{% block title %}Categories{% endblock title %}
+
+{% block description %}
+Categories of the Developer Road Blog:
+{% for category in object_list %}
+{{category.name}} ,
+{% endfor %}
+{% endblock description %}
+
+{% block body_content %}
+
+<div class="m-5">
+    <h1 class="fw-bold h1 text-center">Categories</h1>
+</div>
+
+
+<div class="container min-vh-100">
+    <ul class="w-100 text-decoration-none list-unstyled d-flex flex-row flex-wrap justify-content-center align-items-center">
+        {% for category in object_list %}
+            <li class="card card__relavant span__category" style="max-width: 18em;">
+                <a class="text-decoration-none text-dark w-100 h-100 d-flex align-items-center justify-content-start"
+                    href="{{ category.get_absolute_url }}">
+                    {% if category.image %}
+                    <img src="{{ category.image.url }}" class="w-50 rounded-circle" style="max-width: 10em; min-height: 5em;"  alt="">
+                    {% endif %}
+                    <h5 ># {{category.name|title}}</h5>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="my-3  text-center">
+    <span class="text-muted">
+        There isn't the category you are looking for?
+        <a href="{% url 'blog:create_category' %}" class="link-danger text-decoration-none">
+            Create one
+        </a>
+    </span>
+</div>
+
+{% endblock body_content %}

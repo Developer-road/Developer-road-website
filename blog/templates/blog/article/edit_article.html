@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Edit a post{% endblock title %}
+
+{% block description %}
+Edit an existent post of Developer Road.
+{% endblock description %}
+
+{% block body_content %}
+{% if user.is_authenticated and user.id == post.author.id or user.is_admin %}
+
+<h1 class="mt-3">Edit a post</h1>
+<div class="form-group">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }}
+        <button type="submit" class="btn form-btn">Edit post</button>
+    </form>
+</div>
+<hr>
+<p>There is not the category you are looking for?<br>
+    <a href="{% url 'blog:create_category' %}" target="_blank" class="text-decoration-none btn btn-primary">Create
+        one</a>
+</p>
+
+{% else %}
+<div class="margin-20 text-center">
+    <h1 class="fw-bolder">Sorry, You are not allowed to edit this Post</h1>
+</div>
+
+{% endif %}
+
+{% endblock body_content %}

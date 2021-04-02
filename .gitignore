@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Media stuff, not pushed to git
+
+media/
+
+staticfiles/

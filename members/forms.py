@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from django.contrib.auth.models import User
+
 from django import forms
 
 from django.contrib.auth import get_user_model
@@ -66,14 +66,19 @@ class UserEditForm(UserChangeForm):
 
 class MyPasswordChangeForm(auth_views.PasswordChangeForm):
     old_password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'autofocus': True,
-                                          "class": "form-control bg-white border-left-0 border-md", "placeholder": "Old Password"}),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', "placeholder": "Old Password"}),
     )
     new_password1 = forms.CharField(
-        widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'autofocus': True,
-                                          "class": "form-control bg-white border-left-0 border-md", "placeholder": "New Password"}),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', "placeholder": "New Password"}),
     )
     new_password2 = forms.CharField(
-        widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'autofocus': True,
-                                          "class": "form-control bg-white border-left-0 border-md", "placeholder": "Confirmation"}),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'current-password',  "placeholder": "Confirmation"}),
     )
+
+    def __init__(self, *args, **kwargs):
+        super(MyPasswordChangeForm, self).__init__(*args, **kwargs)
+        self.fields["old_password"].label = "Your old password"
+        
+        self.fields["new_password1"].label = "Your new password"
+        
+        self.fields["new_password2"].label = "Confirm your new password"

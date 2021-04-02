@@ -5,13 +5,11 @@
 
 {% block head_links %}
 {{ block.super }}
-<link rel="stylesheet" href="{% static 'css/register.css' %}">
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
 {% endblock head_links %}
 
 {% block scripts %}
-<script src="{% static 'js/register.js' %}" type="text/javascript"></script>
 {% endblock scripts %}
 
 {% block bootstrap %}
@@ -20,43 +18,31 @@
 {% endblock bootstrap %}
 
 {% block navbar %}
-
-<!-- Navbar-->
-{% comment %} <header class="header">
-    <nav class="navbar navbar-expand-lg navbar-light py-3">
-        <div class="container">
-            <!-- Navbar Brand -->
-            <a href="#" class="navbar-brand">
-
-                <span>
-                    <h1>DeveloperRoad</h1>
-                </span>
-            </a>
-        </div>
-    </nav>
-</header> {% endcomment %}
-
 {% endblock navbar %}
+
 
 {% block body_content %}
 
-<div class="responsive-container">
-    <div class="row py-5 mt-4 align-items-center">
+<div class="responsive-container vh-100 w-100">
+    <div class="row h-100  d-flex align-items-center justify-content-center">
         <!-- For Demo Purpose -->
         <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
             <img src="{% static 'images/register/code.svg' %}" alt="Developer Road"
-                class="img-fluid mb-3 d-none d-md-block">
-            <h1>Create an Account</h1>
-            <p class="font-italic text-muted mb-0">Join a community of Learners, making their own <a
-                    href="{% url 'home:home_page' %}" class="text-muted">
-                    <u>Developer Road</u></a>
-            </p>
+                class="img-fluid mb-3 d-none d-md-block" />
         </div>
 
         <!-- Registeration Form -->
         <div class="col-md-7 col-lg-6 ml-auto">
             <form action="#" method="POST">
                 {% csrf_token %}
+                <h1>Create an Account</h1>
+                <p class="font-italic text-muted ">
+                    Join a community of Learners, making their own 
+                    <a href="{% url 'home:home_page' %}" 
+                    class="text-muted">
+                        <u>Developer Road</u>
+                    </a>
+                </p>
                 <div class="row">
 
                     <!-- First Name -->
@@ -133,24 +119,30 @@
                         <div class="border-bottom w-100 mr-5"></div>
                     </div>
 
-                    {% comment %} <!-- Social Login -->
-                    <div class="form-group col-lg-12 mx-auto">
-                        <a href="#" class="btn btn-primary btn-block py-2 btn-facebook">
-                            <i class="fa fa-facebook-f mr-2"></i>
-                            <span class="font-weight-bold">Continue with Facebook</span>
-                        </a>
-                        <a href="#" class="btn btn-primary btn-block py-2 btn-twitter">
-                            <i class="fa fa-twitter mr-2"></i>
-                            <span class="font-weight-bold">Continue with Twitter</span>
-                        </a>
-                    </div> {% endcomment %}
+                    {% comment %} 
+                        <!-- Social Login -->
+                        <div class="form-group col-lg-12 mx-auto">
+                            <a href="#" class="btn btn-primary btn-block py-2 btn-facebook">
+                                <i class="fa fa-facebook-f mr-2"></i>
+                                <span class="font-weight-bold">Continue with Facebook</span>
+                            </a>
+                            <a href="#" class="btn btn-primary btn-block py-2 btn-twitter">
+                                <i class="fa fa-twitter mr-2"></i>
+                                <span class="font-weight-bold">Continue with Twitter</span>
+                            </a>
+                        </div> 
+                    {% endcomment %}
 
                     <!-- Already Registered -->
                     <div class="text-center w-100">
-                        <p class="text-muted font-weight-bold">Already Registered? <a href="{% url 'login' %}"
-                                class="text-primary ml-2">Login</a></p>
+                        <p class="text-muted font-weight-bold">
+                            Already Registered? 
+                            <a href="{% url 'login' %}"
+                                class="text-primary ml-2">
+                                Login
+                            </a>
+                        </p>
                     </div>
-
                 </div>
             </form>
         </div>

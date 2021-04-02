@@ -1,0 +1,51 @@
+<div class="mx-auto text-center">
+    <div class="my-4">
+        {% if recent %}
+        <h3 class="fw-bold title__color">Recent Posts</h3>
+        {% else %}
+        <h3 class="fw-bold title__color">Related Posts</h3>
+        {% endif %}
+    </div>
+    <div class="container d-flex flex-wrap justify-content-center">
+        {% for related_post in other_posts %}
+        {% if not related_post.id == post.id %}
+        <div class="card rounded card__relavant p-1" style="width: 18rem;">
+            <div class="blog-title semibold p-3">
+                <a href="{% url 'blog:article' related_post.id %}" class="text-decoration-none">
+                    <h3 class="fs-3 text-dark fw-bolder">{{ related_post.title|title }}</h3>
+                </a>
+            </div>
+            <div class="py-2">
+                {% if not recent %}
+                <div class="category">
+                    <span>
+                        <a href="{{ related_post.category.get_absolute_url }}"
+                            class="span__category text-decoration-none py-2 px-4">
+                            {{ related_post.category }}
+                        </a>
+                    </span>
+                </div>
+                {% endif %}
+            </div>
+
+            {% if post.description %}
+            <a href="{% url 'blog:article' related_post.id%}" class="text-decoration-none">
+                <p class="text-center p-3 fs-6 text-gray">{{ related_post.description | slice:":200" }}</p>
+            </a>
+            {% else %}
+            <a href="{% url 'blog:article' related_post.id %}" class="text-decoration-none">
+                <p class="text-center p-3 fs-6 text-gray">{{ related_post.body | striptags | slice:":200" }}</p>
+            </a>
+            {% endif %}
+            <a href="{% url 'members:profile' related_post.author.id %}" class="text-decoration-none mb-3 text-gray">
+                <span class="px-2">
+                    <img src="{{ related_post.author.profile_image.url }}" alt="Author image"
+                        class="rounded-circle image-opacity" width=30 height=30 />
+                </span>
+                <span> {{ related_post.author }} </span>
+            </a>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>

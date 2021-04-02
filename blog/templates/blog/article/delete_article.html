@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Delete Post : {{ post.title }}{% endblock title %}
+{% block description %}
+{{ post.description }}
+{% endblock description %}
+
+
+{% block body_content %}
+<div class="container min-vh-100 d-flex flex-column justify-content-center align-items-center">
+    {% if user.is_authenticated and  user.id == post.author.id %}
+        <h1><span class="text-danger">Delete</span> Post</h1>
+        <h2 class="text-center">You are going to <span class="text-danger">delete</span>: "<i>{{ post.title }}</i> "</h2>
+        <p class="text-center">Are you sure, you want to delete the post ?</p>
+        <div class="form-group">
+            <form action="" method="post" class="d-flex flex-column align-items-center justify-content-center">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Yes, delete Post</button>
+                <p>This action is irreversible</p>
+            </form>
+        </div>
+        <a href="{% url 'blog:article' post.pk %}" class="btn btn-primary btn-sm">Cancel</a>
+    {% else %}
+        <h1>Sorry, You are not allowed to Delete this Post</h1>
+    {% endif %}
+</div>
+{% endblock body_content %}

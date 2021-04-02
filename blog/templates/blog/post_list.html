@@ -3,61 +3,111 @@
 {% load extra_filters %}
 
 {% for post in object %}
-<div class="card w-70 rounded m-3">
+<article class="bg-white my-3 rounded">
     {% if post.header_image %}
-    <div class="mb-3">
-        <a href="{% url 'blog:article_page' post.pk %}"><img src="{{ post.header_image.url }}" alt="No image for this Post" class=" card-img-top"></a>
+    <div class="mb-3" >
+        <a href="{% url 'blog:article' post.pk %}" rel="noopener">
+            <img src="{{ post.header_image.url }}" alt="{{ post.author.first_name }} {{ post.author.last_name }} post" 
+            class=" card-img-top " style="max-height: 250px; height: auto;"  loading="lazy">
+        </a>
     </div>
     {% endif %}
-    <div class="blog-abv p-2 pt-3">
+    <div class="
+            px-3
+            py-2
+            d-flex 
+            flex-column 
+            flex-md-row 
+            justify-content-sm-start
+            justify-content-md-between
+            align-items-md-center
+            ">
         {% if not image_hidden %}
-        <a href="{% url 'members:profile' post.author.id %}"><span class="px-2"><img
-                    src="{{ post.author.profile_image.url }}" alt="" class="rounded-circle image-opacity" width=30
-                    height=30> </span>
-            <span> {{ post.author.first_name }} {{ post.author.last_name }} </span></a>
-        <span class="px-2">·</span>
-        <span class="">{{ post.date }}</span>
+        <div class="">
+            <a href="{% url 'members:profile' post.author.id %}"
+                class="text-decoration-none d-flex align-items-center"
+                rel="noopener"
+                loading="lazy"
+            >
+                <img src="{{ post.author.profile_image.url }}" alt="" 
+                    class="rounded-circle image-opacity me-2 image__postOwner"
+                    />
+                <div class="d-flex flex-column">
+                    <span class="text-gray"> 
+                        <b class="fs-6">
+                            {{ post.author.first_name }} {{ post.author.last_name }}
+                        </b>
+                    </span>
+                    <span class="text-gray fs-6">{{ post.date|date:"M d, y" }}</span>
+                </div>
+            </a>
+        </div>
         {% else %}
-        <span class="ms-3">{{ post.date }}</span>
+        <span class="ms-3">{{ post.date|date:"M d, y" }}</span>
         {% endif %}
-        {% if post.category and not category_hidden%}
-        <span class="px-2 ">·</span>
-        <div class="category">
-            <span><a href="{% url 'blog:category_page'  post.category|myslug %}">{{ post.category }}</a></span>
+        {% if user.is_authenticated and  user.id == post.author.id %}
+        <div class="p-3 d-none d-md-block">
+            <a href="{% url 'blog:delete_article' post.pk %}" class="btn btn-outline-danger" rel="noopener">
+                <i class='bx bx-trash'></i>
+                Delete post
+            </a>
         </div>
         {% endif %}
     </div>
 
-    <div class="blog-title semibold p-3">
-        <h3 class="fs-2">{{ post.title|title }}</h3>
+    <div class="blog-title semibold px-3 ms-2 ms-md-5 pb-2">
+        <a href="{% url 'blog:article' post.id %}" 
+            class="text-decoration-none fs-5 fs-sm-4 title__color pb-2" 
+            rel="noopener"
+        >
+            <h3 class="text-break fw-bold fs-6 fs-md-3">{{ post.title|title }}</h3>
+            {% if post.description %}
+            <p class="blog-description text-break fs-6 fs-md-5">{{ post.description | slice:":200" }}</p>
+            {% else %}
+            <p class="blog-description text-break fs-6 fs-md-5">{{ post.body | striptags | slice:":200" }}</p>
+            {% endif %}
+        </a>
+        {% if post.category and not category_hidden%}
+        <div class="category mb-3">
+            <span>
+                <a href="{{ post.category.get_absolute_url }}"
+                    class="span__category text-decoration-none btn"
+                    rel="noopener">
+                # {{ post.category }}
+                </a>
+            </span>
+        </div>
+        {% endif %}
+        <a href="{% url 'blog:article' post.id %}" class="text-decoration-none fs-5 fs-sm-4 title__color pb-2 d-flex align-items-center">
+            <i class='fs-6 fs-md-5 bx bx-upvote'></i><span class="fs-6 fs-md-5 mx-1">{{ post.total_likes }} Upvotes</span>
+            <i class='fs-6 fs-md-5 bx bx-comment ms-2'></i><span class="fs-6 fs-md-5 mx-1">{{ post.number_of_comments }} Comments</span>
+        </a>
     </div>
-
-
-    {% if post.description %}
-    <p class="blog-description p-3 fs-5">{{ post.description | slice:":200" }}</p>
-    {% else %}
-    <p class="blog-description p-3 fs-5">{{ post.body | striptags | slice:":200" }}</p>
-    {% endif %}
-
-
-    <a href="{% url 'blog:article_page' post.pk %}" class="Read-full p-3">Read full Post</a>
 
     {% if user.is_authenticated and  user.id == post.author.id %}
-    <div class="p-3">
-        <small><a href="{% url 'blog:delete_page' post.pk %}" class="link-danger">Delete
-                post</a></small>
+    <div class="p-3 d-block d-md-none d-flex justify-content-center">
+        <a href="{% url 'blog:delete_article' post.pk %}" class="btn btn-outline-danger">
+            <i class='bx bx-trash'></i>
+            Delete post
+        </a>
     </div>
     {% endif %}
-</div>
+</article>
 
 {% empty %}
-<div class="posts mt-5">
-    <h2 class="text-muted">Sorry there are not Post with that words included</h2>
-
-    <p class="pt-3 fs-4">Try to make another search</p>
-    <p class="pt-3 fs-5">Or go to the blog <a href="{% url 'blog:blog_page' %}" class="link-danger">main page</a></p>
-
-
+<div class="posts vh-100 w-100 pt-5 d-flex justify-content-center align-items-center flex-column">
+    <img src="{% static 'images/blog/noPosts.svg' %}" alt="Developer Road" class="img-fluid w-80 mt-5 h-100" loading="lazy" />
+    <h2 class="text-muted mt-5">Sorry,
+        <span class="text-danger"> we don't</span>
+         have a post, with that words included
+    </h2>
+    <p class="fs-4 mb-0">Try to make another search</p>
+    <p class="fs-5 mb-5">
+        Or 
+        <a href="{% url 'blog:create_article' %}" class="link-danger">
+            Start writing!
+        </a>
+    </p>
 </div>
 
 {% endfor %}

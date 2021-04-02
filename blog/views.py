@@ -1,201 +1,107 @@
+"""Blog Views"""
+
+# Django
 from django.shortcuts import render, get_object_or_404, get_list_or_404
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, RedirectView
-from django.views import View
-from django.urls import reverse_lazy, reverse
-from django.http import HttpResponseRedirect
-from django.db.models import Q
 
-# Import the Post object and Category object
-
-from .models import Post, Category, Comment
-
-from .forms import PostForm, EditPostForm, CreateCategoryForm, CommentForm
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView,
+)
 
 
-class BlogView(ListView):
+# All Categories
+from .utils import ALL_CATEGORIES
+
+from .base_views import *
+
+
+class BlogView(BaseBlogListView):
     """
-    View that shows the list of all the existent blogs
+    View that shows the list of all the newest blog posts
     """
-    model = Post
-    queryset = Post.objects.order_by('-date')
-    paginate_by = 4
-    template_name = 'blog/index.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["cat_items"] = Category.objects.all()
-
-        return context
 
 
-class BlogSearchView(ListView):
+class BlogSearchView(BaseBlogSearchView):
     """
-    View that shows the list of all the existent blogs
+    View that shows the list of all the newest blog posts
     """
-    model = Post
-    # queryset = Post.objects.order_by('-date')
 
-    # paginate_by = 4
-    template_name = 'blog/search.html'
-
-    def get_queryset(self):  # new
-        if "q" in self.request.GET:
-            if str(self.request.GET.get('q')) not in ["", " "]:
-                query = self.request.GET.get('q')
-                object_list = Post.objects.filter(
-                    Q(title__icontains=query) | Q(
-                        description__icontains=query) | Q(body__icontains=query)
-                ).distinct()
-            else:
-                object_list = None
-            return object_list
-        else:
-            object_list = None
-            return object_list
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["cat_items"] = Category.objects.all()
-
-        query = "No search"
-        if "q" in self.request.GET:
-            query = str(self.request.GET.get('q'))
-        context["string_query"] = query
-
-        return context
+    template_name = "blog/search/search.html"
 
 
-class ArticleDetail(DetailView):
+class ArticleDetail(BaseArticleDetailView):
     """
     View that shows in detail the chosen blog post.
     """
-    model = Post
-    template_name = 'blog/details.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        detail_post = get_object_or_404(Post, id=self.kwargs['pk'])
-        context["upvotes"] = detail_post.total_likes()
-        upvoted = False
+    template_name = 'blog/article/detail_article.html'
 
-        if detail_post.upvotes.filter(id=self.request.user.id).exists():
-            upvoted = True
+class CategoryView(BaseCategoryView):
+    """
+    Display a category page
 
-        context["upvoted"] = upvoted
+    Takes from the url the name with hypens and gets the object from the database
+    """
 
-        try:
-            context["comments"] = list(Comment.objects.filter(
-                post_id=detail_post.id).order_by('-date_added'))
-        except:
-            context["comments"] = None
+    def get(self, request, slug):
 
-        if self.request.user.is_authenticated:
-            context["comment_form"] = CommentForm(instance=self.request.user)
+        context = {}
 
-        recent = True        
-        other_posts = list(Post.objects.all().order_by('-date'))[:4]
+        context["category_name"], context["category_post"] = self.get_category_and_posts(request, slug)
 
-        if detail_post.category:
-            related_posts = list(Post.objects.filter(category=detail_post.category))
-            if len(related_posts) > 1:
-                other_posts = related_posts
-                recent = False
+        context["category_hidden"] = True
 
-        context["recent"] = recent
-        context["other_posts"] = other_posts
+        return render(request, "blog/categories/detail_category.html", context)
 
-        return context
+class CategoryListView(BaseCategoryListView):
+    """ 
+    View that renders the list of all categories
 
-    def post(self, request, *args, **kwargs):
-        new_comment = Comment(body=request.POST.get('body'),
-                              commenter=self.request.user,
-                              post=self.get_object())
-        new_comment.save()
-        return HttpResponseRedirect(reverse('blog:article_page', args=[str(self.kwargs['pk'])]))
+    order: Number of posts
+    """
+
+    template_name = "blog/categories/all_categories.html"
 
 
-class PostCreateView(CreateView):
+class CategoryCreateView(BaseCreateCategoryData, CreateView):
+    """
+    Used to create a new blog category
+
+    Extends BaseCreateCategoryData for data, and CreateView for functionality
+
+    Validation: Cannot create a category with the same name
+    """
+
+
+class CategoryUpdateView(BaseEditCategoryData, UpdateView):
+    """
+    View that updates the category model
+
+    Extends BaseCreateCategoryData for data, and CreateView for functionality
+    """
+
+
+class PostCreateView(BaseCreatePostView):
     """
     Used to create a brand new blog post
     """
 
-    model = Post
-    form_class = PostForm
-    template_name = "blog/add_post.html"
-    # fields = "__all__"
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super(PostCreateView, self).form_valid(form)
+    template_name = "blog/article/create_article.html"
 
 
-class CategoryView(View):
-    """
-    Display a category page
-    """
 
-    def get(self, request, cat):
-
-        category_name = get_object_or_404(Category, name=cat.replace("-", " "))
-
-        try:
-            category_post = list(Post.objects.filter(
-                category_id=category_name.id))
-        except Post.DoesNotExist:
-            category_post = None
-
-        context = {"category_name": category_name,
-                   "category_post": category_post,
-                   "category_hidden": True}
-        return render(request, "blog/categories.html", context)
-
-
-class CategoryListView(ListView):
-    model = Category
-    template_name = "blog/categories_list.html"
-
-
-class CategoryCreateView(CreateView):
-    """
-    Used to create a new blog category
-    """
-
-    model = Category
-    # fields = "__all__"
-    form_class = CreateCategoryForm
-    template_name = "blog/add_category.html"
-
-class CategoryUpdateView(UpdateView):
-    model = Category
-    form_class = CreateCategoryForm
-    template_name = "blog/edit_category.html"
-
-
-class EditPost(UpdateView):
+class EditPost(BaseEditPostView):
     """
     Used to edit an existing blog post
     """
-
-    model = Post
-    template_name = 'blog/edit_post.html'
-    form_class = EditPostForm
-    # fields = ('title','meta_description', 'body')
+    template_name = 'blog/article/edit_article.html'
 
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(BaseDeletePostView):
     """
     Used to Delete A post
     """
-    model = Post
-    template_name = "blog/delete_post.html"
-    success_url = reverse_lazy("blog:blog_page")
-
-
-def VoteView(request, pk):
-    post = Post.objects.get(id=pk)
-
-    if post.upvotes.filter(id=request.user.id).exists():
-        post.upvotes.remove(request.user)
-    else:
-        post.upvotes.add(request.user)
-    return HttpResponseRedirect(reverse('blog:article_page', args=[str(pk)]))
+    template_name = "blog/article/delete_article.html"

@@ -1,43 +1,97 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% load crispy_forms_tags %}
+
 {% block title %}Edit profile{% endblock title %}
 
 {% block head_links %}
 {{ block.super }}
-<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
 {% endblock head_links %}
 
 
 {% block body_content %}
 {% if user.is_authenticated %}
 {% if user.id == profile_user.id %}
-<div class="m-4 posts">
-    <h1 class="">Edit profile</h1>
+
+<div class="m-4 text-center">
+    <h1 class="fw-bold">Edit profile</h1>
+    <p class="text-muted">Hi there {{user}}, let's update your profile!</p>
 </div>
 
-<div class="form-group">
-    <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% comment %} {{ form.first_name.label }}
-        {{ form.first_name }} {% endcomment %}
-        {{ form.as_p }}
-        <div class="mt-5">
-            <button type="submit" class="btn form-btn">Update profile</button>
+
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="row g-3">
+        <div class="col-12 col-md-6">
+            {{form.first_name|as_crispy_field}}
         </div>
-    </form>
-</div>
+        <div class="col-12 col-md-6">
+            {{form.last_name|as_crispy_field}}
+        </div>
 
-<div class="mt-5">
+        <div class="col-12">
+            {{form.profile_image|as_crispy_field}}
+        </div>
+
+        <div class="col-12">
+            {{form.description|as_crispy_field}}
+        </div>
+
+        <div class="col-12 col-md-6">
+            {{form.linkedin_url|as_crispy_field}}
+        </div>
+        <div class="col-12 col-md-6">
+            {{form.github_url|as_crispy_field}}
+        </div>
+
+        <div class="col-12 col-md-6">
+            {{form.instagram_url|as_crispy_field}}
+        </div>
+        <div class="col-12 col-md-6">
+            {{form.twitter_url|as_crispy_field}}
+        </div>
+        <div class="col-12">
+            {{form.website_url|as_crispy_field}}
+        </div>
+
+    </div>
+
+    <div class="my-5 mx-auto">
+        <div class="row">
+            <div class="col-md-6 col-12 py-2">
+                <button type="submit" class="btn btn-success w-100">Update profile</button>
+            </div>
+            <div class="col-md-6 col-12 py-2">
+                <a class="btn btn-danger w-100" href="{% url 'members:profile' user.id %}">Cancel</a>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+<div class="mt-5 mx-2">
     <h4 class="fw-bold">Change Password</h4>
-    <p class="mt-3">If you want to change your password click <a href="{% url 'members:change_password' %}"
-            class="link-danger">here</a></p>
+    <p class="mt-3">
+        If you want to change your password:
+    </p>
+    <a href="{% url 'members:change_password' %}" class="btn btn-outline-primary">Change password</a>
 </div>
 
 {% else %}
-<div class="posts container-fluid mt-5">
-    <h1>Hey there {{ user.first_name }} {{ user.last_name }}</h1>
-    <p class="intro-post">Trying to <span>break</span> the <span>system </span>?<br> Don't worry this site
-        is <span>Prepared</span> for this type of hacks.</p>
+<div class="container-fluid mt-5 text-center">
+    <h1>Hi there {{ user }}</h1>
+    <p class="fw-bold">
+        Trying to
+        <span class="text-red">break</span>
+        the
+        <span class="text-red">system</span>?
+        <br />
+        Don't worry this site is
+        <span class="text-red">Prepared</span>
+        for this type of hacks.
+    </p>
 </div>
 
 {% endif %}
@@ -47,11 +101,14 @@
     <h1 class="">You are not registered yet</h1>
 </div>
 
-<hr>
+<hr />
 
 <p class="mt-4">Login to edit your Profile
-    <span class="px-3"><a href="{% url 'login' %}" class=" btn text-decoration-none btn-danger btn-sm">Sing
-            In</a></span>
+    <span class="px-3">
+        <a href="{% url 'login' %}" class=" btn text-decoration-none btn-danger btn-sm">
+            Sing In
+        </a>
+    </span>
 </p>
 
 {% endif %}
