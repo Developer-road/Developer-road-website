@@ -60,6 +60,10 @@ class EditCategoryForm(BaseCRUDCategoryForm):
 
 class CreateCategoryForm(BaseCRUDCategoryForm):
 
+    """
+    Extra validation for category name, doesn't allow repeated categories
+    """
+
     def clean_name(self):
 
         data = self.cleaned_data.get('name')

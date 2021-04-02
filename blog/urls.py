@@ -70,7 +70,7 @@ urlpatterns = [
 
     # Detail category view
     # parameter: the category name
-    path('category/<str:cat>/',
+    path('category/<str:slug>/',
          CategoryView.as_view(),
          name="category"),
 

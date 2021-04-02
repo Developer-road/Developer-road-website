@@ -12,7 +12,7 @@
         <div class="card rounded card__relavant p-1" style="width: 18rem;">
             <div class="blog-title semibold p-3">
                 <a href="{% url 'blog:article' related_post.id %}" class="text-decoration-none">
-                    <h3 class="fs-2 text-dark fw-bolder">{{ related_post.title|title }}</h3>
+                    <h3 class="fs-3 text-dark fw-bolder">{{ related_post.title|title }}</h3>
                 </a>
             </div>
             <div class="py-2">
@@ -42,7 +42,7 @@
                     <img src="{{ related_post.author.profile_image.url }}" alt="Author image"
                         class="rounded-circle image-opacity" width=30 height=30 />
                 </span>
-                <span> {{ related_post.author.first_name }} {{ related_post.author.last_name }} </span>
+                <span> {{ related_post.author }} </span>
             </a>
         </div>
         {% endif %}

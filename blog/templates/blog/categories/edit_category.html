@@ -4,7 +4,7 @@
 {% block title %}Edit Category{% endblock title %}
 
 {% block body_content %}
-{% if user.is_admin %}
+{% if user.is_admin  or user.is_superuser %}
 <div class="m-5 mx-auto text-center">
     <h1 class="fw-bold">Edit a Category</h1>
 </div>

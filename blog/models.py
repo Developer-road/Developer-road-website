@@ -15,6 +15,11 @@ from django_bleach.models import BleachField
 
 
 class Category(models.Model):
+    """
+    Categories system, organizes the blog topics.
+
+    params: name, date (auto), description, image
+    """
 
     # The name for the category
     name = models.CharField(max_length=100,

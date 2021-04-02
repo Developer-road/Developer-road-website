@@ -9,6 +9,8 @@ from django.db.models import Count
 # Models
 from blog.models import Category, Post
 
+from django.core.files.uploadedfile import SimpleUploadedFile
+
 # Get the categories objects with the mosts posts
 ALL_CATEGORIES = Category.objects.annotate(
     most_posts=Count("linked_posts")).order_by("-most_posts")
@@ -23,4 +25,14 @@ SMALL_GIF = (
 # Simple image for testing porpuses
 SIMPLE_IMAGE = b"Lets grab a \xf0\x9f\x8d\x95!"
 
-LIKED_POSTS = Post.objects.annotate(liked=Count("upvotes")).order_by("liked")
+MOST_LIKED_POSTS = Post.objects.annotate(
+    liked=Count("upvotes")).order_by("liked")
+
+MOST_COMMENTED_POSTS = Post.objects.annotate(
+    commented=Count("comment")).order_by("comment")
+
+SIMPLE_UPLOADED_GIF = SimpleUploadedFile(
+    name="simple.gif",
+    content=SMALL_GIF,
+    content_type='image/jpeg'
+)
