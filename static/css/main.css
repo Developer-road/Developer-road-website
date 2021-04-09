@@ -283,6 +283,11 @@ a:hover {
 ==================
 */
 
+/* -> Styles for <code> tag post, the name is the default name <- */
+.hljs {
+  background-color: white  !important;
+}
+
 .create-btn:hover {
   padding: 5.5px 13.5px;
   border-radius: 4px;
