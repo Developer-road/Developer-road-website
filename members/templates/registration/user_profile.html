@@ -104,7 +104,9 @@
         Posts by {{ requested_user.first_name }} {{ requested_user.last_name }}
     </h2>
 </div>
-{% include "blog/post_list.html" with object=user_posts %}
+<div class="container" >
+    {% include "blog/post_list.html" with object=user_posts %}
+</div>
 {% else  %}
 <div class="container py-3 d-flex flex-column align-items-center justify-content-center">
     <h2>This user don't have post yet</h2>
