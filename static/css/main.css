@@ -615,9 +615,11 @@ a:hover {
 
 .a__userImageProfile img {
   border: 5px solid #273764;
+  background-color: #273764;
   width: 5em;
   min-height: 5em;
   min-width: 5em;
+  object-fit: cover;
 }
 
 .a__userEditProfile {
