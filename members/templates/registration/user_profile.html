@@ -29,9 +29,11 @@
                 />
             </a>
             {% if requested_user.id == user.id %}
+            <div style="position: absolute; right: 1em;">
                 <a href="{% url 'members:edit' user.id%}" class="btn btn-primary a__userEditProfile">
                     Edit profile
                 </a>
+            </div>
             {% endif %}
         </div>
     <h4 class="fs-5 fs-md-3 fw-bold mb-3 text-start text-sm-center">
