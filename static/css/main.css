@@ -48,6 +48,15 @@ body {
   overflow-x: hidden;
 }
 
+a {
+  text-decoration: none;
+  color: var(--myred)
+}
+
+a:hover {
+  color: var(--myred-hover);
+}
+
 /*
 ==================
 -> Scroll config <- 
@@ -400,6 +409,10 @@ body {
 -> Blog card <- 
 ==================
 */
+
+.card-img-top {
+    object-fit: cover !important;
+}
 
 .card {
   margin: 0 !important;
