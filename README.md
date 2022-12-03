@@ -2,7 +2,7 @@
 
 The official website of developer road
 
-
+Update: Heroku free plan is down, so there is no production link.
 ## Installation:
 
 ```python
@@ -39,7 +39,7 @@ python manage.py migrate
 When registering a media photo is used in production.
 Since the media files are served from cloudinary, some media files will be left like the default profile image, but don't worry.
 
-The media files will serve correctly on production,or at least is what I think :).
+The media files will serve correctly on production.
 
 
 ## Templates:
