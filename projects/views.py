@@ -22,7 +22,7 @@ class ProjectsHome(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        repos_user = get_user_repos("daniel1404")
+        repos_user = get_user_repos("danidiaztech")
         repos_count = len(repos_user)
         repos_user = repos_user[:6] 
         context["repos_user"] = repos_user
