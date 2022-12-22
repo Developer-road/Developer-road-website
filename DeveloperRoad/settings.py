@@ -15,7 +15,7 @@ from pathlib import Path
 from os.path import join
 
 import whitenoise
-import django_heroku
+# import django_heroku
 import dj_database_url
 import cloudinary
 import cloudinary_storage
@@ -33,7 +33,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # DEBUG = True
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "developerroad.herokuapp.com"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "developerroad.herokuapp.com",
+    "",
+]
 
 # SECURITY WARNING: keep the secret key used in production secret!
 if DEBUG:
@@ -380,4 +385,3 @@ COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
 # Used for media files
 STAGING = config("STAGING", default=False, cast=bool)
 
-django_heroku.settings(locals())
