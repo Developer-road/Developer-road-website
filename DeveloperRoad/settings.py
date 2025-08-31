@@ -242,7 +242,7 @@ STORAGES = {
     'BACKEND': DEFAULT_FILE_STORAGE  # Django 5.2
   },
   'staticfiles': {                                                 # this is the storage for static files
-    'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage'      # Whitenoise for static file storage
+    'BACKEND': 'whitenoise.storage.CompressedStaticFilesStorage'  # Whitenoise for static file storage
   },
 }
 
