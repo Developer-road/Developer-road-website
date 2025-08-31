@@ -36,9 +36,11 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "developerroad.herokuapp.com",
+    # "developerroad.herokuapp.com",
     "developerroad.up.railway.app",
 ]
+
+CSRF_TRUSTED_ORIGINS = ["https://developerroad.up.railway.app"]
 
 # SECURITY WARNING: keep the secret key used in production secret!
 if DEBUG:
