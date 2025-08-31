@@ -35,7 +35,7 @@ class TestBlogUrls(SimpleTestCase):
         # Asserts that the url points to:
         # class based view: BlogView
 
-        self.assertEquals(
+        self.assertEqual(
             resolve(url).func.view_class,
             BlogView)
 
@@ -46,7 +46,7 @@ class TestBlogUrls(SimpleTestCase):
         # Asserts that the url points to:
         # class based view: BlogSearchView
 
-        self.assertEquals(
+        self.assertEqual(
             resolve(url).func.view_class,
             BlogSearchView)
 
@@ -54,7 +54,7 @@ class TestBlogUrls(SimpleTestCase):
 
         url = reverse("blog:categories")
 
-        self.assertEquals(
+        self.assertEqual(
             resolve(url).func.view_class,
             CategoryListView
         )
@@ -68,7 +68,7 @@ class TestBlogUrls(SimpleTestCase):
 
         url = reverse("blog:create_article")
 
-        self.assertEquals(
+        self.assertEqual(
             resolve(url).func.view_class,
             PostCreateView
         )
@@ -77,7 +77,7 @@ class TestBlogUrls(SimpleTestCase):
 
         url = reverse("blog:create_category")
 
-        self.assertEquals(
+        self.assertEqual(
             resolve(url).func.view_class,
             CategoryCreateView
         )
@@ -98,9 +98,9 @@ class TestBlogUrls(SimpleTestCase):
         # Asserts that the url points to:
         # class based view: BlogView
 
-        self.assertEquals(url, "/blog/article/1/")
+        self.assertEqual(url, "/blog/article/1/")
 
-        self.assertEquals(
+        self.assertEqual(
             resolve(url).func.view_class,
             ArticleDetail)
 
@@ -108,9 +108,9 @@ class TestBlogUrls(SimpleTestCase):
 
         url = reverse("blog:category", args=["some-cat"])
 
-        self.assertEquals(url, "/blog/category/some-cat/")
+        self.assertEqual(url, "/blog/category/some-cat/")
 
-        self.assertEquals(
+        self.assertEqual(
             resolve(url).func.view_class,
             CategoryView
         )
@@ -120,9 +120,9 @@ class TestBlogUrls(SimpleTestCase):
         url = reverse("blog:upvotes",
                       args=[2])
 
-        self.assertEquals(url, "/blog/upvotes/2/")
+        self.assertEqual(url, "/blog/upvotes/2/")
 
-        self.assertEquals(
+        self.assertEqual(
             resolve(url).func,
             VoteView
         )
@@ -135,8 +135,8 @@ class TestBlogUrls(SimpleTestCase):
 
         url = reverse("blog:edit_article", args=[1])
 
-        self.assertEquals(url, "/blog/article/1/edit/")
-        self.assertEquals(
+        self.assertEqual(url, "/blog/article/1/edit/")
+        self.assertEqual(
             resolve(url).func.view_class,
             EditPost
         )
@@ -145,9 +145,9 @@ class TestBlogUrls(SimpleTestCase):
 
         url = reverse("blog:edit_category", args=[2])
 
-        self.assertEquals(url, "/blog/category/2/edit/")
+        self.assertEqual(url, "/blog/category/2/edit/")
 
-        self.assertEquals(
+        self.assertEqual(
             resolve(url).func.view_class,
             CategoryUpdateView
         )
@@ -160,9 +160,9 @@ class TestBlogUrls(SimpleTestCase):
 
         url = reverse("blog:delete_article", args=[1])
 
-        self.assertEquals(url, "/blog/article/1/delete/")
+        self.assertEqual(url, "/blog/article/1/delete/")
 
-        self.assertEquals(
+        self.assertEqual(
             resolve(url).func.view_class,
             PostDeleteView
         )

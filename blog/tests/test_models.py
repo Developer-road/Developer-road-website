@@ -52,11 +52,11 @@ class TestCategoryModel(TestCase):
         And the uploads are being sended to the media folder
         """
 
-        self.assertEquals(self.category1.image, None)
+        self.assertEqual(self.category1.image, None)
 
-        self.assertEquals(self.category2.image, None)
+        self.assertEqual(self.category2.image, None)
 
-        self.assertNotEquals(self.category3.image, None)
+        self.assertNotEqual(self.category3.image, None)
 
         self.assertTrue(self.category3.image.url.startswith(
             "/media/images/categories/test"))
@@ -66,15 +66,15 @@ class TestCategoryModel(TestCase):
         Test that the given description is being correctly assigned
         """
 
-        self.assertNotEquals(self.category1.description, None)
+        self.assertNotEqual(self.category1.description, None)
 
-        self.assertEquals(self.category1.description,
+        self.assertEqual(self.category1.description,
                           "This category hasn't a description yet")
 
-        self.assertNotEquals(self.category2.description,
+        self.assertNotEqual(self.category2.description,
                              "This category hasn't a description yet")
 
-        self.assertNotEquals(self.category3.description,
+        self.assertNotEqual(self.category3.description,
                              "This category hasn't a description yet")
 
     def test_absolute_url(self):
@@ -87,12 +87,12 @@ class TestCategoryModel(TestCase):
             name="A cool category Xd"
         )
 
-        self.assertEquals(
+        self.assertEqual(
             self.category1.get_absolute_url(),
             reverse("blog:category", args=["category1"])
         )
 
-        self.assertEquals(
+        self.assertEqual(
             spaces_category.get_absolute_url(),
             reverse("blog:category", args=["a-cool-category-xd"])
         )
@@ -101,9 +101,9 @@ class TestCategoryModel(TestCase):
         """
         Test that the category has the right number of posts assigned
         """
-        self.assertEquals(self.category1.number_of_category_posts, 0)
-        self.assertEquals(self.category2.number_of_category_posts, 0)
-        self.assertEquals(self.category3.number_of_category_posts, 0)
+        self.assertEqual(self.category1.number_of_category_posts, 0)
+        self.assertEqual(self.category2.number_of_category_posts, 0)
+        self.assertEqual(self.category3.number_of_category_posts, 0)
 
     def test_property_number_of_category_posts_WITH_POSTS(self):
 
@@ -121,8 +121,8 @@ class TestCategoryModel(TestCase):
             body="Hi there"
         )
 
-        self.assertEquals(self.category1.number_of_category_posts, 1)
-        self.assertEquals(self.category2.number_of_category_posts, 0)
+        self.assertEqual(self.category1.number_of_category_posts, 1)
+        self.assertEqual(self.category2.number_of_category_posts, 0)
 
 
 class SetUpPostAndCommentMixin(object):
@@ -175,14 +175,14 @@ class TestCommentModel(SetUpPostAndCommentMixin, TestCase):
     def test_comment_post_assignment(self):
 
         # Test the comment 1 is only assigned to post 1
-        self.assertEquals(self.comment1.post, self.post1)
+        self.assertEqual(self.comment1.post, self.post1)
 
-        self.assertNotEquals(self.comment1.post, self.post2)
+        self.assertNotEqual(self.comment1.post, self.post2)
 
         # Test the comment 2 is only assigned to post 2
-        self.assertEquals(self.comment2.post, self.post2)
+        self.assertEqual(self.comment2.post, self.post2)
 
-        self.assertNotEquals(self.comment2.post, self.post1)
+        self.assertNotEqual(self.comment2.post, self.post1)
 
     def test_comment_post_DELETE_on_cascade(self):
 
@@ -200,13 +200,14 @@ class TestCommentModel(SetUpPostAndCommentMixin, TestCase):
     def test_comment_commenter_DELETE_on_cascade(self):
 
         commenter1 = self.comment1.commenter
+        commenter1_id =  commenter1.id # PK (Django 5.x + requiered now)
 
         # Asserts that the comment exist if the use exists
         self.assertTrue(Comment.objects.filter(commenter=commenter1).exists())
 
         self.user1.delete()
         # Asserts that the comment doesn't exist when the user has been deleted
-        self.assertFalse(Comment.objects.filter(commenter=commenter1).exists())
+        self.assertFalse(Comment.objects.filter(commenter_id=commenter1_id).exists())
 
 
 class TestPostModel(SetUpPostAndCommentMixin, TestCase):
@@ -229,7 +230,7 @@ class TestPostModel(SetUpPostAndCommentMixin, TestCase):
         )
 
     def test_well_assigned_title(self):
-        self.assertEquals(self.image_post.title, "Image Post")
+        self.assertEqual(self.image_post.title, "Image Post")
 
     def test_post_author_DELETE_on_cascade(self):
 
@@ -243,15 +244,15 @@ class TestPostModel(SetUpPostAndCommentMixin, TestCase):
 
     def test_post_author_email(self):
 
-        self.assertEquals(self.image_post.author.email, "user1@gmail.com")
+        self.assertEqual(self.image_post.author.email, "user1@gmail.com")
 
     def test_header_image_on_creation(self):
 
-        self.assertEquals(self.post1.header_image, None)
+        self.assertEqual(self.post1.header_image, None)
 
-        self.assertEquals(self.post2.header_image, None)
+        self.assertEqual(self.post2.header_image, None)
 
-        self.assertNotEquals(self.image_post.header_image, None)
+        self.assertNotEqual(self.image_post.header_image, None)
 
         self.assertTrue(self.image_post.header_image.url.startswith(
             "/media/images/post_header/test_"))
@@ -261,7 +262,7 @@ class TestPostModel(SetUpPostAndCommentMixin, TestCase):
         self.assertIsNone(self.post1.description)
         self.assertIsNone(self.post2.description)
 
-        self.assertEquals(self.image_post.description,
+        self.assertEqual(self.image_post.description,
                           "Hi there this is a Image Post")
 
     def test_post_category_DELETE_set_null(self):
@@ -279,7 +280,7 @@ class TestPostModel(SetUpPostAndCommentMixin, TestCase):
 
         test_category_id = test_category.id
 
-        self.assertEquals(test_post.category, test_category)
+        self.assertEqual(test_post.category, test_category)
 
         self.assertTrue(Post.objects.filter(
             category__id=test_category_id).exists())
@@ -294,25 +295,25 @@ class TestPostModel(SetUpPostAndCommentMixin, TestCase):
 
     def test_post_upvotes_count(self):
 
-        self.assertEquals(self.image_post.upvotes.count(), 0)
-        self.assertEquals(self.post1.upvotes.count(), 0)
-        self.assertEquals(self.post2.upvotes.count(), 0)
+        self.assertEqual(self.image_post.upvotes.count(), 0)
+        self.assertEqual(self.post1.upvotes.count(), 0)
+        self.assertEqual(self.post2.upvotes.count(), 0)
 
         self.image_post.upvotes.add(self.user1)
 
-        self.assertEquals(self.image_post.upvotes.count(), 1)
+        self.assertEqual(self.image_post.upvotes.count(), 1)
 
         self.post1.upvotes.add(self.user1, self.user2)
 
-        self.assertEquals(self.post1.upvotes.count(), 2)
+        self.assertEqual(self.post1.upvotes.count(), 2)
 
         self.post1.upvotes.remove(self.user1)
 
-        self.assertEquals(self.post1.upvotes.count(), 1)
+        self.assertEqual(self.post1.upvotes.count(), 1)
 
         self.user2.delete()
 
-        self.assertEquals(self.post1.upvotes.count(), 0)
+        self.assertEqual(self.post1.upvotes.count(), 0)
 
     ###########################
     #    Testing properties   #
@@ -320,11 +321,11 @@ class TestPostModel(SetUpPostAndCommentMixin, TestCase):
 
     def testing_total_likes(self):
 
-        self.assertEquals(self.post1.total_likes(), 0)
+        self.assertEqual(self.post1.total_likes(), 0)
 
         self.post1.upvotes.add(self.user1)
 
-        self.assertEquals(self.post1.total_likes(), 1)
+        self.assertEqual(self.post1.total_likes(), 1)
 
     def test_post_get_absolute_url(self):
         Cool_post = Post.objects.create(
@@ -335,25 +336,25 @@ class TestPostModel(SetUpPostAndCommentMixin, TestCase):
 
         post_id = Cool_post.id
 
-        self.assertEquals(
+        self.assertEqual(
             Cool_post.get_absolute_url(),
             reverse("blog:article", args=[post_id])
         )
 
-        self.assertEquals(
+        self.assertEqual(
             Cool_post.get_absolute_url(),
             reverse("blog:article", args=[post_id])
         )
 
-        self.assertEquals(
+        self.assertEqual(
             Cool_post.get_absolute_url(),
             f"/blog/article/{post_id}/"
         )
 
     def test_post_number_of_comments_property(self):
         
-        self.assertEquals(self.post1.number_of_comments, 1)
-        self.assertEquals(self.post2.number_of_comments, 1)
+        self.assertEqual(self.post1.number_of_comments, 1)
+        self.assertEqual(self.post2.number_of_comments, 1)
 
         Comment.objects.create(
             post=self.post1,
@@ -361,4 +362,4 @@ class TestPostModel(SetUpPostAndCommentMixin, TestCase):
             body="A comment xd"
         )
 
-        self.assertEquals(self.post1.number_of_comments, 2)
+        self.assertEqual(self.post1.number_of_comments, 2)

@@ -87,7 +87,7 @@ class TestForms(SetUpMixin, TestCase):
 
         self.assertFalse(form.is_valid())
 
-        self.assertEquals(len(form.errors), 2)
+        self.assertEqual(len(form.errors), 2)
 
     def test_edit_post_form_all_data(self):
 
@@ -111,7 +111,7 @@ class TestForms(SetUpMixin, TestCase):
 
         self.assertFalse(form.is_valid())
 
-        self.assertEquals(len(form.errors), 1)
+        self.assertEqual(len(form.errors), 1)
 
     ################
     #  CATEGORIES  #
@@ -144,7 +144,7 @@ class TestForms(SetUpMixin, TestCase):
 
         self.assertFalse(form.is_valid())
 
-        self.assertEquals(len(form.errors), 1)
+        self.assertEqual(len(form.errors), 1)
 
     def test_create_category_form_category_already_created(self):
 
@@ -156,7 +156,7 @@ class TestForms(SetUpMixin, TestCase):
 
         self.assertFalse(form.is_valid())
 
-        self.assertEquals(len(form.errors), 1)
+        self.assertEqual(len(form.errors), 1)
 
 
     def test_edit_category_form_category_already_created(self):
@@ -188,4 +188,4 @@ class TestForms(SetUpMixin, TestCase):
 
         self.assertFalse(form.is_valid())
 
-        self.assertEquals(len(form.errors), 1)
+        self.assertEqual(len(form.errors), 1)

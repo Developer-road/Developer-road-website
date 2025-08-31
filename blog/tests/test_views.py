@@ -187,15 +187,15 @@ class TestViews(SetUpViewsMixin, TestCase):
 
         response = self.client.get(self.list_blog_url)
 
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
         self.assertTemplateUsed(response, "blog/blog_home.html")
 
         # Asserts that all the posts are passed to the views
-        self.assertQuerysetEqual(
+        self.assertQuerySetEqual(
             response.context["object_list"], Post.objects.all().order_by("-date"), transform=lambda x: x)
 
-        self.assertQuerysetEqual(
+        self.assertQuerySetEqual(
             response.context["cat_items"], Category.objects.all().order_by("-date"), transform=lambda x: x)
 
         self.create_categories(number=5)
@@ -203,7 +203,7 @@ class TestViews(SetUpViewsMixin, TestCase):
         response = self.client.get(self.list_blog_url)
 
         # Cat items just pass 5 elements
-        self.assertQuerysetEqual(
+        self.assertQuerySetEqual(
             response.context["cat_items"], ALL_CATEGORIES[:5], transform=lambda x: x)
 
     def test_blog_view_GET_filtering_liked(self):
@@ -212,16 +212,16 @@ class TestViews(SetUpViewsMixin, TestCase):
 
         response = self.client.get(url)
 
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
         self.assertTemplateUsed(response, "blog/blog_home.html")
 
-        self.assertQuerysetEqual(
+        self.assertQuerySetEqual(
             response.context["object_list"], MOST_LIKED_POSTS, transform=lambda x: x)
 
         self.post1.upvotes.add(self.user1)
 
-        self.assertQuerysetEqual(
+        self.assertQuerySetEqual(
             response.context["object_list"], MOST_LIKED_POSTS, transform=lambda x: x)
 
     def test_blog_view_GET_filtering_commented(self):
@@ -234,7 +234,7 @@ class TestViews(SetUpViewsMixin, TestCase):
 
         response = self.client.get(url)
 
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
         self.assertTemplateUsed(response, "blog/blog_home.html")
 
@@ -244,7 +244,7 @@ class TestViews(SetUpViewsMixin, TestCase):
 
         self.assertIsNone(response.context["posts"])
 
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
         self.assertTemplateUsed(response, "base.html")
 
@@ -263,58 +263,58 @@ class TestViews(SetUpViewsMixin, TestCase):
 
         # The number of posts that are passed to the context are 0
         # Because there are not posts that contains that posts
-        self.assertEquals(response.context["posts"].count(), 0)
+        self.assertEqual(response.context["posts"].count(), 0)
 
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
         # Custom function that creates posts
         self.create_posts_evenly(name="AWeSOME Post", number=6)
 
         # New response with updated database
         response = self.client.get(url)
-        self.assertEquals(response.context["posts"].count(), 6)
+        self.assertEqual(response.context["posts"].count(), 6)
 
         new_url = self.search_url + "?q=a+cool"
 
         response = self.client.get(new_url)
 
-        self.assertEquals(response.context["posts"].count(), 1)
+        self.assertEqual(response.context["posts"].count(), 1)
 
     def test_blog_categories_view_GET(self):
 
         response = self.client.get(self.list_categories_url)
 
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
         self.assertTemplateUsed(
             response, "blog/categories/all_categories.html")
 
-        self.assertQuerysetEqual(response.context["object_list"],
+        self.assertQuerySetEqual(response.context["object_list"],
                                  Category.objects.all(),
                                  transform=lambda x: x)
 
-        self.assertEquals(response.context["object_list"].count(), 1)
+        self.assertEqual(response.context["object_list"].count(), 1)
 
         self.create_categories(number=6)
 
         response = self.client.get(self.list_categories_url)
 
-        self.assertEquals(response.context["object_list"].count(), 7)
+        self.assertEqual(response.context["object_list"].count(), 7)
 
     def test_blog_created_post_GET(self):
         # Get response
         response = self.client.get(self.create_post_url)
 
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
-        self.assertEquals(Post.objects.all().count(), 2)
+        self.assertEqual(Post.objects.all().count(), 2)
 
         self.assertTemplateUsed(response, "blog/article/create_article.html")
 
     def test_blog_create_post_POST(self):
 
         # Asserts there are 2 posts before the creation of one
-        self.assertEquals(Post.objects.all().count(), 2)
+        self.assertEqual(Post.objects.all().count(), 2)
 
         form = {
             "title": "An awesome post",
@@ -325,14 +325,14 @@ class TestViews(SetUpViewsMixin, TestCase):
         # Post response
         response = self.logged_in_client.post(self.create_post_url, form)
 
-        self.assertEquals(response.status_code, 302)
+        self.assertEqual(response.status_code, 302)
 
-        self.assertEquals(Post.objects.all().count(), 3)
+        self.assertEqual(Post.objects.all().count(), 3)
 
         self.assertTrue(
             Post.objects.filter(title="An awesome post").exists())
 
-        self.assertEquals(
+        self.assertEqual(
             Post.objects.get(title="An awesome post").description,
             "The best post ever")
 
@@ -343,17 +343,17 @@ class TestViews(SetUpViewsMixin, TestCase):
         response = self.logged_in_client.post(self.create_post_url, form)
 
         # User isn't being redirected
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
-        self.assertEquals(Post.objects.all().count(), 2)
+        self.assertEqual(Post.objects.all().count(), 2)
 
     def test_blog_create_category_GET(self):
 
         response = self.client.get(self.create_category_url)
 
-        self.assertEquals(Category.objects.all().count(), 1)
+        self.assertEqual(Category.objects.all().count(), 1)
 
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
         self.assertTemplateUsed(response,
                                 "blog/categories/create_category.html")
@@ -367,10 +367,10 @@ class TestViews(SetUpViewsMixin, TestCase):
         response = self.logged_in_client.post(self.create_category_url,
                                               form)
 
-        self.assertEquals(response.status_code, 302)
+        self.assertEqual(response.status_code, 302)
 
         # Category has been created
-        self.assertEquals(Category.objects.all().count(), 2)
+        self.assertEqual(Category.objects.all().count(), 2)
 
     def test_blog_create_category_POST_no_data(self):
         # No data passed to the form
@@ -380,10 +380,10 @@ class TestViews(SetUpViewsMixin, TestCase):
                                               form)
 
         # User isn't redirected
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
         # Category wasn't created
-        self.assertEquals(Category.objects.all().count(), 1)
+        self.assertEqual(Category.objects.all().count(), 1)
 
     def test_blog_create_category_POST_proof_name_uniqueness(self):
 
@@ -394,32 +394,32 @@ class TestViews(SetUpViewsMixin, TestCase):
         response = self.logged_in_client.post(self.create_category_url,
                                               form)
 
-        self.assertEquals(response.status_code, 302)
+        self.assertEqual(response.status_code, 302)
 
         # Category has been created
-        self.assertEquals(Category.objects.all().count(), 2)
+        self.assertEqual(Category.objects.all().count(), 2)
 
         # Second try
         second_response = self.logged_in_client.post(self.create_category_url,
                                                      form)
 
         # User isn't redirected
-        self.assertEquals(second_response.status_code, 200)
+        self.assertEqual(second_response.status_code, 200)
 
         # Second Category hasn't been created
-        self.assertEquals(Category.objects.all().count(), 2)
+        self.assertEqual(Category.objects.all().count(), 2)
 
     def test_blog_detail_edit_post_GET(self):
 
         response = self.logged_in_client.get(self.detail_edit_post_url)
 
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
         self.assertTemplateUsed(response,
                                 "blog/article/edit_article.html")
 
     def test_blog_detail_edit_post_POST(self):
-        """No testing :("""
+        """TODO: """
 
         pass
         # Create a post with author of the client logged in
@@ -456,14 +456,14 @@ class TestViews(SetUpViewsMixin, TestCase):
         # # The user that is edited has to be the author
         # response = self.logged_in_client.post(url, form)
 
-        # # self.assertEquals(response.status_code, 302)
+        # # self.assertEqual(response.status_code, 302)
 
-        # self.assertEquals(new_post.body, body)
+        # self.assertEqual(new_post.body, body)
 
     def test_blog_detail_delete_view_GET(self):
         response = self.client.get(self.detail_delete_post_url)
 
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
         self.assertTemplateUsed(response, "blog/article/delete_article.html")
 
@@ -480,30 +480,30 @@ class TestViews(SetUpViewsMixin, TestCase):
         self.assertFalse(Post.objects.filter(
             id=self.post2.id).exists())
 
-        self.assertEquals(response.status_code, 302)
+        self.assertEqual(response.status_code, 302)
 
     def test_blog_detail_post_GET(self):
 
         response = self.client.get(self.detail_post_url)
 
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
         self.assertTemplateUsed(response,
                                 "blog/article/detail_article.html")
 
-        self.assertEquals(response.context["post"],
+        self.assertEqual(response.context["post"],
                           self.post1)
 
-        self.assertEquals(response.context["upvotes"],
+        self.assertEqual(response.context["upvotes"],
                           self.post1.total_likes())
 
-        self.assertQuerysetEqual(response.context["comments"],
+        self.assertQuerySetEqual(response.context["comments"],
                                  Comment.objects.filter(
             post=self.post1).order_by('-date_added'))
 
     def test_blog_detail_post_POST(self):
 
-        self.assertEquals(self.post1.number_of_comments, 0)
+        self.assertEqual(self.post1.number_of_comments, 0)
 
         form = {
             "body": "Hi there this is my comment xd"
@@ -512,26 +512,26 @@ class TestViews(SetUpViewsMixin, TestCase):
         response = self.logged_in_client.post(self.detail_post_url,
                                               form)
 
-        self.assertEquals(response.status_code, 302)
+        self.assertEqual(response.status_code, 302)
 
-        self.assertEquals(self.post1.number_of_comments, 1)
+        self.assertEqual(self.post1.number_of_comments, 1)
 
     def test_blog_detail_category_GET(self):
 
         response = self.client.get(self.detail_category_url)
 
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_blog_detail_edit_category_GET(self):
 
         response = self.logged_in_client.get(self.detail_edit_category_url)
 
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_blog_detail_edit_category_POST_no_admin_user(self):
         # Asserts the name of the category1
 
-        self.assertEquals(self.category1.name, "cool-category")
+        self.assertEqual(self.category1.name, "cool-category")
 
         form = {
             "name": "Other NAME",
@@ -543,9 +543,9 @@ class TestViews(SetUpViewsMixin, TestCase):
             self.detail_edit_category_url, form
         )
 
-        self.assertEquals(response.status_code, 302)
+        self.assertEqual(response.status_code, 302)
 
-        self.assertNotEquals(self.category1.name, "other name")
+        self.assertNotEqual(self.category1.name, "other name")
 
     def test_blog_edit_category_POST_admin(self):
 
@@ -574,13 +574,13 @@ class TestViews(SetUpViewsMixin, TestCase):
 
         self.assertTrue(user_.is_admin)
 
-        self.assertEquals(self.category1.name,
+        self.assertEqual(self.category1.name,
                           "cool-category")
 
         response = self.client.post(self.detail_edit_category_url,
                                     form)
 
         # No idea why this doesn't work :(
-        # self.assertEquals(self.category1.name,
+        # self.assertEqual(self.category1.name,
         #                   "other name")
     
