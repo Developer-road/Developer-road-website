@@ -1,42 +1,50 @@
 # Developer-road-website
 
-The official website of developer road
+The open source code for the DeveloperRoad project. Made with Django 5.2, supporting PostgreSQL and media files via Cloudinary.
 
-Update: Heroku free plan is down, so there is no production link.
-## Installation:
+![DeveloperRoad site](/static/images/Readme/Developer-road-home-page.png)
 
-```python
+## Run in Local:
+
+
+Clone the repository.
+
+```bash
+git@github.com:Developer-road/Developer-road-website.git
+cd Developer-road-website
+```
+
+Use a virtual environment to install the dependencies.
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-From now you require a Postgres database with the following keys:
+By default DEBUG is False. This allows to run locally with an Sqlite local database.
 
-It shouldn't be like that but now it seems to break up if you don't set up a postgres database.
-
-```python
-'NAME': 'DeveloperRoad',
-'USER': 'postgres',
-'PASSWORD': 'daniel1404',
-'HOST': 'localhost',
-```
-
-Now run:
-
-```python
-python manage.py livereload
-
-python manage.py runserver
-```
-
-Remember to migrate the database before start developing:
+To create the database locally, run:
 ```
 python manage.py migrate
 ```
 
+To run the project locally, use livereload if you're modifying the source code.
+
+```python
+python manage.py livereload
+
+```
+
+And in a separate terminal:
+
+```
+python manage.py runserver
+```
 
 ## Warning:
 
-When registering a media photo is used in production.
+When creating an user a media photo is used in production.
 Since the media files are served from cloudinary, some media files will be left like the default profile image, but don't worry.
 
 The media files will serve correctly on production.
