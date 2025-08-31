@@ -1,0 +1,10 @@
+# Linters / formatting
+pylint>=3.2.6
+astroid>=3.2.4
+autopep8>=2.1.0
+isort>=5.13.2
+pycodestyle>=2.12.1
+toml>=0.10.2
+
+# Testing tools
+selenium>=4.25.0
