@@ -153,13 +153,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # For local development
 if DEBUG:
     DATABASES = {
-        # 'default': {
-        #     'ENGINE': 'django.db.backends.postgresql',
-        #     'NAME': 'DeveloperRoad',
-        #     'USER': 'postgres',
-        #     'PASSWORD': 'daniel1404',
-        #     'HOST': 'localhost',
-        # }
         'default' : {
             'ENGINE' : 'django.db.backends.sqlite3',
             'NAME' : BASE_DIR / 'db.sqlite3'

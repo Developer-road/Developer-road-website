@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}404 Page{% endblock title %}
 
@@ -7,17 +8,18 @@ There is nothing here.
 {% endblock description %}
 
 {% block body_content %}
-<div class="handler">
-    <h1 class="error-title">404</h1>
+<div class="handler text-center py-5">
+    <!-- 404 Image -->
+    <img src="{% static 'images/blog/404.svg' %}" alt="Page not found" class="img-fluid mb-4" style="max-width: 300px;">
 
-    <div class="sorry-text">
-        <p>Sorry, this <span>page</span> can't be <span>found</span></p>
-    </div>
+    <!-- 404 Message -->
+    <h1 class="error-title display-3 fw-bold mb-3">Not Found</h1>
+    <p class="lead mb-4">Sorry, the page you’re looking for can’t be found.</p>
 
+    <!-- Buttons -->
     <div class="my-btn-group">
-        <button class="btn btn-danger"><a href="{% url 'home:home_page' %}">Take me to Home</a></button>
-        <button class="btn btn-danger"><a href="{% url 'blog:home' %}">Go to the Blog</a></button>
+        <a href="{% url 'home:home_page' %}" class="btn btn-danger me-2">Take me Home</a>
+        <a href="{% url 'blog:home' %}" class="btn btn-danger">Go to the Blog</a>
     </div>
 </div>
-
 {% endblock body_content %}
